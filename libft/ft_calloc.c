@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 20:53:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/07/05 20:53:07 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/18 12:22:06 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*p;
+	int		full_size;
+	char	*buf;
 
-	p = malloc(count * size);
-	if (p == NULL)
-		return (p);
-	ft_bzero(p, count * size);
-	return (p);
+	full_size = size * count;
+	buf = malloc(full_size);
+	if (buf == NULL)
+		return (NULL);
+	return (ft_memset((void *)buf, 0, full_size));
 }
