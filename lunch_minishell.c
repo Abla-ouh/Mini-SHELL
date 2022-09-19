@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/18 18:27:20 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:42:20 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int	get_len(char *line, char *set)
 	str_trim = ft_strtrim(line, set);
     if(str_trim == NULL)
         return (-1);
-	// if (ft_strchr(set, str_trim[i]) == NULL)
-    //     len++;
     while(str_trim[i])
     {
         // if(ft_strchr(set, str_trim[i]) != NULL)

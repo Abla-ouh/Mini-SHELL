@@ -573,6 +573,82 @@
               "font": "script",
               "textAlign": "middle"
             }
+          },
+          "c1ada410-5ca0-429f-1488-6380a3f5b60f": {
+            "id": "c1ada410-5ca0-429f-1488-6380a3f5b60f",
+            "type": "draw",
+            "name": "Draw",
+            "parentId": "page",
+            "childIndex": 19,
+            "point": [
+              973.46,
+              278.05
+            ],
+            "rotation": 0,
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1
+            },
+            "points": [
+              [
+                0,
+                0,
+                0.5
+              ],
+              [
+                0,
+                0,
+                0.5
+              ]
+            ],
+            "isComplete": true
+          },
+          "0509f8d9-1ed5-491f-24d0-116ac96c97df": {
+            "id": "0509f8d9-1ed5-491f-24d0-116ac96c97df",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 20,
+            "point": [
+              931.34,
+              155.33
+            ],
+            "rotation": 0,
+            "text": "error cases :\n<<<...\n>>>...\n||....",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "9c62c278-cbad-4ff5-1a4c-3a3921c48ebf": {
+            "id": "9c62c278-cbad-4ff5-1a4c-3a3921c48ebf",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 21,
+            "point": [
+              1062.77,
+              155.83
+            ],
+            "rotation": 0,
+            "text": "str S\n< --> \"<\"\n> --> \">\"\n<< --> \"H\"\n>> --> \"A\"\n| --> \"|\"\n    NOT BGN NOT LAST",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
           }
         },
         "bindings": {}
