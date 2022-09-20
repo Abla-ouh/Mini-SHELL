@@ -16,8 +16,8 @@
             "parentId": "page",
             "childIndex": 1,
             "point": [
-              405.4,
-              65.42
+              1681.98,
+              19.86
             ],
             "rotation": 0,
             "text": " |",
@@ -38,8 +38,8 @@
             "parentId": "page",
             "childIndex": 2,
             "point": [
-              344.28,
-              69.66
+              1620.86,
+              24.1
             ],
             "rotation": 0,
             "text": "<",
@@ -60,8 +60,8 @@
             "parentId": "page",
             "childIndex": 3,
             "point": [
-              479.94,
-              65.79
+              1756.52,
+              20.23
             ],
             "rotation": 0,
             "text": ">",
@@ -82,8 +82,8 @@
             "parentId": "page",
             "childIndex": 4,
             "point": [
-              571.62,
-              68.75
+              1848.2,
+              23.19
             ],
             "rotation": 0,
             "text": ">>",
@@ -104,8 +104,8 @@
             "parentId": "page",
             "childIndex": 5,
             "point": [
-              276.27,
-              73.79
+              1552.85,
+              28.23
             ],
             "rotation": 0,
             "text": " <<",
@@ -126,8 +126,8 @@
             "parentId": "page",
             "childIndex": 6,
             "point": [
-              14.2,
-              247.98
+              1290.78,
+              202.42
             ],
             "rotation": 0,
             "text": "argument",
@@ -148,8 +148,8 @@
             "parentId": "page",
             "childIndex": 7,
             "point": [
-              287.96,
-              304.47
+              1564.54,
+              258.91
             ],
             "rotation": 0,
             "bend": 0,
@@ -205,8 +205,8 @@
             "parentId": "page",
             "childIndex": 8,
             "point": [
-              508.23,
-              281.99
+              1784.81,
+              236.43
             ],
             "rotation": 0,
             "text": " rediriction",
@@ -227,8 +227,8 @@
             "parentId": "page",
             "childIndex": 9,
             "point": [
-              414.28,
-              422.72
+              1690.86,
+              377.16
             ],
             "rotation": 0,
             "text": " rediriction",
@@ -249,8 +249,8 @@
             "parentId": "page",
             "childIndex": 10,
             "point": [
-              365.79,
-              167.02
+              1642.37,
+              121.46
             ],
             "rotation": 0,
             "text": "< ",
@@ -271,8 +271,8 @@
             "parentId": "page",
             "childIndex": 11,
             "point": [
-              393.7,
-              167.51
+              1670.28,
+              121.95
             ],
             "rotation": 0,
             "text": "file",
@@ -293,8 +293,8 @@
             "parentId": "page",
             "childIndex": 12,
             "point": [
-              638.63,
-              281.7
+              1915.21,
+              236.14
             ],
             "rotation": 0,
             "text": " ls ",
@@ -315,8 +315,8 @@
             "parentId": "page",
             "childIndex": 13,
             "point": [
-              737.03,
-              279.64
+              2013.61,
+              234.08
             ],
             "rotation": 0,
             "text": " -j ",
@@ -337,8 +337,8 @@
             "parentId": "page",
             "childIndex": 14,
             "point": [
-              24.11,
-              398.29
+              1300.69,
+              352.73
             ],
             "rotation": 0,
             "text": "cmand ",
@@ -359,8 +359,8 @@
             "parentId": "page",
             "childIndex": 15,
             "point": [
-              218.1,
-              446.95
+              1494.68,
+              401.39
             ],
             "rotation": 0,
             "bend": -0.0000686837757446206,
@@ -415,8 +415,8 @@
             "parentId": "page",
             "childIndex": 16,
             "point": [
-              806.93,
-              426.39
+              2083.51,
+              380.83
             ],
             "rotation": 0,
             "text": "| ",
@@ -437,8 +437,8 @@
             "parentId": "page",
             "childIndex": 7,
             "point": [
-              545.57,
-              422.45
+              1822.15,
+              376.89
             ],
             "rotation": 0,
             "text": "argument",
@@ -459,8 +459,8 @@
             "parentId": "page",
             "childIndex": 10,
             "point": [
-              663.01,
-              422.54
+              1939.59,
+              376.98
             ],
             "rotation": 0,
             "text": " rediriction",
@@ -481,8 +481,8 @@
             "parentId": "page",
             "childIndex": 11,
             "point": [
-              72.53,
-              166.22
+              1349.11,
+              120.66
             ],
             "rotation": 0,
             "text": " rediriction",
@@ -503,8 +503,8 @@
             "parentId": "page",
             "childIndex": 17,
             "point": [
-              226.47,
-              187.88
+              1503.05,
+              142.32
             ],
             "rotation": 0,
             "bend": 0,
@@ -559,8 +559,8 @@
             "parentId": "page",
             "childIndex": 18,
             "point": [
-              672.85,
-              280.76
+              1949.43,
+              235.2
             ],
             "rotation": 0,
             "text": " -la",
@@ -581,8 +581,8 @@
             "parentId": "page",
             "childIndex": 19,
             "point": [
-              973.46,
-              278.05
+              2250.04,
+              232.49
             ],
             "rotation": 0,
             "style": {
@@ -613,8 +613,8 @@
             "parentId": "page",
             "childIndex": 20,
             "point": [
-              931.34,
-              155.33
+              2207.92,
+              109.77
             ],
             "rotation": 0,
             "text": "error cases :\n<<<...\n>>>...\n||....",
@@ -635,8 +635,8 @@
             "parentId": "page",
             "childIndex": 21,
             "point": [
-              1062.77,
-              155.83
+              2339.35,
+              110.27
             ],
             "rotation": 0,
             "text": "str S\n< --> \"<\"\n> --> \">\"\n<< --> \"H\"\n>> --> \"A\"\n| --> \"|\"\n    NOT BGN NOT LAST",

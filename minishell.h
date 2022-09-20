@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/20 01:10:13 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:13:24 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ typedef struct s_arg
 
 void    ft_parser(char *line);
 char	*ft_strtrim(char *s, char *set);
+char    *ft_tokenize(char **lines);
 #endif

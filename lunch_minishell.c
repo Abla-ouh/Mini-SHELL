@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/20 00:46:05 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/21 00:16:37 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,69 +189,120 @@ void	ft_parser(char *line)
 
 	i = 0;
     lines = ft_lexer(line, " \t\r\v\f\n");
-	while(lines[i])
-	{
-		printf("%s\n", lines[i]);
-		i++;
-	}
-	exit(1);
-	//ft_tokenize(lines);
+	ft_tokenize(lines);
 }
 
-char	scan_str(char *line)
+// char	scan_arg(char *line)
+// {
+// 	//char	type;
+// 	int		i;
+
+// 	i = 0;
+// 	while (line[i])
+// 	{
+// 		if (line[i] == '|')
+// 			return('P');
+// 		else if (line[i] == '<' && line[i + 1] == '<')
+// 			return('H');
+// 		else if (line[i] == '<' && line[i + 1] == '<')
+// 			return('A');
+// 		else if (line[i] == '<')
+// 			return('<');
+// 		else if(line[i] == '>')
+// 			return('>');
+// 		else
+// 			return('E');
+// 		i++;
+// 	}
+//     return(0);
+// }
+
+int	count_dup(char *str_trim, char o)
 {
-	//char	type;
-	int		i;
+	int i;
 
 	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '|')
-			return('P');
-		else if (line[i] == '<' && line[i + 1] == '<')
-			return('H');
-		else if (line[i] == '<' && line[i + 1] == '<')
-			return('A');
-		else if (line[i] == '<')
-			return('<');
-		else if(line[i] = '>')
-			return('>');
-		else
-			return('E');
-		i++;
-	}
+    while (str_trim[i] == o)
+        i++;
+    return (i);
+}
+
+char	check_pipe(char	*arg)
+{
+	int count;
+	int	i;
+
+	i = 0;
+	count = count_dup(arg, '|');
+	if (count > 1)
+		return ('E');
+	else
+		return ('|');
+}
+
+char	check_in(char *arg)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = count_dup(arg, '<');
+	if (count == 1)
+		return('<');
+	else if (count == 2)
+		return('H');
+	else
+		return('E');
+}
+
+char	check_out(char	*arg)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = count_dup(arg, '>');
+	if (count == 1)
+		return ('>');
+	else if (count == 2)
+		return ('A');
+	else
+		return ('E');
 }
 
 char    *ft_tokenize(char **lines)
 {
     int		i;
-	int		j;
-    int     k;
+    int     j;
+	int		k;
 	int		len;
     char	*tokenized_arr;
 
 	i = 0;
 	len = 0;
+    k = 0;
 	while (lines[len])
 		len++;
 	tokenized_arr = ft_calloc(len + 1, sizeof(char *));
-    while(lines)
+    while(lines[i] != '\0')
     {
-        if (scan_arg(lines[i]) == 'P')
-            tokenized_arr[k] = 'P';
-        else if (scan_arg(lines[i]) == 'H')
-            tokenized_arr[k] = 'H';
-		else if (scan_arg(lines[i]) == 'S')
-            tokenized_arr[k] = 'S';
-		else if (scan_arg(lines[i]) == 'A')
-			tokenized_arr[k] = 'A';
-		else if (scan_arg(lines[i]) == '>')
-			tokenized_arr[k] = '>';
-		else if (scan_arg(lines[i]) == '<')
-			tokenized_arr[k] = '<';
+		if (*lines[i] == '|')
+			tokenized_arr[k] = check_pipe(lines[i]);
+		else if (*lines[i] == '<')
+			tokenized_arr[k] = check_in(lines[i]);
+		else if (*lines[i] == '>')
+			tokenized_arr[k] = check_out(lines[i]);
 		else
-			tokenized_arr[k] = /* smtg else*/
+			tokenized_arr[k] = 'S';		
 		k++;
 		i++;
-    }
+	}
+	tokenized_arr[k] = '\0';
+	i = 0;
+	while(tokenized_arr[i])
+	{
+		printf("%c", tokenized_arr[i]);
+		i++;
+	}
+    return (tokenized_arr);
 }
