@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/19 11:42:20 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:46:05 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int    find_until_not(char *str_trim, int *i, char o)
 {
     while (str_trim[*i] == o)
         (*i)++;
-     return (1);
+    return (1);
 }
 
 int valid_word(char *str_trim, int *i)
@@ -110,7 +110,7 @@ void    count_until_not(char *trim_line, int i, int *len, char o)
 void    skip_quote_len(char *trim_line, int i, int *len, char q)
 {
     (*len)++;
-    while (trim_line[i + (*len)] && trim_line[i + (*len)] != q)
+    while (trim_line[i + (*len)] && trim_line[i + (*len)] != q)//keep iterating until next quote 
         (*len)++;
     if (trim_line[i + (*len)] == q)
         (*len)++;
@@ -155,7 +155,7 @@ char *fill_arg(char *trim_line, int *i)
     return (arg);
 }
 
-char **ft_split_blank(char *line, char *set)
+char **ft_lexer(char *line, char *set)
 {
 	char **strs;
     char *trim_line;
@@ -182,20 +182,76 @@ char **ft_split_blank(char *line, char *set)
 	return (strs);
 }
 
-char    **ft_lexer(char *line)
+void	ft_parser(char *line)
 {
-    int i;
-    int j;
-    char **lines;
-    // char *line_trim;
-    i = 0;
-    j = 0;
-    // line_trim = ft_strtrim()
-    lines = ft_split_blank(line, " \t\r\v\f\n");
-    while(lines[i])
+	char	**lines;
+	int	i;
+
+	i = 0;
+    lines = ft_lexer(line, " \t\r\v\f\n");
+	while(lines[i])
+	{
+		printf("%s\n", lines[i]);
+		i++;
+	}
+	exit(1);
+	//ft_tokenize(lines);
+}
+
+char	scan_str(char *line)
+{
+	//char	type;
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '|')
+			return('P');
+		else if (line[i] == '<' && line[i + 1] == '<')
+			return('H');
+		else if (line[i] == '<' && line[i + 1] == '<')
+			return('A');
+		else if (line[i] == '<')
+			return('<');
+		else if(line[i] = '>')
+			return('>');
+		else
+			return('E');
+		i++;
+	}
+}
+
+char    *ft_tokenize(char **lines)
+{
+    int		i;
+	int		j;
+    int     k;
+	int		len;
+    char	*tokenized_arr;
+
+	i = 0;
+	len = 0;
+	while (lines[len])
+		len++;
+	tokenized_arr = ft_calloc(len + 1, sizeof(char *));
+    while(lines)
     {
-        printf("%s\n", lines[i]);
-        i++;
+        if (scan_arg(lines[i]) == 'P')
+            tokenized_arr[k] = 'P';
+        else if (scan_arg(lines[i]) == 'H')
+            tokenized_arr[k] = 'H';
+		else if (scan_arg(lines[i]) == 'S')
+            tokenized_arr[k] = 'S';
+		else if (scan_arg(lines[i]) == 'A')
+			tokenized_arr[k] = 'A';
+		else if (scan_arg(lines[i]) == '>')
+			tokenized_arr[k] = '>';
+		else if (scan_arg(lines[i]) == '<')
+			tokenized_arr[k] = '<';
+		else
+			tokenized_arr[k] = /* smtg else*/
+		k++;
+		i++;
     }
-    exit(1);
 }

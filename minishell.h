@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/17 22:39:30 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:10:13 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_tools
+typedef struct s_arg
 {
-    char *line;
-    char **env;
-}               t_tools;
+    char *token;
+    char type;
+}               t_arg;
 
-char    **ft_lexer(char *line);
+void    ft_parser(char *line);
 char	*ft_strtrim(char *s, char *set);
 #endif
