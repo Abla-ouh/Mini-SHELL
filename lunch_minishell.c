@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/21 20:34:54 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:59:37 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,43 +208,109 @@ int    ft_syntax_error(char **lines, char *token)
     }
     return (0);
 }
-void	ft_parser(char *line)
+
+int	ft_check_redir_filename(char **lines, char *tokens)
+{
+	int	i;
+
+	i = 0;
+	while(tokens[i])
+	{
+		if (tokens[i] != '|' && tokens[i] != 'S' && tokens[i + 1] != 'S')
+		{
+			if (!lines[i + 1])
+				printf("minishell: syntax error near unexpected token `newline'\n");
+			else if (ft_strlen(lines[i + 1]) > 1)
+				printf("minishell: syntax error near unexpected token `%c%c'\n", lines[i + 1][0], lines[i + 1][0]);
+			else
+				printf("minishell: syntax error near unexpected token `%c'\n", lines[i + 1][0]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	ft_read_stdin(int *here_fds, char *tokens, char **lines, int del_idx)
+{
+	char *temp;
+	
+	while(1)
+	{
+		temp = readline("> ");
+		if (!temp || !ft_strcmp(temp, lines[del_idx]))
+			break ;
+		write(here_fds[1], temp, ft_strlen(temp));
+		free(temp);
+	}
+	if (temp) //khrj b delimeter
+		free(temp);
+}
+
+int find_here_docs(char *tokens)
+{
+	int i;
+	int her;
+
+	i = 0;
+	her = 0;
+	while (tokens[i])
+	{
+		if (tokens[i] == 'H')
+			her++;
+		i++;
+	}
+	return (her);
+}
+
+int	**ft_open_hdocs(char **lines, char *tokens)
+{
+	int	**here_fds;
+	int	here_num;
+	int	i;
+	int j;
+
+	here_num = find_here_docs(tokens);
+	if (!here_num)
+		return (NULL);
+	here_fds = malloc(sizeof(int *) * (here_num + 1));
+	i = 0;
+	j = 0;
+	printf("count = %d\n", here_num);
+	while (i < here_num)
+	{
+		here_fds[i] = malloc(sizeof(int) * 2);
+		while(tokens[j] && tokens[j] != 'H')
+			j++;
+		ft_read_stdin(here_fds[i], tokens, lines , ++j);
+		i++;
+	}
+	return (here_fds);
+}
+
+t_cmds	*ft_parser(char *line)
 {
 	char	**lines;
     char    *tokens;
+	int		**here_fds;
+	int		*infiles;
+	int		*outfiles;
+	t_cmds	*cmds;
 
     lines = ft_lexer(line, " \t\r\v\f\n");
-	ft_tokenize(lines);
-    ft_syntax_error(lines, tokens);
-    /* check valid redirections */
+	tokens = ft_tokenize(lines);
+    if (ft_syntax_error(lines, tokens))
+		return (NULL);
+    if (ft_check_redir_filename(lines, tokens))
+		return (NULL);
+	here_fds = ft_open_hdocs(lines, tokens);
+	
+	/* open infiles */
+	/* open outfiles */
     /* fillup the linked list struct */
     /* free all addresses not useful anymore */
+	return (cmds);
 }
-
-// char	scan_arg(char *line)
-// {
-// 	//char	type;
-// 	int		i;
-
-// 	i = 0;
-// 	while (line[i])
-// 	{
-// 		if (line[i] == '|')
-// 			return('P');
-// 		else if (line[i] == '<' && line[i + 1] == '<')
-// 			return('H');
-// 		else if (line[i] == '<' && line[i + 1] == '<')
-// 			return('A');
-// 		else if (line[i] == '<')
-// 			return('<');
-// 		else if(line[i] == '>')
-// 			return('>');
-// 		else
-// 			return('E');
-// 		i++;
-// 	}
-//     return(0);
-// }
 
 int	count_dup(char *str_trim, char o)
 {
@@ -333,5 +399,6 @@ char    *ft_tokenize(char **lines)
 		printf("%c", tokenized_arr[i]);
 		i++;
 	}
+	printf("\n");
     return (tokenized_arr);
 }

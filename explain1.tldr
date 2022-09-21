@@ -649,6 +649,50 @@
               "font": "script",
               "textAlign": "middle"
             }
+          },
+          "5f2f8f05-8e42-4097-35c7-c5b641c44347": {
+            "id": "5f2f8f05-8e42-4097-35c7-c5b641c44347",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 22,
+            "point": [
+              251.23000000000002,
+              167.46
+            ],
+            "rotation": 0,
+            "text": "\"HSHSHSS|SHS\"",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "469b06c9-d0f0-4780-2b70-cf782e55d416": {
+            "id": "469b06c9-d0f0-4780-2b70-cf782e55d416",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 23,
+            "point": [
+              83.6,
+              242.64
+            ],
+            "rotation": 0,
+            "text": "**here_fds = (int **)malloc(sizeof(int*) * (howmany(H)));",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
           }
         },
         "bindings": {}
