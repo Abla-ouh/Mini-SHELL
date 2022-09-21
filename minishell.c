@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/21 00:19:39 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:44:36 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int ac, char **av, char **env)
 
     if (ac != 1 || !*env)
         return (1);
-    ft_parser("<infile cat /etc/passwd  | awk '{printf' | echo lkasdjflk\" allaskdjfl llaksdjf laskdfj lkasjdf \"lasdjfkasdjf'asdjflksajdflkasjdf asdfkasldj flkasjdf lkasdjf ' | pwd");
+    ft_parser("\"<<<\"<<infile cat /etc/passwd  '|' awk '{printf' | echo lkasdjflk\" allaskdjfl llaksdjf laskdfj lkasjdf \"lasdjfkasdjf'asdjflksajdflkasjdf asdfkasldj flkasjdf lkasdjf ' | pwd");
     // while(1)
     // {
     //     line = readline("minishell$ ");

@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/20 22:13:24 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:56:01 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,27 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-typedef struct s_arg
+typedef struct s_envp
 {
-    char *token;
-    char type;
-}               t_arg;
+    char            *key;
+    char            *value;
+    struct s_envp   *next;
+} t_envp;
+
+
+typedef struct s_gdata
+{
+    int     exit_status;
+    t_envp  env;
+} t_gdata;
+
+typedef struct s_cmds
+{
+    char    *path;
+    char    **args;
+    int     in;
+    int     out;
+} t_cmds;
 
 void    ft_parser(char *line);
 char	*ft_strtrim(char *s, char *set);

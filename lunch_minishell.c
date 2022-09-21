@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/21 00:16:37 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:34:54 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void    count_until_not(char *trim_line, int i, int *len, char o)
 void    skip_quote_len(char *trim_line, int i, int *len, char q)
 {
     (*len)++;
-    while (trim_line[i + (*len)] && trim_line[i + (*len)] != q)//keep iterating until next quote 
+    while (trim_line[i + (*len)] && trim_line[i + (*len)] != q) //keep iterating until next quote 
         (*len)++;
     if (trim_line[i + (*len)] == q)
         (*len)++;
@@ -182,14 +182,43 @@ char **ft_lexer(char *line, char *set)
 	return (strs);
 }
 
+int    ft_syntax_error(char **lines, char *token)
+{
+    int i;
+
+    i = 0;
+    if (!ft_strcmp(lines[0], "|"))
+    {
+        printf("minishell: syntax error near unexpected token `|'\n");
+        return (1);
+    }
+    while(token[i])
+    {
+        if (token[i] == 'E')
+        {
+            printf("minishell: syntax error near unexpected token `%c%c'\n", lines[i][0], lines[i][0]);
+            return (1);
+        }
+        i++;
+    }
+    if (!ft_strcmp(lines[i - 1], "|"))
+    {
+        printf("minishell: syntax error near unexpected token `|'\n");
+        return (1);
+    }
+    return (0);
+}
 void	ft_parser(char *line)
 {
 	char	**lines;
-	int	i;
+    char    *tokens;
 
-	i = 0;
     lines = ft_lexer(line, " \t\r\v\f\n");
 	ft_tokenize(lines);
+    ft_syntax_error(lines, tokens);
+    /* check valid redirections */
+    /* fillup the linked list struct */
+    /* free all addresses not useful anymore */
 }
 
 // char	scan_arg(char *line)
@@ -293,7 +322,7 @@ char    *ft_tokenize(char **lines)
 		else if (*lines[i] == '>')
 			tokenized_arr[k] = check_out(lines[i]);
 		else
-			tokenized_arr[k] = 'S';		
+			tokenized_arr[k] = 'S';
 		k++;
 		i++;
 	}
