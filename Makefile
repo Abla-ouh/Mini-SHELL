@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+         #
+#    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/09/19 12:43:35 by abouhaga         ###   ########.fr        #
+#    Updated: 2022/09/23 12:02:52 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,15 @@ OBJS    = $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) $(LIBFT) -lreadline
+	@$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) $(LIBFT) -lreadline
 
 clean :
-	make clean -C libft
-	rm -rf $(OBJS)
+	@make clean -C libft
+	@rm -rf $(OBJS)
 
 fclean : clean
-	rm -rf libft/libft.a
-	rm -rf $(NAME) 
+	@rm -rf libft/libft.a
+	@rm -rf $(NAME) 
 
 re : fclean all
 
