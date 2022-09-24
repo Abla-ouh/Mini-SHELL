@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lunch_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/23 18:04:59 by midfath          ###   ########.fr       */
+/*   Updated: 2022/09/24 16:04:51 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	get_len(char *line, char *set)
 
     len = 0;
     i = 0;
-	str_trim = ft_strtrim(line, set);
+	str_trim = ft_str_trim(line, set);
     if(str_trim == NULL)
         return (-1);
     while(str_trim[i])
@@ -231,7 +231,7 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 	return (0);
 }
 
-void	ft_read_stdin(int *here_fds, char *tokens, char **lines, int del_idx)
+void	ft_read_stdin(int *here_fds, char **lines, int del_idx)
 {
 	char *temp;
 	
@@ -282,7 +282,7 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 		here_fds[i] = malloc(sizeof(int) * 2);
 		while(tokens[j] && tokens[j] != 'H')
 			j++;
-		ft_read_stdin(here_fds[i], tokens, lines , ++j);
+		ft_read_stdin(here_fds[i], lines , ++j);
 		i++;
 	}
 	return (here_fds);
@@ -293,8 +293,8 @@ t_cmds	*ft_parser(char *line)
 	char	**lines;
     char    *tokens;
 	int		**here_fds;
-	int		*infiles;
-	int		*outfiles;
+	//int		*infiles;
+	//int		*outfiles;
 	t_cmds	*cmds;
 
     lines = ft_lexer(line, " \t\r\v\f\n");
@@ -368,7 +368,6 @@ char	check_out(char	*arg)
 char    *ft_tokenize(char **lines)
 {
     int		i;
-    int     j;
 	int		k;
 	int		len;
     char	*tokenized_arr;

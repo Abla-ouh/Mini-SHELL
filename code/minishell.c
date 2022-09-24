@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/23 17:51:13 by midfath          ###   ########.fr       */
+/*   Updated: 2022/09/24 15:56:33 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-/* "<< infile cat /etc/passwd  '|' awk '{printf' | echo  lkasdjflk\" allaskdjfl llaksdjf laskdfj lkasjdf \"lasdjfkasdjf'asdjflksajdflkasjdf asdfkasldj flkasjdf lkasdjf ' | pwd" */
-
 int main(int ac, char **av, char **env)
 {
     (void)av;
     char	*line;
-    char    *arr;
+    //char    *arr;
     line = NULL;
 
     if (ac != 1 || !*env)
