@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_matfreex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 20:55:49 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/07/05 20:55:50 by abouhaga         ###   ########.fr       */
+/*   Created: 2022/05/12 09:07:16 by midfath           #+#    #+#             */
+/*   Updated: 2022/05/17 23:35:34 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	ft_matfreex(char ***mat)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while ((unsigned char)s1[i] == (unsigned char)s2[i] && (unsigned char)s1[i])
+	while (mat && mat[0] && mat[0][i])
+	{
+		free(mat[0][i]);
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	if (mat)
+	{
+		free(mat[0]);
+		*mat = NULL;
+	}
 }

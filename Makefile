@@ -6,29 +6,57 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/09/23 12:02:52 by midfath          ###   ########.fr        #
+#    Updated: 2022/09/24 15:33:19 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+#Color:
 
-NAME = minishell
+RED		= \033[0;31m
+DEFAULT	= \033[0;39m
+PINK	= \033[1;35m
+BLUE	= \033[1;34m
 
-LIBFT    = libft/libft.a
+#vars
 
-SRCS = minishell.c lunch_minishell.c strings_utils.c
+CC 			= gcc
+CFLAGS 		= -Wall -Wextra -Werror
+NAME 		= minishell
+LIBFT    	= libft/libft.a
+OBJ_DIR		= obj
+BIN_DIR		= bin
+NAME		= $(BIN_DIR)/$(BIN)
+BIN			= minishell
+SRC_DIR		= code
+RDLINE		= -lreadline
+inc			= inc/minishell.h
+
+#cmd
+
+PRINTF		= printf
+
+#src&&obj
+SRC			= minishell.c lunch_minishell.c strings_utils.c
+
+OBJS    = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
+	@$(CC) $(CFLAGS) -I inc -c $< -o $@
+	@$(PRINTF) "\rCompiling $(BLUE)$<$(DEFAULT)..."
 
 $(LIBFT):
-	make -C libft
-
-OBJS    = $(SRCS:.c=.o)
+	@make -C libft
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS)  -o $(NAME) $(LIBFT) -lreadline
+$(NAME) : creat_dir $(LIBFT) $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(RDLINE) -I inc -o $(NAME)
+	@$(PRINTF) "\r%100s\r$(BLUE)$(NAME) is up to date!$(DEFAULT)\n"
+	
+creat_dir :
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(BIN_DIR)
 
 clean :
 	@make clean -C libft
@@ -36,7 +64,8 @@ clean :
 
 fclean : clean
 	@rm -rf libft/libft.a
-	@rm -rf $(NAME) 
+	@rm -rf $(NAME)
+	@$(PRINTF) "$(RED) $(NAME) removed successfully. $(DEFAULT)\n"
 
 re : fclean all
 

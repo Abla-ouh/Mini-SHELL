@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 20:55:28 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/07/05 20:55:29 by abouhaga         ###   ########.fr       */
+/*   Created: 2021/11/12 15:11:58 by midfath           #+#    #+#             */
+/*   Updated: 2021/11/18 14:34:56 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,30 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == -2147483648)
+	unsigned int	m;
+
+	if (n < 0)
 	{
-		write (fd, "-2147483648", 11);
+		n *= -1;
+		ft_putchar_fd('-', fd);
 	}
-	else if (n < 0)
+	m = (unsigned int)n;
+	if (m <= 9)
+		ft_putchar_fd((m + '0'), fd);
+	else
 	{
-		ft_putchar_fd ('-', fd);
-		ft_putnbr_fd (n *(-1), fd);
-	}
-	if (n >= 0 && n < 10)
-	{
-		ft_putchar_fd (n + '0', fd);
-	}
-	if (n > 9)
-	{
-		ft_putnbr_fd (n / 10, fd);
-		ft_putnbr_fd (n % 10, fd);
+		ft_putnbr_fd(m / 10, fd);
+		ft_putchar_fd(m % 10 + '0', fd);
 	}
 }
+
+/*#include <fcntl.h>
+
+int	main(void)
+{
+	int	fd;
+
+	fd = open("./test.txt", O_RDWR | O_CREAT);
+	ft_putnbr_fd(1337, fd);
+	return (0);
+}*/

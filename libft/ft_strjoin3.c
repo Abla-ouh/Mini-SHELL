@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 08:59:45 by midfath           #+#    #+#             */
-/*   Updated: 2022/05/25 09:00:10 by midfath          ###   ########.fr       */
+/*   Created: 2022/04/19 22:05:06 by midfath           #+#    #+#             */
+/*   Updated: 2022/04/19 22:11:56 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin3(char *s1, char *s2)
 {
 	int		len_s1;
 	int		len_s2;
 	char	*s3;
 	int		i;
 
-	if (s1 == NULL && s2 == NULL)
+	if (s2 == NULL)
 		return (NULL);
 	i = 0;
 	len_s1 = ft_strlen(s1);
@@ -36,5 +36,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	s3[len_s1 + len_s2] = '\0';
+	free(s1);
+	free(s2);
 	return (s3);
 }

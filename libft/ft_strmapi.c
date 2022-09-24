@@ -3,33 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 20:56:36 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/07/05 20:56:37 by abouhaga         ###   ########.fr       */
+/*   Created: 2021/11/11 17:33:54 by midfath           #+#    #+#             */
+/*   Updated: 2021/11/11 18:42:53 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*str;
-	int		len;
-	int		i;
+	size_t		len;
+	size_t		i;
+	char		*p;
 
+	i = 0;
 	if (!s || !f)
 		return (0);
-	i = 0;
 	len = ft_strlen(s);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
+	p = (char *)malloc(sizeof(char) * (len + 1));
+	if (!p)
 		return (NULL);
-	while (s[i])
+	while (i < len)
 	{
-		str[i] = f(i, s[i]);
+		p[i] = f(i, s[i]);
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	p[i] = '\0';
+	return (p);
 }
+
+/*char	f(unsigned int i, char c)
+{
+	return (c + i);
+}
+
+int	main(void)
+{
+	char	*str1 = "abc";
+	char	*str2;
+	
+	printf("%s", ft_strmapi(str1, *f));
+}*/

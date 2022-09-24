@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_matrixdup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/25 08:59:45 by midfath           #+#    #+#             */
-/*   Updated: 2022/05/25 09:00:10 by midfath          ###   ########.fr       */
+/*   Created: 2022/04/22 02:18:43 by midfath           #+#    #+#             */
+/*   Updated: 2022/05/12 09:29:13 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	**ft_matrdupix(char **mat)
 {
-	int		len_s1;
-	int		len_s2;
-	char	*s3;
 	int		i;
+	char	**ptr;
 
-	if (s1 == NULL && s2 == NULL)
+	i = 0;
+	while (mat && mat[i])
+		i++;
+	ptr = malloc(sizeof(char *) * (i + 1));
+	if (!ptr)
 		return (NULL);
 	i = 0;
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	s3 = (char *)malloc(len_s1 + len_s2 + 1);
-	if (s3 == NULL)
-		return (NULL);
-	while (i < len_s1 || i < len_s2)
+	while (mat[i])
 	{
-		if (i < len_s1)
-			s3[i] = s1[i];
-		if (i < len_s2)
-			s3[i + len_s1] = s2[i];
+		ptr[i] = ft_strdup(mat[i]);
+		if (!mat[i])
+		{
+			ft_matfreex(&ptr);
+			return (NULL);
+		}
 		i++;
 	}
-	s3[len_s1 + len_s2] = '\0';
-	return (s3);
+	ptr[i] = NULL;
+	return (ptr);
 }

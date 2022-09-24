@@ -3,118 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 20:55:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/07/05 20:55:39 by abouhaga         ###   ########.fr       */
+/*   Created: 2021/11/09 19:10:05 by midfath           #+#    #+#             */
+/*   Updated: 2021/11/18 13:08:49 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_word(char const *s, char c)
+static	int	ft_count(char const*s, char c)
 {
-	int	i;
 	int	count;
+	int	j;
 
-	i = 0;
-	count = 1;
-	while (s[i] == c && s[i])
-		i++;
-	while (s[i])
-	{	
-		if (s[i] && s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
+	count = 0;
+	j = 0;
+	while (s[j])
+	{
+		if (s[j] == c)
+		j++;
+		else
+		{
+			while (s[j] && s[j] != c)
+				j++;
 			count++;
-		i++;
+		}
 	}
 	return (count);
 }
 
-static char	**ft_free(char **str, int k)
+static void	ft_free(char **ptr, int i)
 {
-	while (k >= 0)
-	{
-		free(str[k]);
-		k--;
-	}
-	return (str);
-}
-
-static char	**ft_get_word(char **str, char const *s, char c)
-{
-	int	i;
-	int	len_word;
-	int	k;
-
-	i = 0;
-	k = 0;
-	len_word = 0;
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (!s[i])
-			break ;
-		while (s[i] != c && s[i] && s[i++])
-			len_word++;
-		str[k] = (char *)malloc(sizeof (char) * (len_word + 1));
-		if (!str[k])
-			return (ft_free(str, k - 1));
-		k++;
-		len_word = 0;
-	}
-	str[k] = NULL;
-	return (str);
-}
-
-static char	**ft_fill_str(char **str, char const *s, char c)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (s[k])
-	{
-		j = 0;
-		while (s[k] && s[k] == c)
-			k++;
-		if (!s[k])
-			break ;
-		while (s[k] && s[k] != c)
-		{
-			str[i][j] = s[k];
-			k++;
-			j++;
-		}
-		str[i][j] = '\0';
-		i++;
-	}
-	return (str);
+	while (i--)
+		free(ptr[i]);
+	free (ptr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		count;
-	char	**str;
+	int		l;
+	int		j;
+	int		start;
+	char	**ret;
 
 	if (!s)
-		return (0);
-	count = ft_count_word(s, c);
-	str = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!str)
 		return (NULL);
-	str = ft_get_word(str, s, c);
-	str[count] = 0;
-	return (ft_fill_str(str, s, c));
+	ret = (char **)malloc((ft_count(s, c) + 1) * sizeof(char *));
+	if (!ret)
+		return (NULL);
+	j = 0;
+	l = 0;
+	while (l < ft_count(s, c))
+	{
+		while (s[j] == c)
+			j++;
+		start = j;
+		while (s[j] != c && s[j])
+			j++;
+		ret[l++] = ft_substr(s, start, j - start);
+		if (!ret[l - 1])
+			ft_free(ret, l);
+	}
+	ret[l] = NULL;
+	return (ret);
 }
-// #include <stdio.h>
-// int main(void)
-// {
-// 	char **str;
-// 	int i = 0;
-// 	str = ft_split("aaaaaaa", 'a');
-// 	printf("%p\n", *str);
-// 	return (0);
-// }

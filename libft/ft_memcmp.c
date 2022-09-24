@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 20:54:56 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/07/05 20:54:57 by abouhaga         ###   ########.fr       */
+/*   Created: 2021/11/03 14:46:36 by midfath           #+#    #+#             */
+/*   Updated: 2021/11/03 18:09:57 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	p1 = (unsigned char *)s1;
 	p2 = (unsigned char *)s2;
-	while (i < n)
-	{
-		if (p1[i] != p2[i])
-			return (p1[i] - p2[i]);
+	if (n == 0)
+		return (0);
+	while (p1[i] == p2[i] && i + 1 < n)
 		i++;
-	}
-	return (0);
+	return (p1[i] - p2[i]);
 }

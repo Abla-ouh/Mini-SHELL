@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 08:52:28 by midfath           #+#    #+#             */
-/*   Updated: 2021/11/17 11:07:28 by midfath          ###   ########.fr       */
+/*   Created: 2021/11/08 15:34:09 by midfath           #+#    #+#             */
+/*   Updated: 2021/11/14 17:53:22 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t			i;
-	unsigned char	*p1;
-	unsigned char	*p2;
+#include "libft.h"
 
-	p1 = (unsigned char *)s1;
-	p2 = (unsigned char *)s2;
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (p1[i] == p2[i] && p1[i] && i + 1 < n)
-		i++;
-	return (p1[i] - p2[i]);
+int	ft_chrstr(char chr, char *s)
+{
+	int	j;
+
+	j = 0;
+	while (s[j])
+	{
+		if (s[j] == chr)
+			return (1);
+		j++;
+	}
+	return (0);
+}
+
+char	*ft_strtrim(const char *s1, const char *set)
+{
+	int		len;
+
+	if (!s1)
+		return (NULL);
+	while (*s1 && ft_chrstr(*s1, (char *)set))
+		s1++;
+	len = ft_strlen(s1);
+	while (len && ft_chrstr(s1[len - 1], (char *)set))
+		len--;
+	return (ft_substr(s1, 0, len));
 }
