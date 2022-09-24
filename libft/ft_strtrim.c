@@ -12,8 +12,6 @@
 
 #include "libft.h"
 
-#include "libft.h"
-
 int	ft_chrstr(char chr, char *s)
 {
 	int	j;

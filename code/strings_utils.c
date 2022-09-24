@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strings_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:08:45 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/23 18:04:37 by midfath          ###   ########.fr       */
+/*   Updated: 2022/09/24 15:54:20 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_getend(char *str,char *set, int end)
 	return (end);
 }
 
-char	*ft_strtrim(char *s, char *set)
+char	*ft_str_trim(char *s, char *set)
 {
 	int		end;
 	int		i;

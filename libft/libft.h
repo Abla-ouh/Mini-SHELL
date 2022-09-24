@@ -44,6 +44,7 @@ char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_countchar(char *s, char c);
 int		ft_strrncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strjoin3(char *s1, char *s2);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_matrdupix(char **mat);
