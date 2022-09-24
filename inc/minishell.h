@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/24 16:09:12 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:58:36 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_cmds
     char    **args;
     int     in;
     int     out;
+    int     is_exec;
 } t_cmds;
 
 t_cmds  *ft_parser(char *line);
