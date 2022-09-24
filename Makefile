@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/09/24 15:33:19 by midfath          ###   ########.fr        #
+#    Updated: 2022/09/24 18:38:50 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ NAME		= $(BIN_DIR)/$(BIN)
 BIN			= minishell
 SRC_DIR		= code
 RDLINE		= -lreadline
-inc			= inc/minishell.h
 
 #cmd
 
@@ -60,11 +59,11 @@ creat_dir :
 
 clean :
 	@make clean -C libft
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJ_DIR)
 
 fclean : clean
 	@rm -rf libft/libft.a
-	@rm -rf $(NAME)
+	@rm -rf $(BIN_DIR)
 	@$(PRINTF) "$(RED) $(NAME) removed successfully. $(DEFAULT)\n"
 
 re : fclean all
