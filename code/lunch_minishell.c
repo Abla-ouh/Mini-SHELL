@@ -6,11 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/24 18:55:00 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/25 12:49:02 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <../inc/minishell.h>
 
 int is_seperator_char(char c)
 {
@@ -276,7 +276,6 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 	here_fds = malloc(sizeof(int *) * (here_num + 1));
 	i = 0;
 	j = 0;
-	printf("count = %d\n", here_num);
 	while (i < here_num)
 	{
 		here_fds[i] = malloc(sizeof(int) * 2);
@@ -288,22 +287,79 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 	return (here_fds);
 }
 
-char	*ft_open_infiles(char **lines, char *tokens)
+int	*ft_open_infiles(char **lines, char *tokens)
 {
 	int i;
+	int j;
 	int	in;
-	char *infiles;
+	int *infiles;
 
-	i = 0;
 	in = find_op(tokens, '<');
 	if(!in)
 		return (NULL);
-	
-	
-	
-	
+	infiles = malloc(sizeof(int) * (in + 1));
+	i = 0;
+	j = 0;
+	while (i < in)
+	{
+		while(tokens[j] && tokens[j] != '<')
+			j++;
+		if (access(lines[j + 1], F_OK) == -1)
+		{
+			printf("minishell: %s: No such file or directory\n", lines[j + 1]);
+			return (NULL);
+		}
+		else if (access(lines[j + 1], R_OK) == -1)
+		{
+			printf("minishell: %s: Permission denied\n", lines[j + 1]);
+			return (NULL);
+		}
+		infiles[i] = 0;
+		i++;
+	}
+	return (infiles);
 }
 
+int	*ft_open_outfiles(char **lines, char *tokens)
+{
+	int i;
+	int j;
+	int	out;
+	int *outfiles;
+
+	out = find_op(tokens, '>');
+	//printf("out = %d\n", out);
+	if(!out)
+		return (NULL);
+	i = 0;
+	j = 0;
+	outfiles = malloc(sizeof(int) * (out + 1));
+	while (i < out)
+	{
+		while(tokens[j] && tokens[j] != '>')
+			j++;
+		if (access(lines[j + 1], F_OK) == -1)
+		{
+			open(lines[j + 1], O_CREAT, 0644);
+			return (NULL);
+		}
+		else if (access(lines[j + 1], W_OK) == -1)
+		{
+			printf("minishell: %s: Permission denied\n", lines[j + 1]);
+			return (NULL);
+		}
+		outfiles[i] = 1;
+		i++;
+	}
+	outfiles[i] = '\0';
+	// i = 0;
+	// while(outfiles[i])
+	// {
+	// 	printf("%d\n", outfiles[i]);
+	// 	i++;
+	// }
+	return (outfiles);
+}
 t_cmds	*ft_parser(char *line)
 {
 	char	**lines;
@@ -313,6 +369,7 @@ t_cmds	*ft_parser(char *line)
 	int		*outfiles;
 	t_cmds	*cmds;
 
+	cmds = NULL;
     lines = ft_lexer(line, " \t\r\v\f\n");
 	tokens = ft_tokenize(lines);
     if (ft_syntax_error(lines, tokens))
@@ -321,6 +378,7 @@ t_cmds	*ft_parser(char *line)
 		return (NULL);
 	here_fds = ft_open_hdocs(lines, tokens);
 	infiles = ft_open_infiles(lines, tokens);
+	outfiles = ft_open_outfiles(lines, tokens);
 	/* open infiles */
 	/* open outfiles */
     /* fillup the linked list struct */
@@ -409,11 +467,11 @@ char    *ft_tokenize(char **lines)
 	}
 	tokenized_arr[k] = '\0';
 	i = 0;
-	while(tokenized_arr[i])
-	{
-		printf("%c", tokenized_arr[i]);
-		i++;
-	}
-	printf("\n");
+	// while(tokenized_arr[i])
+	// {
+	// 	printf("%c", tokenized_arr[i]);
+	// 	i++;
+	// }
+	// printf("\n");
     return (tokenized_arr);
 }

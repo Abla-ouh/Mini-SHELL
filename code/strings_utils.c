@@ -6,11 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:08:45 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/24 15:54:20 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/25 12:01:20 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <../inc/minishell.h>
 
 int	ft_srch(char *str, char c)
 {
