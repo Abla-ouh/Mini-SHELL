@@ -6,10 +6,10 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/09/25 16:16:21 by midfath          ###   ########.fr       */
+/*   Updated: 2022/09/25 16:41:08 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-//ft_env(t_list *env, t_)
+ft_env(t_list *env, t_)
