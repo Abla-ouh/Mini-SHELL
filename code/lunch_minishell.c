@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/24 16:04:51 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:55:00 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ void	ft_read_stdin(int *here_fds, char **lines, int del_idx)
 		free(temp);
 }
 
-int find_here_docs(char *tokens)
+int find_op(char *tokens, char c)
 {
 	int i;
 	int her;
@@ -256,7 +256,7 @@ int find_here_docs(char *tokens)
 	her = 0;
 	while (tokens[i])
 	{
-		if (tokens[i] == 'H')
+		if (tokens[i] == c)
 			her++;
 		i++;
 	}
@@ -270,7 +270,7 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 	int	i;
 	int j;
 
-	here_num = find_here_docs(tokens);
+	here_num = find_op(tokens, 'H');
 	if (!here_num)
 		return (NULL);
 	here_fds = malloc(sizeof(int *) * (here_num + 1));
@@ -288,13 +288,29 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 	return (here_fds);
 }
 
+char	*ft_open_infiles(char **lines, char *tokens)
+{
+	int i;
+	int	in;
+	char *infiles;
+
+	i = 0;
+	in = find_op(tokens, '<');
+	if(!in)
+		return (NULL);
+	
+	
+	
+	
+}
+
 t_cmds	*ft_parser(char *line)
 {
 	char	**lines;
     char    *tokens;
 	int		**here_fds;
-	//int		*infiles;
-	//int		*outfiles;
+	int		*infiles;
+	int		*outfiles;
 	t_cmds	*cmds;
 
     lines = ft_lexer(line, " \t\r\v\f\n");
@@ -304,7 +320,7 @@ t_cmds	*ft_parser(char *line)
     if (ft_check_redir_filename(lines, tokens))
 		return (NULL);
 	here_fds = ft_open_hdocs(lines, tokens);
-	
+	infiles = ft_open_infiles(lines, tokens);
 	/* open infiles */
 	/* open outfiles */
     /* fillup the linked list struct */

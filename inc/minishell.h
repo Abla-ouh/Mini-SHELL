@@ -6,7 +6,11 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/24 22:16:20 by midfath          ###   ########.fr       */
+=======
+/*   Updated: 2022/09/24 17:58:36 by abouhaga         ###   ########.fr       */
+>>>>>>> origin/master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +45,7 @@ typedef struct s_cmds
     char    **args;
     int     in;
     int     out;
+    int     is_exec;
 } t_cmds;
 
 t_cmds  *ft_parser(char *line);
