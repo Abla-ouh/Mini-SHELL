@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/25 15:42:53 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:02:16 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int ac, char **av, char **env)
 
     if (ac != 1 || !*env)
         return (1);
-    ft_parser("< hello");
+    ft_parser("< hello < sdfa");
     // while(1)
     // {
     //     line = readline("minishell$ ");
