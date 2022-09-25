@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/09/25 16:23:11 by midfath          ###   ########.fr        #
+#    Updated: 2022/09/25 16:34:09 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,4 +69,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean r
