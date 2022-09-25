@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/24 17:58:36 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:41:37 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-typedef struct s_envp
-{
-    char            *key;
-    char            *value;
-    struct s_envp   *next;
-} t_envp;
+// typedef struct s_envp
+// {
+//     char            *key;
+//     char            *value;
+//     struct s_envp   *next;
+// } t_envp;
 
 
 typedef struct s_gdata
 {
     int     exit_status;
-    t_envp  env;
+    //t_envp  env;
 } t_gdata;
 
 typedef struct s_cmds

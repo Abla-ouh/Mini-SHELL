@@ -6,11 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/24 15:56:33 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:42:53 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <../inc/minishell.h>
 
 int main(int ac, char **av, char **env)
 {
@@ -21,7 +21,7 @@ int main(int ac, char **av, char **env)
 
     if (ac != 1 || !*env)
         return (1);
-    ft_parser("<< stop1 cat << stop2");
+    ft_parser("< hello");
     // while(1)
     // {
     //     line = readline("minishell$ ");
