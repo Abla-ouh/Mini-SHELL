@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/25 15:41:37 by abouhaga         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/25 15:18:23 by midfath          ###   ########.fr       */
+>>>>>>> 410e567da2420f88fac4471f492af5fa2c0aa19d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +23,11 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+<<<<<<< HEAD
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+=======
 
 // typedef struct s_envp
 // {
