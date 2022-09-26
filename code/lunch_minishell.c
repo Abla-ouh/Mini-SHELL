@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/25 19:01:35 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:49:28 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,19 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 		ft_read_stdin(here_fds[i], lines , ++j);
 		i++;
 	}
+	i = 0;
+	while(i < here_num)
+	{
+		j = 0;
+		while(j < 2)
+		{
+			printf("%d  ", here_fds[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	exit(1);
 	return (here_fds);
 }
 
