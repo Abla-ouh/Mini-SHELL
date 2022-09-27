@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe.h                                              :+:      :+:    :+:   */
+/*   ft_istrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/09/26 16:42:02 by midfath          ###   ########.fr       */
+/*   Created: 2022/09/25 18:35:17 by midfath           #+#    #+#             */
+/*   Updated: 2022/09/25 18:35:27 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXE_H
-# define EXE_H
-
-# include "../libft/libft.h"
-# include "minishell.h"
-
-typedef struct s_env
+int	ft_istrchr(const char *str, char c)
 {
-	char	*title;
-	char	*value;
-}t_env;
+	int index;
 
-
-
-#endif 
+	index = 0;
+	if (!str)
+		return (-1);
+	while (str[index])
+	{
+		if (str[index] == c)
+			return (index);
+		index++;
+	}
+	return (-1);
+}
