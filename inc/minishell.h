@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/26 11:39:34 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:33:57 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct s_cmds
     int     is_exec;
     struct s_cmds *next;
 } t_cmds;
+
+typedef struct s_data
+{
+	char	**lines;
+    char    *tokens;
+	int		**here_fds;
+	int		*infiles;
+	int		*outfiles;
+} t_data;
 
 t_cmds  *ft_parser(char *line);
 int     count_dup(char *str_trim, char o);
