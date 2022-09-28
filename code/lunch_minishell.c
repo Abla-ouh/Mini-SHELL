@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/26 12:49:28 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/28 02:00:04 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,31 @@ char **ft_lexer(char *line, char *set)
 	return (strs);
 }
 
+int	is_quoted(char *arg)
+{
+	int i;
+
+	i = 0;
+	while(arg[i])
+	{
+		if (arg[i] == '\"')
+		{
+			skip_quote(arg, &i, '\"');
+			if (arg[i - 1] != '\"')
+				return (0);
+		}
+		else if (arg[i] == '\'')
+		{
+			skip_quote(arg, &i, '\'');
+			if (arg[i - 1] != '\'')
+				return (0);
+		}
+		else
+			i++;
+	}
+	return (1);
+}
+
 int    ft_syntax_error(char **lines, char *token)
 {
     int i;
@@ -203,6 +228,11 @@ int    ft_syntax_error(char **lines, char *token)
             printf("minishell: syntax error near unexpected token `%c%c'\n", lines[i][0], lines[i][0]);
             return (1);
         }
+		if (!is_quoted(lines[i]))
+		{
+			printf("minishell: unclosed quotes\n");
+			return (1);
+		}
         i++;
     }
     if (!ft_strcmp(lines[i - 1], "|"))
@@ -238,7 +268,8 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 void	ft_read_stdin(int *here_fds, char **lines, int del_idx)
 {
 	char *temp;
-	
+
+	pipe(here_fds);
 	while(1)
 	{
 		temp = readline("> ");
@@ -288,19 +319,19 @@ int	**ft_open_hdocs(char **lines, char *tokens)
 		ft_read_stdin(here_fds[i], lines , ++j);
 		i++;
 	}
-	i = 0;
-	while(i < here_num)
-	{
-		j = 0;
-		while(j < 2)
-		{
-			printf("%d  ", here_fds[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	exit(1);
+	// i = 0;
+	// while(i < here_num)
+	// {
+	// 	j = 0;
+	// 	while(j < 2)
+	// 	{
+	// 		printf("%d  ", here_fds[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
+	// exit(1);
 	return (here_fds);
 }
 
@@ -351,6 +382,7 @@ int	*ft_open_outfiles(char **lines, char *tokens)
 	int *outfiles;
 
 	out = find_op(tokens, '>');
+	out += find_op(tokens, 'A');
 	//printf("out = %d\n", out);
 	if(!out)
 		return (NULL);
@@ -384,29 +416,93 @@ int	*ft_open_outfiles(char **lines, char *tokens)
 	}
 	return (outfiles);
 }
+
+int	*setup_last_io(char *token, t_data *data)
+{
+	int last_in;
+	int last_out;
+	int *last_io;
+	
+	last_io = malloc(sizeof(int) * 2);
+	
+	last_in = find_op(token, '<');
+	last_out = find_op(token, '>');
+	last_out += find_op(token, 'A');
+	if (last_in)
+		last_io[0] = data->infiles[last_in - 1];
+	else
+		last_io[0] = 0;
+	if (last_out)
+		last_io[1] = data->outfiles[last_out - 1];
+	else
+		last_io[1] = 1;
+	return (last_io);
+}
+
+int	ft_count(char *s, char c)
+{
+	int	count;
+	int	j;
+
+	count = 0;
+	j = 0;
+	while (s[j])
+	{
+		if (s[j] == c)
+		j++;
+		else
+		{
+			while (s[j] && s[j] != c)
+				j++;
+			count++;
+		}
+	}
+	return (count);
+}
+
+t_cmds	*ft_fillup_struct(t_data *data)
+{
+	int i;
+	char **splitted_tokens;
+	int	*last_io; // last_io[0] -> in; last_io[1] -> out
+	t_cmds *cmds;
+
+	i = 0;
+	splitted_tokens = ft_split(data->tokens, '|');
+	cmds = malloc(sizeof(t_cmds) * (ft_count(data->tokens, '|') + 1));
+	while (splitted_tokens[i])
+	{
+		last_io = setup_last_io(splitted_tokens[i], data);
+		cmds[i].in = last_io[0];
+		cmds[i].out = last_io[1];
+		/*
+			FILLUP REST 
+		*/
+		
+		i++;
+	}
+	
+}
+
 t_cmds	*ft_parser(char *line)
 {
-	char	**lines;
-    char    *tokens;
-	int		**here_fds;
-	int		*infiles;
-	int		*outfiles;
+	t_data	data;
 	t_cmds	*cmds;
 
-	cmds = NULL;
-    lines = ft_lexer(line, " \t\r\v\f\n");
-	tokens = ft_tokenize(lines);
-    if (ft_syntax_error(lines, tokens))
+    data.lines = ft_lexer(line, " \t\r\v\f\n");
+	data.tokens = ft_tokenize(data.lines);
+    if (ft_syntax_error(data.lines, data.tokens))
 		return (NULL);
-    if (ft_check_redir_filename(lines, tokens))
+    if (ft_check_redir_filename(data.lines,data.tokens))
 		return (NULL);
-	here_fds = ft_open_hdocs(lines, tokens);
+	data.here_fds = ft_open_hdocs(data.lines, data.tokens);
 	/* open infiles */
-	infiles = ft_open_infiles(lines, tokens);
+	data.infiles = ft_open_infiles(data.lines, data.tokens);
 	/* open outfiles */
-	outfiles = ft_open_outfiles(lines, tokens);
+	data.outfiles = ft_open_outfiles(data.lines, data.tokens);
     /* fillup the linked list struct */
-	ft_fillup_struct(lines, tokens, here_fds, infiles, outfiles, cmds);
+	cmds = ft_fillup_struct(&data);
+	//ft_fillup_struct(&data);
     /* free all addresses not useful anymore */
 	return (cmds);
 }
