@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/09/25 16:52:49 by midfath          ###   ########.fr        #
+#    Updated: 2022/09/27 16:25:20 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ RDLINE		= -lreadline
 PRINTF		= printf
 
 #src&&obj
-SRC			= minishell.c lunch_minishell.c strings_utils.c
+SRC			= minishell.c lunch_minishell.c strings_utils.c \
+				cd_exe.c env_exe.c
 
 OBJS    	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
