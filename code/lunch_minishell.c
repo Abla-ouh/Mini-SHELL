@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/29 15:05:13 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:26:55 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,6 +458,7 @@ int	*setup_last_io(int *last_io, char *token, t_data *data)
 		last_io[1] = data->outfiles[last_out - 1];
 	else
 		last_io[1] = 1;
+	//edit it to return the is_exec
 	return (0);
 }
 
@@ -482,14 +483,56 @@ int	*setup_last_io(int *last_io, char *token, t_data *data)
 // 	return (count);
 // }
 
+char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
+{
+	int i;
+	int j;
+	int k;
+	int **args;
+	
+	i = 0;
+	j = 0;
+	k = 0;
+	while (tokens[i])
+	{
+		if (tokens[i] == 'H' || tokens[i] == '<' || tokens[i] == '>' || tokens[i] == 'A')
+		{
+			while (tokens[i] && (tokens[i] == 'H' || tokens[i] == '<' || tokens[i] == '>' || tokens[i] == 'A'))
+			{
+				(*sync_lines)++;
+				i++;
+			}
+		}
+		if (tokens[i] == 'S' && tokens[i - 1] != 'S')
+		{
+			(*sync_lines)++;
+			i++;
+		}
+		else if (tokens[i] == 'S' && tokens[i - 1] == 'S')
+		{
+			while (*lines[k])
+			{
+				args[j][k] = lines[*sync_lines][k];
+				k++;
+			}
+		}
+		i++;
+		j++;
+		(*sync_lines)++;
+	}
+	return (args);
+}
+
 t_cmds	**ft_fillup_struct(t_data *data)
 {
 	int i;
 	int	*last_io; // last_io[0] -> in; last_io[1] -> out
 	int	is_exec;
+	int	sync_lines;
 	t_cmds **cmds;
 
 	i = 0;
+	sync_lines = 0;
 	cmds = malloc(sizeof(t_cmds*) * (ft_strptr(data->tokens) + 1));
 	is_exec = 0;
 	while (data->tokens[i])
@@ -498,6 +541,7 @@ t_cmds	**ft_fillup_struct(t_data *data)
 		is_exec = setup_last_io(last_io, data->tokens[i], data);
 		cmds[i]->in = last_io[0];
 		cmds[i]->out = last_io[1];
+		cmds[i]->args = ft_fill_args(data->lines, data->tokens[i], &sync_lines);
 		cmds[i]->is_exec = is_exec;
 		
 		/*
