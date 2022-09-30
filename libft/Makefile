@@ -59,7 +59,8 @@ SRCS	= ft_strlen.c \
 		  ft_strrncmp.c \
 		  ft_matrixdup.c \
 		  ft_matfreex.c \
-		  ft_istrchr.c
+		  ft_istrchr.c \
+		  ft_leak.c
 
 SRCS_BN = ft_lstnew_bonus.c \
 		  ft_lstsize_bonus.c \
