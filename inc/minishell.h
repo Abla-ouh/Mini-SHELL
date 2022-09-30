@@ -45,11 +45,12 @@ typedef struct s_cmds
     int     out;
     int     is_exec;
 } t_cmds;
+
 typedef struct s_data
 {
 	char	**lines;
     char	**tokens;
-	int		**here_fds;
+	int		*here_fds;
 	int		**infiles;
 	int		**outfiles;
 } t_data;

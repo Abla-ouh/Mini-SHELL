@@ -301,9 +301,9 @@ int find_op(char *tokens, char c)
 	return (her);
 }
 
-int	**ft_open_hdocs(char *lines, char *tokens, int *sync_lines)
+int	*ft_open_hdocs(char **lines, char *tokens, int *sync_lines)
 {
-	int	**here_fds;
+	int	*here_fds;
 	int	here_num;
 	int	i;
 	int j;
@@ -437,7 +437,7 @@ int	*setup_last_io(int *last_io, char *token, t_data *data)
 	int last_in;
 	int last_her;
 	int last_out;
-	int _exec;
+	//int _exec;
 	
 	last_io = malloc(sizeof(int) * 2);
 	
@@ -520,7 +520,30 @@ char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 		j++;
 		(*sync_lines)++;
 	}
+	// i = 0;
+	// j = 0;
+	// while(args[i])
+	// {
+	// 	while(args[i][j])
+	// 	{
+	// 		printf("%s", *args[j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
+	// exit(0);
 	return (args);
+}
+
+int	ft_strptr(char **ptr)
+{
+	int i;
+
+	i = 0;
+	while (ptr[i])
+		i++;
+	return (i);
 }
 
 t_cmds	**ft_fillup_struct(t_data *data)
@@ -550,16 +573,6 @@ t_cmds	**ft_fillup_struct(t_data *data)
 		i++;
 	}
 	
-}
-
-int	ft_strptr(char **ptr)
-{
-	int i;
-
-	i = 0;
-	while (ptr[i])
-		i++;
-	return (i);
 }
 
 t_cmds	*ft_parser(char *line)

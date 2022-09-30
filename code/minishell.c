@@ -15,9 +15,9 @@
 int main(int ac, char **av, char **env)
 {
     (void)av;
-    char	*line;
+    //char	*line;
     //char    *arr;
-    line = NULL;
+    //line = NULL;
 
     if (ac != 1 || !*env)
         return (1);
