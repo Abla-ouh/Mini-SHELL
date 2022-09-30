@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/29 22:26:55 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/09/30 22:43:08 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -448,14 +448,14 @@ int	*setup_last_io(int *last_io, char *token, t_data *data)
 	if (last_in || last_her)
 	{
 		if (ft_strrchr(token, 'H') > ft_strrchr(token, '<'))
-			last_io[0] = data->here_fds[last_her - 1];
+			last_io[0] = *(data->here_fds[last_her - 1]);
 		else
-			last_io[0] = data->infiles[last_in - 1];
+			last_io[0] = *(data->infiles[last_in - 1]);
 	}
 	else
 		last_io[0] = 0;
 	if (last_out)
-		last_io[1] = data->outfiles[last_out - 1];
+		last_io[1] = *(data->outfiles[last_out - 1]);
 	else
 		last_io[1] = 1;
 	//edit it to return the is_exec
@@ -488,16 +488,16 @@ char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 	int i;
 	int j;
 	int k;
-	int **args;
+	char	**args;
 	
 	i = 0;
 	j = 0;
 	k = 0;
 	while (tokens[i])
 	{
-		if (tokens[i] == 'H' || tokens[i] == '<' || tokens[i] == '>' || tokens[i] == 'A')
+		if (tokens[i] != 'S')
 		{
-			while (tokens[i] && (tokens[i] == 'H' || tokens[i] == '<' || tokens[i] == '>' || tokens[i] == 'A'))
+			while (tokens[i] && tokens[i] != 'S')
 			{
 				(*sync_lines)++;
 				i++;
@@ -546,32 +546,72 @@ int	ft_strptr(char **ptr)
 	return (i);
 }
 
-t_cmds	**ft_fillup_struct(t_data *data)
+// t_cmds	**ft_fillup_struct(t_data *data)
+// {
+// 	int i;
+// 	int	*last_io; // last_io[0] -> in; last_io[1] -> out
+// 	int	is_exec;
+// 	int	sync_lines;
+// 	t_cmds **cmds;
+
+// 	i = 0;
+// 	sync_lines = 0;
+// 	cmds = malloc(sizeof(t_cmds*) * (ft_strptr(data->tokens) + 1));
+// 	is_exec = 0;
+// 	while (data->tokens[i])
+// 	{
+// 		cmds[i] = malloc(sizeof(t_cmds));
+// 		is_exec = setup_last_io(last_io, data->tokens[i], data);
+// 		cmds[i]->in = last_io[0];
+// 		cmds[i]->out = last_io[1];
+// 		cmds[i]->args = ft_fill_args(data->lines, data->tokens[i], &sync_lines);
+// 		cmds[i]->is_exec = is_exec;
+		
+// 		i++;
+// 	}
+	
+// }
+
+// t_cmds *node(t_data data, int i)
+// {
+//     t_cmds *ptr;
+// 	ptr = (t_cmds*)malloc(sizeof(t_cmds));
+	
+//     ptr->path = data.lines[i];
+//     ptr->args = data.lines[i][j];
+//     ptr->in = data.infile[i];
+//     ptr->out = data.outfile[i];
+//     ptr->is_exec = /*chi haja*/
+//     ptr->next = NULL;
+// 	return (ptr);
+// }
+
+t_cmds	*ft_fillup_struct(t_data *data)
 {
 	int i;
 	int	*last_io; // last_io[0] -> in; last_io[1] -> out
 	int	is_exec;
 	int	sync_lines;
-	t_cmds **cmds;
+    t_cmds *cmd;
 
+	cmd = (t_cmds*)malloc(sizeof(t_cmds));
 	i = 0;
 	sync_lines = 0;
-	cmds = malloc(sizeof(t_cmds*) * (ft_strptr(data->tokens) + 1));
 	is_exec = 0;
 	while (data->tokens[i])
 	{
-		cmds[i] = malloc(sizeof(t_cmds));
 		is_exec = setup_last_io(last_io, data->tokens[i], data);
-		cmds[i]->in = last_io[0];
-		cmds[i]->out = last_io[1];
-		cmds[i]->args = ft_fill_args(data->lines, data->tokens[i], &sync_lines);
-		cmds[i]->is_exec = is_exec;
-		
-		/*
-			
-		*/
+		cmd->in = last_io[0];
+		cmd->out = last_io[1];
+		cmd->args = ft_fill_args(data->lines, data->tokens[i], &sync_lines);
+		cmd->is_exec = is_exec;
+		cmd->next = NULL;
 		i++;
 	}
+
+	
+
+	
 	
 }
 
