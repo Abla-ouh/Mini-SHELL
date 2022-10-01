@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/27 21:34:45 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/01 16:22:58 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int ac, char **av, char **env)
 
     if (ac != 1 || !*env)
         return (1);
-    ft_parser("<< hello 'asdfasfasdf' << hell");
+    ft_parser("< token cat");
     // while(1)
     // {
     //     line = readline("minishell$ ");

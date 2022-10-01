@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/30 22:43:08 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:56:03 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -432,34 +432,55 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync_lines)
 	return (outfiles);
 }
 
-int	*setup_last_io(int *last_io, char *token, t_data *data)
+int check_exec(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while(data->infiles[i] && data->outfiles[i])
+	{
+		if (data->infiles[i] < 0 || data->outfiles[i] < 0)
+			return (0);
+	}
+	return (1);
+}
+
+int	setup_last_io(int *last_io, char *token, t_data *data)
 {
 	int last_in;
 	int last_her;
 	int last_out;
-	//int _exec;
-	
-	last_io = malloc(sizeof(int) * 2);
+	int _exec;
 	
 	last_in = find_op(token, '<');
 	last_her = find_op(token, 'H');
 	last_out = find_op(token, '>');
 	last_out += find_op(token, 'A');
+	
+	if (!check_exec(data))
+	{
+		_exec = 0;
+		return(_exec);
+	}
 	if (last_in || last_her)
 	{
 		if (ft_strrchr(token, 'H') > ft_strrchr(token, '<'))
+		{
 			last_io[0] = *(data->here_fds[last_her - 1]);
+		}
 		else
 			last_io[0] = *(data->infiles[last_in - 1]);
 	}
 	else
 		last_io[0] = 0;
+	
 	if (last_out)
 		last_io[1] = *(data->outfiles[last_out - 1]);
 	else
 		last_io[1] = 1;
+	_exec = 1;
+	return(_exec);
 	//edit it to return the is_exec
-	return (0);
 }
 
 // int	ft_count(char *s, char c)
@@ -483,6 +504,23 @@ int	*setup_last_io(int *last_io, char *token, t_data *data)
 // 	return (count);
 // }
 
+int		args_to_alloc(char *tokens)
+{
+	int i;
+	int s;
+
+	i = 0;
+	s = 0;
+	while (tokens[i])
+	{
+		if (tokens[i] == 'S' && (i == 0 || tokens[i - 1] == 'S'))
+			s++;
+		i++;
+	}
+	return (s);
+	
+}
+
 char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 {
 	int i;
@@ -493,6 +531,10 @@ char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 	i = 0;
 	j = 0;
 	k = 0;
+
+	args = (char **)malloc(sizeof(char**) * (args_to_alloc(tokens) + 1));
+	if (!args)
+		return(NULL);
 	while (tokens[i])
 	{
 		if (tokens[i] != 'S')
@@ -503,33 +545,29 @@ char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 				i++;
 			}
 		}
-		if (tokens[i] == 'S' && tokens[i - 1] != 'S')
+		if (i != 0 && tokens[i] == 'S' && tokens[i - 1] != 'S')
 		{
 			(*sync_lines)++;
 			i++;
 		}
-		else if (tokens[i] == 'S' && tokens[i - 1] == 'S')
+		else if (tokens[i] == 'S' && (i == 0 || tokens[i - 1] == 'S'))
 		{
-			while (*lines[k])
-			{
-				args[j][k] = lines[*sync_lines][k];
-				k++;
-			}
+			args[j] = ft_strdup(lines[*sync_lines]);
+			// while (*lines[k])
+			// {
+			// 	args[j][k] = lines[*sync_lines][k];
+			// 	k++; 
+			// }
 		}
 		i++;
 		j++;
 		(*sync_lines)++;
 	}
+	args[j] = NULL;
 	// i = 0;
-	// j = 0;
-	// while(args[i])
+	// while (args[i])
 	// {
-	// 	while(args[i][j])
-	// 	{
-	// 		printf("%s", *args[j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
+	// 	printf("args[%d] = %s\n", i, args[i]);
 	// 	i++;
 	// }
 	// exit(0);
@@ -586,33 +624,47 @@ int	ft_strptr(char **ptr)
 // 	return (ptr);
 // }
 
+void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
+{
+	t_cmds *ptr;
+
+	ptr = *cmds;
+	if (!ptr)
+		*cmds = new;
+	else
+	{
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = new;
+	}
+}
+
 t_cmds	*ft_fillup_struct(t_data *data)
 {
 	int i;
 	int	*last_io; // last_io[0] -> in; last_io[1] -> out
 	int	is_exec;
 	int	sync_lines;
-    t_cmds *cmd;
+    t_cmds *new_cmd;
+    t_cmds *head_cmd;
 
-	cmd = (t_cmds*)malloc(sizeof(t_cmds));
 	i = 0;
+	last_io = malloc(sizeof(int) * 2);
 	sync_lines = 0;
 	is_exec = 0;
-	while (data->tokens[i])
+    head_cmd = 0;
+	while (data->splitted_tokens[i])
 	{
-		is_exec = setup_last_io(last_io, data->tokens[i], data);
-		cmd->in = last_io[0];
-		cmd->out = last_io[1];
-		cmd->args = ft_fill_args(data->lines, data->tokens[i], &sync_lines);
-		cmd->is_exec = is_exec;
-		cmd->next = NULL;
+		new_cmd = (t_cmds*)malloc(sizeof(t_cmds));
+		new_cmd->is_exec = setup_last_io(last_io, data->splitted_tokens[i], data);
+		new_cmd->in = last_io[0];
+		new_cmd->out = last_io[1];
+		new_cmd->args = ft_fill_args(data->lines, data->splitted_tokens[i], &sync_lines);
+		new_cmd->next = NULL;
+		ft_add_back_cmd(&head_cmd, new_cmd);
 		i++;
 	}
-
-	
-
-	
-	
+	return (head_cmd);
 }
 
 t_cmds	*ft_parser(char *line)
@@ -623,39 +675,56 @@ t_cmds	*ft_parser(char *line)
 	int		sync_lines;
 
     data.lines = ft_lexer(line, " \t\r\v\f\n");
-	data.tokens = ft_split(ft_tokenize(data.lines), '|');
+	data.tokens = ft_tokenize(data.lines);
     if (ft_syntax_error(data.lines, data.tokens))
 		return (NULL);
-    if (ft_check_redir_filename(data.lines,data.tokens))
+    if (ft_check_redir_filename(data.lines, data.tokens))
 		return (NULL);
-	data.here_fds = (int **)malloc(sizeof(int*) * (ft_strptr(data.tokens)));
+	data.splitted_tokens = ft_split(data.tokens, '|');
+	data.here_fds = (int **)malloc(sizeof(int*) * (ft_strptr(data.splitted_tokens)));
 	i = -1;
 	sync_lines = 0;
-	while (data.tokens[++i])
+	while (data.splitted_tokens[++i])
 	{
-		data.here_fds[i] = ft_open_hdocs(data.lines[i], data.tokens[i], &sync_lines);
+		data.here_fds[i] = ft_open_hdocs(&(data.lines[i]), data.splitted_tokens[i], &sync_lines);
 		sync_lines++;
 	}
 	/* open infiles */
-	data.infiles = (int **)malloc(sizeof(int*) * (ft_strptr(data.tokens)));
+	data.infiles = (int **)malloc(sizeof(int*) * (ft_strptr(data.splitted_tokens)));
 	i = -1;
 	sync_lines = 0;
-	while (data.tokens[++i])
+	while (data.splitted_tokens[++i])
 	{
-		data.infiles[i] = ft_open_infiles(data.lines[i], data.tokens[i], &sync_lines);
+		data.infiles[i] = ft_open_infiles(&(data.lines[i]), data.splitted_tokens[i], &sync_lines);
 		sync_lines++;	
 	}
 	/* open outfiles */
-	data.outfiles = (int **)malloc(sizeof(int*) * (ft_strptr(data.tokens)));
+	data.outfiles = (int **)malloc(sizeof(int*) * (ft_strptr(data.splitted_tokens)));
 	i = -1;
 	sync_lines = 0;
-	while (data.tokens[++i])
+	while (data.splitted_tokens[++i])
 	{
-		data.outfiles = ft_open_outfiles(data.lines[i], data.tokens[i], &sync_lines);
+		data.outfiles[i] = ft_open_outfiles((&data.lines[i]), data.splitted_tokens[i], &sync_lines);
 		sync_lines++;
 	}
     /* fillup the linked list struct */
 	cmds = ft_fillup_struct(&data);
+	i = 0;
+	while (cmds)
+	{
+		while(cmds->args[i])
+		{
+			printf("arg : %s index %d\n", cmds->args[i], i);
+			i++;
+		}
+		printf("\n");
+		printf("cmds->in: %d\n", cmds->in);
+		printf("cmds->out: %d\n", cmds->out);
+		printf("cmds->is_exec: %d\n", cmds->is_exec);
+		printf("-------------------------------------------------------\n");
+		cmds = cmds->next;
+	}
+	exit(1);
 	//ft_fillup_struct(&data);
     /* free all addresses not useful anymore */
 	return (cmds);
@@ -741,7 +810,7 @@ char    *ft_tokenize(char **lines)
 		i++;
 	}
 	tokenized_arr[k] = '\0';
-	i = 0;
+	//i = 0;
 	// while(tokenized_arr[i])
 	// {
 	// 	printf("%c", tokenized_arr[i]);
