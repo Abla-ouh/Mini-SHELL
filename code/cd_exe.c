@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/02 11:40:21 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 15:49:27 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
 	{
 		r = cd_option("OLDPWD", env, gdexe);
 		if (r == 1)
-			printf(gdexe->p_cwd);
+			printf("%s", gdexe->p_cwd);
 	}
 	else
 		r = chdir_update(av[1], env, gdexe);
@@ -48,11 +48,11 @@ int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
 **			-1 if an error occured (chdir)
 */
 
-int	cd_option(char *dir, t_list *env, t_gexe *gdexe)
+int	cd_option(char *path, t_list *env, t_gexe *gdexe)
 {
 	char	*dir;
 
-	dir = getenv(dir);
+	dir = getenv(path);
 	if (!dir)
 		return (-1);
 	return (chdir_update(dir, env, gdexe));
@@ -93,11 +93,21 @@ int	chdir_update(char *dir, t_list *env ,t_gexe *gdexe)
 	return (1);
 }
 
-int main(int av, char av, char **env)
+int main(int ac, char **av, char **envp)
 {
 	t_list *env;
 	t_gexe	*exe;
 	
-
-
+	//exe = (t_gexe *)malloc(sizeof(t_gexe));
+	exe = NULL;
+ 	//exe->env = env_list(envp);
+	//ft_getp_cwd(&exe->p_cwd);
+	// exe->end =0;
+	// exe->exit_status =0;
+	if (ac && av)
+	{
+		env = env_list(envp);
+		//ft_cd(env, av, exe);
+		ft_env(env);
+	}
 }
