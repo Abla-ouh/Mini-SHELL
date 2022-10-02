@@ -6,13 +6,29 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/09/30 15:59:46 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 10:12:28 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_cd(t_list env,char **argv , )
+int	ft_cd(t_list *env,char **av , t_gexe *gdexe)
+{
+	int	r;
+
+	if (!ft_strcmp(av[1], "~") || !av[1])
+		r = cd_option("HOME", env, gdexe);
+	else if (!ft_strcmp("-", av[1]))
+	{
+		r = cd_option("OLDPWD", env, gdexe);
+		if (r == 1)
+			printf(gdexe->p_cwd);
+	}
+	else
+		r = chdir_update(av[1], env, gdexe);
+	if (r == 0)
+		gdexe->;
+}
 
 /*
 ◦ cd with only a relative or absolute path
@@ -28,6 +44,16 @@ int	ft_cd(t_list env,char **argv , )
 **			-1 if an error occured (chdir)
 */
 
+int	cd_option(char *dir, t_list *env, t_gexe *gdexe)
+{
+	char	*dir;
+
+	dir = getenv(dir);
+	if (!dir)
+		return (-1);
+	return (chdir_update(dir, env, gdexe));
+}
+
 int	ft_getp_cwd(char **p_cwd)
 {
 	if (!(getcwd(*p_cwd, ft_strlen(*p_cwd))))
@@ -42,7 +68,7 @@ int	ft_getp_cwd(char **p_cwd)
 }
 
 
-int	chdir_update(char *dir, t_list *env,t_gexe *gdexe)
+int	chdir_update(char *dir, t_list *env ,t_gexe *gdexe)
 {
 	char	**o_pwd;
 	char	**pwd_env;
@@ -61,4 +87,9 @@ int	chdir_update(char *dir, t_list *env,t_gexe *gdexe)
 	if (!(ft_getp_cwd(&gdexe->p_cwd)) && pwd_env && ft_getp_cwd(pwd_env) == 0)
 			return (0);
 	return (1);
+}
+
+int main(int av, char av, char **env)
+{
+
 }
