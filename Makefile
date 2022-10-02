@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/09/27 16:25:20 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/02 11:05:52 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ BLUE	= \033[1;34m
 #vars
 
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror  -fsanitize=address
+# CFLAGS 		= -Wall -Wextra -Werror
 NAME 		= minishell
 LIBFT    	= libft/libft.a
 OBJ_DIR		= obj
@@ -70,4 +71,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean r
+.PHONY : all clean fclean 

@@ -16,19 +16,14 @@ typedef struct s_data
 	int		*outfiles;
 } t_data;
 
-// t_cmds *node(data, i , j)
-// {
-//     t_cmds *ptr;
-//     s_content ptr3;
-//     ptr1 = malloc(t_cmds);
-//     ptr1->path = data->lines[i];
-//     ptr1->args = data->lines[i][j];
-//     ptr1->in = data->infile[i];
-//     ptr1->out = data->outfile[i];
-//     ptr1->is_exec = /*chi haja*/
-//     ptr1->next = NULL;
-//     .
-//     .
-//     .
-
-// }
+t_cmds *node(t_data data)
+{
+    t_cmds *ptr;
+    ptr1 = malloc(t_cmds);
+    ptr1->path = data->lines[i];
+    ptr1->args = data->lines[i][j];
+    ptr1->in = data->infile[i];
+    ptr1->out = data->outfile[i];
+    ptr1->is_exec = /*chi haja*/
+    ptr1->next = NULL;
+}
