@@ -6,13 +6,13 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/02 11:05:13 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 11:40:21 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_cd(t_list *env,char **av , t_gexe *gdexe)
+int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
 {
 	int	r;
 
@@ -29,7 +29,8 @@ int	ft_cd(t_list *env,char **av , t_gexe *gdexe)
 	if (r == 0)
 		gdexe->end = 1;
 	else if (errno)
-	
+		printf("%s: %s",av[0] ,strerror(errno));
+//	gdexe->exit_status
 	return (r);
 }
 
@@ -39,7 +40,7 @@ int	ft_cd(t_list *env,char **av , t_gexe *gdexe)
 ** note : Here the directory change is performed
 **		chdir is performed
 **		OLDPWD is updated if needed,
-**		gdata->cwd is always updated as it tracks the real cwd
+**		gdexe->pcwd is always updated as it tracks the real cwd
 **		Finally, the PWD is updated if needed
 **
 ** RETURN:	1 on success
@@ -94,5 +95,9 @@ int	chdir_update(char *dir, t_list *env ,t_gexe *gdexe)
 
 int main(int av, char av, char **env)
 {
+	t_list *env;
+	t_gexe	*exe;
+	
+
 
 }
