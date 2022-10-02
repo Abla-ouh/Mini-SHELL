@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/01 22:56:03 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:22:11 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,10 +309,14 @@ int	*ft_open_hdocs(char **lines, char *tokens, int *sync_lines)
 	int j;
 
 	here_num = find_op(tokens, 'H');
-	if (!here_num)
-		return (NULL);
-	here_fds = malloc(sizeof(int) * (here_num + 1));
 	i = 0;
+	if (!here_num)
+		{
+		while (tokens[i++])
+			(*sync_lines)++;
+		return (NULL);
+	}
+	here_fds = malloc(sizeof(int) * (here_num + 1));
 	j = 0;
 	while (i < here_num)
 	{
@@ -348,10 +352,14 @@ int	*ft_open_infiles(char **lines, char *tokens, int *sync_lines)
 	int *infiles;
 
 	in = find_op(tokens, '<');
-	if(!in)
-		return (NULL);
-	infiles = malloc(sizeof(int) * (in));
 	i = 0;
+	if(!in)
+	{
+		while (tokens[i++])
+			(*sync_lines)++;
+		return (NULL);
+	}
+	infiles = malloc(sizeof(int) * (in));
 	j = 0;
 	while (i < in)
 	{
@@ -393,10 +401,13 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync_lines)
 
 	out = find_op(tokens, '>');
 	out += find_op(tokens, 'A');
-	//printf("out = %d\n", out);
-	if(!out)
-		return (NULL);
 	i = 0;
+	if(!out)
+	{
+		while (tokens[i++])
+			(*sync_lines)++;
+		return (NULL);
+	}
 	j = 0;
 	outfiles = malloc(sizeof(int) * (out));
 	while (i < out)
@@ -406,7 +417,9 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync_lines)
 			j++;
 			(*sync_lines)++;
 		}
-		if (access(lines[*sync_lines + 1], F_OK) == -1)
+		if (!tokens[j])
+			break ;
+		if ((tokens[j] == '>' || tokens[j] == 'A') && access(lines[*sync_lines + 1], F_OK) == -1)
 		{
 			outfiles[i] = open(lines[*sync_lines + 1], O_CREAT | O_WRONLY, 0644);
 			i++;
@@ -445,7 +458,7 @@ int check_exec(t_data *data)
 	return (1);
 }
 
-int	setup_last_io(int *last_io, char *token, t_data *data)
+int	setup_last_io(int *last_io, char *token, t_data *data, int cmd_idx)
 {
 	int last_in;
 	int last_her;
@@ -466,43 +479,22 @@ int	setup_last_io(int *last_io, char *token, t_data *data)
 	{
 		if (ft_strrchr(token, 'H') > ft_strrchr(token, '<'))
 		{
-			last_io[0] = *(data->here_fds[last_her - 1]);
+			last_io[0] = data->here_fds[cmd_idx][last_her - 1];
 		}
 		else
-			last_io[0] = *(data->infiles[last_in - 1]);
+			last_io[0] = data->infiles[cmd_idx][last_in - 1];
 	}
 	else
 		last_io[0] = 0;
 	
 	if (last_out)
-		last_io[1] = *(data->outfiles[last_out - 1]);
+		last_io[1] = data->outfiles[cmd_idx][last_out - 1];
 	else
 		last_io[1] = 1;
 	_exec = 1;
 	return(_exec);
 	//edit it to return the is_exec
 }
-
-// int	ft_count(char *s, char c)
-// {
-// 	int	count;
-// 	int	j;
-
-// 	count = 0;
-// 	j = 0;
-// 	while (s[j])
-// 	{
-// 		if (s[j] == c)
-// 		j++;
-// 		else
-// 		{
-// 			while (s[j] && s[j] != c)
-// 				j++;
-// 			count++;
-// 		}
-// 	}
-// 	return (count);
-// }
 
 int		args_to_alloc(char *tokens)
 {
@@ -537,40 +529,21 @@ char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 		return(NULL);
 	while (tokens[i])
 	{
-		if (tokens[i] != 'S')
+		if (tokens[i] == 'S' && (i == 0 || tokens[i - 1] == 'S'))
 		{
-			while (tokens[i] && tokens[i] != 'S')
+			while (tokens[i] == 'S')
 			{
-				(*sync_lines)++;
+				args[j] = ft_strdup(lines[*sync_lines]);
+				j++;
 				i++;
+				(*sync_lines)++;
 			}
-		}
-		if (i != 0 && tokens[i] == 'S' && tokens[i - 1] != 'S')
-		{
-			(*sync_lines)++;
-			i++;
-		}
-		else if (tokens[i] == 'S' && (i == 0 || tokens[i - 1] == 'S'))
-		{
-			args[j] = ft_strdup(lines[*sync_lines]);
-			// while (*lines[k])
-			// {
-			// 	args[j][k] = lines[*sync_lines][k];
-			// 	k++; 
-			// }
+			break;
 		}
 		i++;
-		j++;
 		(*sync_lines)++;
 	}
 	args[j] = NULL;
-	// i = 0;
-	// while (args[i])
-	// {
-	// 	printf("args[%d] = %s\n", i, args[i]);
-	// 	i++;
-	// }
-	// exit(0);
 	return (args);
 }
 
@@ -583,46 +556,6 @@ int	ft_strptr(char **ptr)
 		i++;
 	return (i);
 }
-
-// t_cmds	**ft_fillup_struct(t_data *data)
-// {
-// 	int i;
-// 	int	*last_io; // last_io[0] -> in; last_io[1] -> out
-// 	int	is_exec;
-// 	int	sync_lines;
-// 	t_cmds **cmds;
-
-// 	i = 0;
-// 	sync_lines = 0;
-// 	cmds = malloc(sizeof(t_cmds*) * (ft_strptr(data->tokens) + 1));
-// 	is_exec = 0;
-// 	while (data->tokens[i])
-// 	{
-// 		cmds[i] = malloc(sizeof(t_cmds));
-// 		is_exec = setup_last_io(last_io, data->tokens[i], data);
-// 		cmds[i]->in = last_io[0];
-// 		cmds[i]->out = last_io[1];
-// 		cmds[i]->args = ft_fill_args(data->lines, data->tokens[i], &sync_lines);
-// 		cmds[i]->is_exec = is_exec;
-		
-// 		i++;
-// 	}
-	
-// }
-
-// t_cmds *node(t_data data, int i)
-// {
-//     t_cmds *ptr;
-// 	ptr = (t_cmds*)malloc(sizeof(t_cmds));
-	
-//     ptr->path = data.lines[i];
-//     ptr->args = data.lines[i][j];
-//     ptr->in = data.infile[i];
-//     ptr->out = data.outfile[i];
-//     ptr->is_exec = /*chi haja*/
-//     ptr->next = NULL;
-// 	return (ptr);
-// }
 
 void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
 {
@@ -642,26 +575,26 @@ void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
 t_cmds	*ft_fillup_struct(t_data *data)
 {
 	int i;
-	int	*last_io; // last_io[0] -> in; last_io[1] -> out
+	int	last_io[2]; // last_io[0] -> in; last_io[1] -> out
 	int	is_exec;
 	int	sync_lines;
     t_cmds *new_cmd;
     t_cmds *head_cmd;
 
 	i = 0;
-	last_io = malloc(sizeof(int) * 2);
 	sync_lines = 0;
 	is_exec = 0;
     head_cmd = 0;
 	while (data->splitted_tokens[i])
 	{
 		new_cmd = (t_cmds*)malloc(sizeof(t_cmds));
-		new_cmd->is_exec = setup_last_io(last_io, data->splitted_tokens[i], data);
+		new_cmd->is_exec = setup_last_io(last_io, data->splitted_tokens[i], data, i);
 		new_cmd->in = last_io[0];
 		new_cmd->out = last_io[1];
 		new_cmd->args = ft_fill_args(data->lines, data->splitted_tokens[i], &sync_lines);
 		new_cmd->next = NULL;
 		ft_add_back_cmd(&head_cmd, new_cmd);
+		sync_lines++;
 		i++;
 	}
 	return (head_cmd);
@@ -686,7 +619,7 @@ t_cmds	*ft_parser(char *line)
 	sync_lines = 0;
 	while (data.splitted_tokens[++i])
 	{
-		data.here_fds[i] = ft_open_hdocs(&(data.lines[i]), data.splitted_tokens[i], &sync_lines);
+		data.here_fds[i] = ft_open_hdocs(data.lines, data.splitted_tokens[i], &sync_lines);
 		sync_lines++;
 	}
 	/* open infiles */
@@ -695,23 +628,25 @@ t_cmds	*ft_parser(char *line)
 	sync_lines = 0;
 	while (data.splitted_tokens[++i])
 	{
-		data.infiles[i] = ft_open_infiles(&(data.lines[i]), data.splitted_tokens[i], &sync_lines);
+		data.infiles[i] = ft_open_infiles(data.lines, data.splitted_tokens[i], &sync_lines);
 		sync_lines++;	
 	}
 	/* open outfiles */
 	data.outfiles = (int **)malloc(sizeof(int*) * (ft_strptr(data.splitted_tokens)));
-	i = -1;
+	i = 0;
 	sync_lines = 0;
-	while (data.splitted_tokens[++i])
+	while (data.splitted_tokens[i])
 	{
-		data.outfiles[i] = ft_open_outfiles((&data.lines[i]), data.splitted_tokens[i], &sync_lines);
+		data.outfiles[i] = ft_open_outfiles(data.lines, data.splitted_tokens[i], &sync_lines);
 		sync_lines++;
+		i++;
 	}
     /* fillup the linked list struct */
 	cmds = ft_fillup_struct(&data);
 	i = 0;
 	while (cmds)
 	{
+		i = 0;
 		while(cmds->args[i])
 		{
 			printf("arg : %s index %d\n", cmds->args[i], i);
@@ -724,7 +659,7 @@ t_cmds	*ft_parser(char *line)
 		printf("-------------------------------------------------------\n");
 		cmds = cmds->next;
 	}
-	exit(1);
+	//exit(1);
 	//ft_fillup_struct(&data);
     /* free all addresses not useful anymore */
 	return (cmds);
