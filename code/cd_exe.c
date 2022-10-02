@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/02 15:49:27 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 16:01:41 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ int main(int ac, char **av, char **envp)
 	t_list *env;
 	t_gexe	*exe;
 	
-	//exe = (t_gexe *)malloc(sizeof(t_gexe));
-	exe = NULL;
+	exe = (t_gexe *)malloc(sizeof(t_gexe));
+	//exe = NULL;
  	//exe->env = env_list(envp);
 	//ft_getp_cwd(&exe->p_cwd);
 	// exe->end =0;
-	// exe->exit_status =0;
+	exe->exit_status = 0;
 	if (ac && av)
 	{
 		env = env_list(envp);

@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/02 11:04:31 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 15:43:10 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,31 @@ typedef struct s_gexe
 {
 	int		end;
 	int     exit_status;
-    t_list  *env;
+//    t_list  *env;
 	char	*p_cwd;
 } t_gexe;
 
-/*the builtin cd*/
-int	ft_cd(t_list env ,char **av, t_gexe *gdexe);
+/*********************** the builtin env ************************/
+int	ft_env(t_list *env);
 
-/*the chdir func but change the oldpwd and update the pwd */
-int	chdir_update(char *dir, t_list *env, t_gexe *gdexe);
+/*convert the char **env to lst*/
+t_env	*init_lst_env(void);
+t_env	*env_str(char *str);
+t_list	*env_list(char **env);
 
-/*find title and return the value addres */
+/*find title in env lst and return the value addres */
 char **find_title(t_list *env, char *title);
 
  /*ft_getp_cwd the getcwd  func but never fail because of buff size*/
 int	ft_getp_cwd(char **p_cwd);
+
+/*********************** the builtin cd **************************/
+int	ft_cd(t_list *env ,char **av, t_gexe *gdexe);
+int	cd_option(char *dir, t_list *env, t_gexe *gdexe);
+
+/*the chdir func but change the oldpwd and update the pwd */
+int	chdir_update(char *dir, t_list *env, t_gexe *gdexe);
+
+
 
 #endif 
