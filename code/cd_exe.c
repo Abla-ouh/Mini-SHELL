@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/02 10:12:28 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 11:05:13 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	ft_cd(t_list *env,char **av , t_gexe *gdexe)
 	else
 		r = chdir_update(av[1], env, gdexe);
 	if (r == 0)
-		gdexe->;
+		gdexe->end = 1;
+	else if (errno)
+	
+	return (r);
 }
 
 /*

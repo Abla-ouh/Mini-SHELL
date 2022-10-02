@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/01 18:11:31 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/02 11:04:31 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #ifndef EXE_H
 # define EXE_H
 # include "../libft/libft.h"
+# include <errno.h>
 # include "minishell.h"
 
 typedef struct s_env
@@ -25,7 +26,8 @@ typedef struct s_env
 
 typedef struct s_gexe
 {
-    int     exit_status;
+	int		end;
+	int     exit_status;
     t_list  *env;
 	char	*p_cwd;
 } t_gexe;
