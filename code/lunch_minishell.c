@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/02 17:22:11 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:01:43 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -572,6 +572,38 @@ void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
 	}
 }
 
+char *get_cmd_path(t_data *data, t_cmds *cmds)
+{
+	char *path;
+	char *cmd_path;
+	char *tmp;
+	int i;
+
+	i = 0;
+	path = getenv("PATH");
+	if (!path)
+		return (NULL);
+	while (path[i])
+	{
+		if (path[i] == ':')
+		{
+			tmp = ft_substr(path, 0, i);
+			cmd_path = ft_strjoin(tmp, "/");
+			free(tmp);
+			tmp = ft_strjoin(cmd_path, cmds->args[0]);
+			free(cmd_path);
+			if (access(tmp, X_OK) == 0)
+				return (tmp);
+			free(tmp);
+			path += i + 1;
+			i = 0;
+		}
+		i++;
+	}
+	printf("minishell: %s: command not found\n", cmds->args[0]);
+	return (NULL);
+}
+
 t_cmds	*ft_fillup_struct(t_data *data)
 {
 	int i;
@@ -592,6 +624,7 @@ t_cmds	*ft_fillup_struct(t_data *data)
 		new_cmd->in = last_io[0];
 		new_cmd->out = last_io[1];
 		new_cmd->args = ft_fill_args(data->lines, data->splitted_tokens[i], &sync_lines);
+		new_cmd->path = get_cmd_path(new_cmd->args[0]);
 		new_cmd->next = NULL;
 		ft_add_back_cmd(&head_cmd, new_cmd);
 		sync_lines++;
@@ -600,10 +633,12 @@ t_cmds	*ft_fillup_struct(t_data *data)
 	return (head_cmd);
 }
 
+
 t_cmds	*ft_parser(char *line)
 {
 	t_data	data;
 	t_cmds	*cmds;
+	char	path;
 	int		i;
 	int		sync_lines;
 
