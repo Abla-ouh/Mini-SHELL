@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/03 22:41:26 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/05 08:35:55 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 // } t_envp;
 
 
-typedef struct s_gdata
-{
-    int     exit_status;
-    t_envp  env;
-} t_gdata;
+// typedef struct s_gdata
+// {
+//     int     exit_status;
+//     t_envp  env;
+// } t_gdata;
 
 typedef struct s_cmds
 {

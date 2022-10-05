@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/04 16:11:10 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/05 08:40:29 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 # include <errno.h>
 # include <unistd.h>
-# include "minishell.h"
+# include <minishell.h>
 
 typedef struct s_env
 {
@@ -24,6 +24,7 @@ typedef struct s_env
 	char	*value;
 }t_env;
 
+typedef struct s_cmds t_cmds;
 
 typedef struct s_gexe
 {
@@ -33,6 +34,8 @@ typedef struct s_gexe
 } t_gexe;
 
 t_gexe glob;
+
+int	ft_exec(t_cmds *cmds);
 
 /*init the gdexe struct*/
 int	gdexe_init(t_gexe *exe, char **env);
