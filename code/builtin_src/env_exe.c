@@ -6,21 +6,23 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/04 09:29:03 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/05 13:51:24 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_env(t_list *env, t_gexe *flag)
+int	ft_env(t_list *env)
  {
 	while (env)
 	{
-		printf("%s=", ((t_env *)env->content)->title);
-		printf("%s\n", ((t_env *)env->content)->value);
+		if (((t_env *)env->content)->value)
+		{
+			printf("%s=", ((t_env *)env->content)->title);
+			printf("%s\n", ((t_env *)env->content)->value);
+		}
 		env = env->next;
 	}
-	flag->exit_status = 0;
 	return (1);
  }
 
