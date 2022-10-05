@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/02 15:43:10 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/04 16:11:10 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define EXE_H
 # include "../libft/libft.h"
 # include <errno.h>
+# include <unistd.h>
 # include "minishell.h"
 
 typedef struct s_env
@@ -26,14 +27,18 @@ typedef struct s_env
 
 typedef struct s_gexe
 {
-	int		end;
+	char	**env;
 	int     exit_status;
-//    t_list  *env;
-	char	*p_cwd;
+	t_list  *envx;
 } t_gexe;
 
+t_gexe glob;
+
+/*init the gdexe struct*/
+int	gdexe_init(t_gexe *exe, char **env);
+
 /*********************** the builtin env ************************/
-int	ft_env(t_list *env);
+int	ft_env(t_list *env, t_gexe *flag);
 
 /*convert the char **env to lst*/
 t_env	*init_lst_env(void);
