@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/05 08:40:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 11:25:29 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ int	cd_option(char *dir, t_list *env, t_gexe *gdexe);
 /*the chdir func but change the oldpwd and update the pwd */
 int	chdir_update(char *dir, t_list *env, t_gexe *gdexe);
 
+/*********************** the builtin exit **************************/
+int	ft_exit(char **ar);
 
+/*********************** the builtin echo **************************/
+int	ft_echo(char **ar);
 
 #endif 
