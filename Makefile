@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/06 18:31:08 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/06 19:15:12 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ NAME 		= minishell
 LIBFT    	= libft/libft.a
 OBJ_DIR		= obj
 BIN_DIR		= bin
+BTIN_DIR	= builtin_src
 NAME		= $(BIN_DIR)/$(BIN)
 BIN			= minishell
 SRC_DIR		= code
@@ -39,7 +40,7 @@ PRINTF		= printf
 
 #src&&obj
 SRC			= minishell.c lunch_minishell.c strings_utils.c \
-				cd_exe.c env_exe.c ft_exec.c builtin_src/builtin_utils.c \
+				builtin_src/builtin_utils.c \
 				builtin_src/cd_exe.c builtin_src/echo_exe.c builtin_src/env_exe.c \
 				builtin_src/exit_exe.c 
 				
@@ -63,6 +64,7 @@ $(LIBFT):
 $(BIN_DIR) :
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(BIN_DIR)
+	@mkdir -p $(OBJ_DIR)/$(BTIN_DIR)
 
 clean :
 	@make clean -C libft

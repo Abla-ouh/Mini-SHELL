@@ -6,13 +6,13 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/06 11:32:59 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 19:19:04 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_exit(char **ar)
-{
+// int	ft_exit(char **ar)
+// {
 	
-}
+// }

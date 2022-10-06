@@ -6,28 +6,28 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/05 14:04:20 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 19:20:13 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
-{
-	int	r;
+// int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
+// {
+// 	int	r;
 
-	if (!ft_strcmp(av[1], "~") || !av[1])
-		r = cd_option("HOME", env, gdexe);
-	else if (!ft_strcmp("-", av[1]))
-	{
-		r = cd_option("OLDPWD", env, gdexe);
-	}
-	else
-		r = chdir_update(av[1], env, gdexe);
-	if (errno)
-		printf("%s: %s",av[0] ,strerror(errno));
-	return (r);
-}
+// 	if (!ft_strcmp(av[1], "~") || !av[1])
+// 		r = cd_option("HOME", env, gdexe);
+// 	else if (!ft_strcmp("-", av[1]))
+// 	{
+// 		r = cd_option("OLDPWD", env, gdexe);
+// 	}
+// 	else
+// 		r = chdir_update(av[1], env, gdexe);
+// 	if (errno)
+// 		printf("%s: %s",av[0] ,strerror(errno));
+// 	return (r);
+// }
 
 /*
 ◦ cd with only a relative or absolute path
@@ -43,15 +43,15 @@ int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
 **			-1 if an error occured (chdir)
 */
 
-int	cd_option(char *path, t_list *env, t_gexe *gdexe)
-{
-	char	*dir;
+// int	cd_option(char *path, t_list *env, t_gexe *gdexe)
+// {
+// 	char	*dir;
 
-	dir = getenv(path);
-	if (!dir)
-		return (-1);
-	return (chdir_update(dir, env, gdexe));
-}
+// 	dir = getenv(path);
+// 	if (!dir)
+// 		return (-1);
+// 	return (chdir_update(dir, env, gdexe));
+// }
 
 // int	ft_getp_cwd(char **p_cwd)
 // {

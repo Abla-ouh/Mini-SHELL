@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/06 11:25:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 19:22:05 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ typedef struct s_gexe
 
 t_gexe glob;
 
-int	ft_exec(t_cmds *cmds);
+void	ft_exec(t_cmds *cmds);
 
 /*init the gdexe struct*/
 int	gdexe_init(t_gexe *exe, char **env);
 
 /*********************** the builtin env ************************/
-int	ft_env(t_list *env, t_gexe *flag);
+int	ft_env(t_list *env);
 
 /*convert the char **env to lst*/
 t_env	*init_lst_env(void);

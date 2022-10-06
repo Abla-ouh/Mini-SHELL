@@ -6,13 +6,13 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:57:32 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/05 16:38:39 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 19:16:19 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-void	ft_echo(char **ar)
+int	ft_echo(char **ar)
 {
 	int	i;
 	int	j;
@@ -39,4 +39,5 @@ void	ft_echo(char **ar)
 	}
 	if (j)
 		write(1, "\n", 1);
+	return (0);
 }
