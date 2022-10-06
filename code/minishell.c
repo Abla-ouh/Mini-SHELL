@@ -6,11 +6,12 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/06 18:35:43 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 19:25:09 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../inc/minishell.h>
+#include <minishell.h>
+#include <exe.h>
 
 int main(int ac, char **av, char **env)
 {
