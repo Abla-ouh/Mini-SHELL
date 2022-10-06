@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/04 19:54:39 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/05 23:31:25 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -510,7 +510,6 @@ int		args_to_alloc(char *tokens)
 		i++;
 	}
 	return (s);
-	
 }
 
 char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
