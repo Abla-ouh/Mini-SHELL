@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/05 17:46:24 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/06 18:31:08 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ PRINTF		= printf
 #src&&obj
 SRC			= minishell.c lunch_minishell.c strings_utils.c \
 				cd_exe.c env_exe.c ft_exec.c builtin_src/builtin_utils.c \
-				builtin_src/cd_exe.c builtin_src/echo_exe.c builtin_src/env_exe.c
+				builtin_src/cd_exe.c builtin_src/echo_exe.c builtin_src/env_exe.c \
 				builtin_src/exit_exe.c 
 				
 
