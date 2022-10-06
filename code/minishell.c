@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/05 08:39:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 18:35:43 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int ac, char **av, char **env)
 
     if (ac != 1 || !*env)
         return (1);
-    // ft_parser("< token cat meeeee | hh jdjd fewefwewer owefjwejfiojijoijwfj | > nors ww w");
+    // ft_parser("< token cat meeeee | ls hello | > nors ww w");
     while(1)
     {
         line = readline("minishell$ ");

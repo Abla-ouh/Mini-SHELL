@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/05 09:45:27 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/06 18:34:36 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -572,7 +572,7 @@ void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
 	}
 }
 
-char *get_cmd_path(t_data *data, t_cmds *cmds)
+char *get_cmd_path(t_cmds *cmds)
 {
 	char *path;
 	char *cmd_path;
@@ -624,7 +624,7 @@ t_cmds	*ft_fillup_struct(t_data *data)
 		new_cmd->in = last_io[0];
 		new_cmd->out = last_io[1];
 		new_cmd->args = ft_fill_args(data->lines, data->splitted_tokens[i], &sync_lines);
-		new_cmd->path = get_cmd_path(new_cmd->args[0]);
+		new_cmd->path = get_cmd_path(new_cmd);
 		new_cmd->next = NULL;
 		ft_add_back_cmd(&head_cmd, new_cmd);
 		sync_lines++;
@@ -638,7 +638,6 @@ t_cmds	*ft_parser(char *line)
 {
 	t_data	data;
 	t_cmds	*cmds;
-	char	path;
 	int		i;
 	int		sync_lines;
 
@@ -691,11 +690,10 @@ t_cmds	*ft_parser(char *line)
 		printf("cmds->in: %d\n", cmds->in);
 		printf("cmds->out: %d\n", cmds->out);
 		printf("cmds->is_exec: %d\n", cmds->is_exec);
+		printf("cmds->path: %s\n", cmds->path);
 		printf("-------------------------------------------------------\n");
 		cmds = cmds->next;
 	}
-	//exit(1);
-	//ft_fillup_struct(&data);
     /* free all addresses not useful anymore */
 	return (cmds);
 }
