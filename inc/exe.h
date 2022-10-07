@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/06 19:22:05 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 17:47:18 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ int	cd_option(char *dir, t_list *env, t_gexe *gdexe);
 int	chdir_update(char *dir, t_list *env, t_gexe *gdexe);
 
 /*********************** the builtin exit **************************/
+
 int	ft_exit(char **ar);
+/*atoi but convert to unsigned int */
+unsigned int	ft_atoui(char *nb, unsigned int *ptr);
 
 /*********************** the builtin echo **************************/
 int	ft_echo(char **ar);

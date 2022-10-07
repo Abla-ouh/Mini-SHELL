@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/07 09:21:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 18:13:06 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 // int	ft_exit(char **ar)
 // {
+// 	unsigned int	signe;
 	
+// 	if (!ar[1])
+// 		exit(glob.exit_status);
+	
+// 	signe	 = ft_atoui();
 // }
