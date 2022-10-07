@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/09/30 16:14:21 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 11:22:14 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,14 @@ char **find_title(t_list *env, char *title)
 	}
 	return (NULL);
 }
+// int main (int ac , char **av, char **en)
+// {
+// 	char **f;
+// 	t_list *env;
+// 	(void)av;
+// 	(void)ac;
+// 	env = env_list(en);
+// 	f = find_title(env, "PWD");
+// 	if ((*f))
+// 		printf("%s\n", *f);
+// }

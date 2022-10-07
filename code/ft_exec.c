@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/06 19:27:17 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 09:30:05 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_cmd_exe(t_cmds *node_cmd)
 		return (-1);
 	else if (!pid)
 		return (sub_process(node_cmd));
+	ft_wait_cmd(pid);	
 	return (0);
 }
 
@@ -42,7 +43,5 @@ void	ft_exec(t_cmds *lst_cmds)
 		glob.exit_status = ft_cmd_exe(node_cmd);
 		node_cmd = node_cmd->next;
 	}
-	while (wait(NULL) != -1)
-		;
 	return ;
 }
