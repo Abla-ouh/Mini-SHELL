@@ -58,7 +58,9 @@ SRCS	= ft_strlen.c \
 		  ft_strjoin.c \
 		  ft_strrncmp.c \
 		  ft_matrixdup.c \
-		  ft_matfreex.c
+		  ft_matfreex.c \
+		  ft_istrchr.c \
+		  ft_leak.c
 
 SRCS_BN = ft_lstnew_bonus.c \
 		  ft_lstsize_bonus.c \
@@ -68,7 +70,8 @@ SRCS_BN = ft_lstnew_bonus.c \
 		  ft_lstlast_bonus.c \
 		  ft_lstiter_bonus.c \
 		  ft_lstmap_bonus.c	\
-		  ft_lstdelone_bonus.c
+		  ft_lstdelone_bonus.c \
+		  ft_putstr.c 
 
 OBJS	= $(SRCS:.c=.o)
 
