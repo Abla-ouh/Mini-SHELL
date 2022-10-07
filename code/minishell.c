@@ -6,11 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/07 12:09:24 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/07 21:17:10 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../inc/minishell.h>
+#include <minishell.h>
 
 int main(int ac, char **av, char **env)
 {
@@ -22,19 +22,18 @@ int main(int ac, char **av, char **env)
 
     if (ac != 1 || !*env)
         return (1);
-    // ft_parser("< token cat eee | ls hello > nors ww w");
-    while(1)
-    {
-        line = readline("minishell$ ");
-        if (!line)
-        {
-            free(line);
-            exit(0);
-        }
-        if (ft_strlen(line) > 0)
-			add_history(line);
-        cmds = ft_parser(line);
-        ft_exec(cmds);
-    }
+    ft_parser("< token cat \"$m'eee$'ee\" | ls hello | > nors ww w");
+    // while(1)
+    // {
+    //     line = readline("minishell$ ");
+    //     if (!line)
+    //     {
+    //         free(line);
+    //         exit(0);
+    //     }
+        // if (ft_strlen(line) > 0)
+		// 	add_history(line);
+    //     ft_parser(line);
+    // }
     return (0);
 }

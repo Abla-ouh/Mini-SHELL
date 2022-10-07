@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/06 19:20:13 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 11:03:23 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@
 // 	char	**pwd_env;
 
 // 	pwd_env = find_title(env, "PWD");
+//	if (!pwd_env)
+//		return (0);
 // 	o_pwd = find_title(env, "OLDPWD");
 // 	if (chdir(dir) == -1)
 // 		return (-1);
