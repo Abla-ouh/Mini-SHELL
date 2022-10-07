@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/06 19:22:05 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 21:53:33 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_env
 {
 	char	*title;
 	char	*value;
-}t_env;
+}	t_env;
 
 typedef struct s_cmds t_cmds;
 
@@ -31,7 +31,7 @@ typedef struct s_gexe
 	char	**env;
 	int     exit_status;
 	t_list  *envx;
-} t_gexe;
+}	t_gexe;
 
 t_gexe glob;
 
