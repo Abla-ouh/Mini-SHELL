@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/05 23:31:25 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/07 10:23:02 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -599,7 +599,7 @@ char *get_cmd_path(t_cmds *cmds)
 		}
 		i++;
 	}
-	printf("minishell: %s: command not found\n", cmds->args[0]);
+	//printf("minishell: %s: command not found\n", cmds->args[0]);
 	return (NULL);
 }
 
