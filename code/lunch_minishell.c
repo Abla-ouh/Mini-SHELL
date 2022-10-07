@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lunch_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/07 08:08:00 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 21:15:53 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -599,7 +599,7 @@ char *get_cmd_path(t_cmds *cmds)
 		}
 		i++;
 	}
-	printf("minishell: %s: command not found\n", cmds->args[0]);
+	//printf("minishell: %s: command not found\n", cmds->args[0]);
 	return (NULL);
 }
 
