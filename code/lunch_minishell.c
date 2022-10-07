@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/06 18:34:36 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/07 08:08:00 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -510,7 +510,6 @@ int		args_to_alloc(char *tokens)
 		i++;
 	}
 	return (s);
-	
 }
 
 char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
