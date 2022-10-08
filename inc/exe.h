@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/07 17:47:18 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/08 08:34:25 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ t_gexe glob;
 void	ft_exec(t_cmds *cmds);
 
 /*init the gdexe struct*/
-int	gdexe_init(t_gexe *exe, char **env);
+int		gdexe_init(t_gexe *exe, char **env);
 
 /*********************** the builtin env ************************/
-int	ft_env(t_list *env);
+int		ft_env(t_list *env);
 
 /*convert the char **env to lst*/
 t_env	*init_lst_env(void);
@@ -52,22 +52,26 @@ t_list	*env_list(char **env);
 char **find_title(t_list *env, char *title);
 
  /*ft_getp_cwd the getcwd  func but never fail because of buff size*/
-int	ft_getp_cwd(char **p_cwd);
+int		ft_getp_cwd(char **p_cwd);
 
 /*********************** the builtin cd **************************/
-int	ft_cd(t_list *env ,char **av, t_gexe *gdexe);
-int	cd_option(char *dir, t_list *env, t_gexe *gdexe);
+int		ft_cd(t_list *env ,char **av, t_gexe *gdexe);
+int		cd_option(char *dir, t_list *env, t_gexe *gdexe);
 
 /*the chdir func but change the oldpwd and update the pwd */
-int	chdir_update(char *dir, t_list *env, t_gexe *gdexe);
+int		chdir_update(char *dir, t_list *env, t_gexe *gdexe);
 
 /*********************** the builtin exit **************************/
 
-int	ft_exit(char **ar);
+int		ft_exit(char **ar);
 /*atoi but convert to unsigned int */
 unsigned int	ft_atoui(char *nb, unsigned int *ptr);
 
 /*********************** the builtin echo **************************/
-int	ft_echo(char **ar);
+int		ft_echo(char **ar);
+
+/*********************** the builtin export **************************/
+int		ft_export(char **var);
+void	put_export();
 
 #endif 
