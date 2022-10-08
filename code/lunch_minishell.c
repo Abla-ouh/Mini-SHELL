@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/07 21:15:53 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/07 21:20:47 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -493,7 +493,6 @@ int	setup_last_io(int *last_io, char *token, t_data *data, int cmd_idx)
 		last_io[1] = 1;
 	_exec = 1;
 	return(_exec);
-	//edit it to return the is_exec
 }
 
 int		args_to_alloc(char *tokens)
