@@ -6,14 +6,14 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:26:51 by midfath           #+#    #+#             */
-/*   Updated: 2022/09/29 19:37:30 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/10 12:21:24 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_leak(void **ptr)
+void	ft_leak(void *ptr)
 {
-	free(*ptr);
-	*ptr = NULL;
+	free(ptr);
+	ptr = NULL;
 }

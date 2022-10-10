@@ -50,7 +50,7 @@ char	*ft_strjoin3(char *s1, char *s2);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_matrdupix(char **mat);
 void	ft_matfreex(char ***mat);
-void	ft_leak(void **ptr);
+void	ft_leak(void *ptr);
 
 /****************************Part TOW***************************************/
 

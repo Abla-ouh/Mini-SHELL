@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/07 10:44:28 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/10 12:41:43 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ PRINTF		= printf
 SRC			= minishell.c lunch_minishell.c strings_utils.c \
 				builtin_src/builtin_utils.c \
 				builtin_src/cd_exe.c builtin_src/echo_exe.c builtin_src/env_exe.c \
-			#	builtin_src/exit_exe.c ft_exec.c
+				builtin_src/export_exe.c
+#	builtin_src/export_exe.c ft_exec.c
 				
 
 OBJS    	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
