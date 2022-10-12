@@ -6,14 +6,16 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/10 08:57:09 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/12 18:34:12 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_env(t_list *env)
+int	ft_env(char **av, t_list *env)
  {
+	if (av[1])
+		return (errno);
 	while (env)
 	{
 		if (((t_env *)env->content)->value)

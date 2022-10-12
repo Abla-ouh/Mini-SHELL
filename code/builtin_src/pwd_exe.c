@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe_data.c                                         :+:      :+:    :+:   */
+/*   pwd_exe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/10 15:47:41 by midfath          ###   ########.fr       */
+/*   Created: 2022/10/12 18:03:28 by midfath           #+#    #+#             */
+/*   Updated: 2022/10/12 18:44:51 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-void	glob_init(char **env)
+int	ft_pwd(char **ar)
 {
+	char *cwd;
+	if (ar[1])
+		return(errno);
 	glob.exit_status = 0;
-	glob.envx = env_list(env);
-	glob.env = env;
+	cwd =  getcwd(NULL, 0);
+	ft_putstr(cwd);
+	return (1);
 }

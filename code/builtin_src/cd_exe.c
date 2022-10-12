@@ -6,28 +6,26 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/07 11:03:23 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/12 18:01:40 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-// int	ft_cd(t_list *env ,char **av ,t_gexe *gdexe)
-// {
-// 	int	r;
+int	ft_cd(char **av)
+{
+	int	r;
 
-// 	if (!ft_strcmp(av[1], "~") || !av[1])
-// 		r = cd_option("HOME", env, gdexe);
-// 	else if (!ft_strcmp("-", av[1]))
-// 	{
-// 		r = cd_option("OLDPWD", env, gdexe);
-// 	}
-// 	else
-// 		r = chdir_update(av[1], env, gdexe);
-// 	if (errno)
-// 		printf("%s: %s",av[0] ,strerror(errno));
-// 	return (r);
-// }
+	if (!av[1])
+	 	r = cd_option("HOME");
+	else if (!ft_strcmp("-", av[1]))
+		r = cd_option("OLDPWD");
+	else
+		r = chdir_update(av[1]);
+	if (errno)
+		perror(strerror(errno));
+	return (r);
+}
 
 /*
 ◦ cd with only a relative or absolute path
@@ -43,15 +41,20 @@
 **			-1 if an error occured (chdir)
 */
 
-// int	cd_option(char *path, t_list *env, t_gexe *gdexe)
-// {
-// 	char	*dir;
+int	cd_option(char *path)
+{
+	char	*dir;
 
-// 	dir = getenv(path);
-// 	if (!dir)
-// 		return (-1);
-// 	return (chdir_update(dir, env, gdexe));
-// }
+	dir = getenv(path);
+	if (!dir)
+	{
+		ft_putstr_fd("minishell: cd: `", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd("': environment variable not set\n", 2);
+		return (-1);
+	}
+	return (chdir_update(dir));
+}
 
 // int	ft_getp_cwd(char **p_cwd)
 // {
@@ -66,27 +69,25 @@
 // 	return (1);
 // }
 
+int	chdir_update(char *dir)
+{
+	char	**o_pwd;
+	char	**cwd;
+	char	*pwd;
 
-// int	chdir_update(char *dir, t_list *env ,t_gexe *gdexe)
-// {
-// 	char	**o_pwd;
-// 	char	**pwd_env;
-
-// 	pwd_env = find_title(env, "PWD");
-//	if (!pwd_env)
-//		return (0);
-// 	o_pwd = find_title(env, "OLDPWD");
-// 	if (chdir(dir) == -1)
-// 		return (-1);
-// 	if (o_pwd)
-// 	{
-// 		free(*o_pwd);
-// 		*o_pwd = ft_strdup(gdexe->p_cwd);
-// 		if (!(*o_pwd))
-// 			return (0);
-// 	}
-// 	if (!(ft_getp_cwd(&gdexe->p_cwd)) && pwd_env && ft_getp_cwd(pwd_env) == 0)
-// 			return (0);
-// 	return (1);
-// }
-
+	pwd = getcwd(NULL, 0);
+	o_pwd = find_title("OLDPWD");
+	cwd = find_title("PWD");
+	if (chdir(dir) == -1)
+		return (-1);
+	if (o_pwd)
+	{
+		free(*o_pwd);
+		*o_pwd = ft_strdup(pwd);
+		if (!(*o_pwd))
+			return (0);
+	}
+	if (!(pwd))
+		return (0);
+	return (1);
+}

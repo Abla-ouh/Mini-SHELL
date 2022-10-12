@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/09 16:07:39 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/12 18:37:53 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ typedef struct s_gexe
 t_gexe glob;
 
 void	ft_exec(t_cmds *cmds);
-
+void	ft_wait_cmd(pid_t pid);
+int	ft_isbuiltin(t_cmds *shel_l);
+int	run_builtin(t_cmds *shel_l, int flag);
 /*init the gdexe struct*/
-int		gdexe_init(t_gexe *exe, char **env);
+void	glob_init(char **env);
 
 /*********************** the builtin env ************************/
-int		ft_env(t_list *env);
+int		ft_env(char **av ,t_list *env);
 
 /*convert the char **env to lst*/
 t_env	*init_lst_env(void);
@@ -49,17 +51,17 @@ t_env	*env_str(char *str);
 t_list	*env_list(char **env);
 
 /*find title in env lst and return the value addres */
-char **find_title(t_list *env, char *title);
+char **find_title(char *title);
 
  /*ft_getp_cwd the getcwd  func but never fail because of buff size*/
 int		ft_getp_cwd(char **p_cwd);
 
 /*********************** the builtin cd **************************/
-int		ft_cd(t_list *env ,char **av, t_gexe *gdexe);
-int		cd_option(char *dir, t_list *env, t_gexe *gdexe);
+int		ft_cd(char **av);
+int		cd_option(char *dir);
 
 /*the chdir func but change the oldpwd and update the pwd */
-int		chdir_update(char *dir, t_list *env, t_gexe *gdexe);
+int		chdir_update(char *dir);
 
 /*********************** the builtin exit **************************/
 int		ft_exit(char **ar);
@@ -69,6 +71,8 @@ unsigned int	ft_atoui(char *nb, unsigned int *ptr);
 
 /*********************** the builtin echo **************************/
 int		ft_echo(char **ar);
+/*********************** the builtin pwd **************************/
+int	ft_pwd(char **ar);
 
 /*********************** the builtin export **************************/
 void	put_export();

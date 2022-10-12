@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 21:26:58 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/10 12:39:17 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/10 18:40:09 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ int	vars_check(char *var)
 void	put_export()
 {
 	t_env *env;
+	t_list *tmp;
 	
-	while (glob.envx)
+	tmp =glob.envx;
+	while (tmp)
 	{
-		env = glob.envx->content;
+		env = tmp->content;
 		if (ft_strcmp(env->title, "_"))
 		{
 			ft_putstr("declare -x ");
@@ -62,7 +64,7 @@ void	put_export()
 			}
 			ft_putstr("\n");
 		}
-		glob.envx = glob.envx->next;
+		tmp = tmp->next;
 	}
 }
 

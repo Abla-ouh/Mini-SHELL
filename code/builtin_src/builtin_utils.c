@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/10 12:38:08 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/10 18:42:51 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	var_cat(char **var)
 {
 	char	**r_write;
 	int		len;
-	r_write = find_title(glob.envx , var[0]);
+	r_write = find_title(var[0]);
 	if(r_write)
 	{
 		len = ft_strlen(*r_write) + ft_strlen(var[1]);
@@ -55,7 +55,7 @@ int	var_update(char **var)
 	char	**r_write;
 
 	new = NULL;
-	r_write = find_title(glob.envx , var[0]);
+	r_write = find_title(var[0]);
 	if(r_write)
 	{
 		free(*r_write);
@@ -90,16 +90,19 @@ char **get_var(char *str)
 	return (new_var);
 }
 
-char **find_title(t_list *env, char *title)
+char **find_title(char *title)
 {
-	while (env)
+	t_list *tmp;
+	
+	tmp = glob.envx;
+	while (tmp)
 	{
-		if (((t_env *)env->content)->title)
+		if (((t_env *)tmp->content)->title)
 		{
-			if (!ft_strcmp(((t_env *)env->content)->title, title))
-				return (&((t_env *)env->content)->value);
+			if (!ft_strcmp(((t_env *)tmp->content)->title, title))
+				return (&((t_env *)tmp->content)->value);
 		}
-		env = env->next;
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

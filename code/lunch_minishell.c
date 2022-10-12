@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lunch_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/07 21:20:47 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:04:24 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -674,7 +674,9 @@ t_cmds	*ft_parser(char *line)
 		i++;
 	}
     /* fillup the linked list struct */
+	t_cmds	*original;
 	cmds = ft_fillup_struct(&data);
+	original = cmds;
 	i = 0;
 	while (cmds)
 	{
@@ -693,7 +695,7 @@ t_cmds	*ft_parser(char *line)
 		cmds = cmds->next;
 	}
     /* free all addresses not useful anymore */
-	return (cmds);
+	return (original);
 }
 
 int	count_dup(char *str_trim, char o)
