@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/12 18:01:40 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/13 19:05:18 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,58 +16,35 @@ int	ft_cd(char **av)
 {
 	int	r;
 
+	r = 0;
 	if (!av[1])
 	 	r = cd_option("HOME");
 	else if (!ft_strcmp("-", av[1]))
 		r = cd_option("OLDPWD");
 	else
 		r = chdir_update(av[1]);
-	if (errno)
-		perror(strerror(errno));
+	if (r == -1)
+	{
+		ft_putstr_fd("minishell: cd: `", 2);
+		ft_putendl_fd(strerror(errno), 2);
+	}	
 	return (r);
 }
 
-/*
-◦ cd with only a relative or absolute path
-
-** note : Here the directory change is performed
-**		chdir is performed
-**		OLDPWD is updated if needed,
-**		gdexe->pcwd is always updated as it tracks the real cwd
-**		Finally, the PWD is updated if needed
-**
-** RETURN:	1 on success
-**			0 if an error occured (malloc)
-**			-1 if an error occured (chdir)
-*/
-
 int	cd_option(char *path)
 {
-	char	*dir;
+	char	**dir;
 
-	dir = getenv(path);
-	if (!dir)
+	dir = find_title(path);
+	if (!(dir))
 	{
 		ft_putstr_fd("minishell: cd: `", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("': environment variable not set\n", 2);
 		return (-1);
 	}
-	return (chdir_update(dir));
+	return (chdir_update(*dir));
 }
-
-// int	ft_getp_cwd(char **p_cwd)
-// {
-// 	if (!(getcwd(*p_cwd, ft_strlen(*p_cwd))))
-// 		{
-// 			errno = 0;
-// 			ft_leak((void **)p_cwd);
-// 			*p_cwd = getcwd(NULL, 0);
-// 			if (!(*p_cwd))
-// 				return (0);
-// 		}
-// 	return (1);
-// }
 
 int	chdir_update(char *dir)
 {
@@ -87,7 +64,5 @@ int	chdir_update(char *dir)
 		if (!(*o_pwd))
 			return (0);
 	}
-	if (!(pwd))
-		return (0);
 	return (1);
 }

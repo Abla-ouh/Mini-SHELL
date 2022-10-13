@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/12 18:37:53 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/13 17:58:12 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ unsigned int	ft_atoui(char *nb, unsigned int *ptr);
 
 /*********************** the builtin echo **************************/
 int		ft_echo(char **ar);
+
+/*********************** the builtin unset **************************/
+int	ft_unset(char **ar);
+
 /*********************** the builtin pwd **************************/
 int	ft_pwd(char **ar);
 

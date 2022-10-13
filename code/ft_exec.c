@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/12 18:38:24 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/12 21:05:15 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ void	ft_exec(t_cmds *shel_l)
 		flag = ft_isbuiltin(shel_l);
 	if (flag != 0)
 		run_builtin(shel_l, flag);
-	while (node_cmd)
+	else
 	{
-		glob.exit_status = ft_cmd_exe(node_cmd);
-		node_cmd = node_cmd->next;
+		while (node_cmd)
+		{
+			glob.exit_status = ft_cmd_exe(node_cmd);
+			node_cmd = node_cmd->next;
+		}
 	}
 	return ;
 }
@@ -83,8 +86,7 @@ int	run_builtin(t_cmds *shel_l, int flag)
 	else if (flag == 4)
 		return (ft_echo(shel_l->args));
 	else if (flag == 5)
-		return (0);
-	//TODO: UNSET
+		return (ft_unset(shel_l->args));
 	else if (flag == 6)
 		return (ft_env(shel_l->args ,glob.envx));
 	else if (flag == 7)
