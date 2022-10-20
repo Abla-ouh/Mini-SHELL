@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/20 18:56:56 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/20 21:35:32 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ft_exit(char **ar)
 	long int	sig;
 
 	sig = 0;
-	if ()
-	{
+	// if ()
+	// {
 		if (!ar[1])
 			exit(glob.exit_status);	
 		if (ft_check_digits(ar[1]))
@@ -44,7 +44,7 @@ int	ft_exit(char **ar)
 		//printf("%lu\n", sig);
 		if (sig && !ar[2])
 			exit(sig % 256);
-	}
+	// }
 	else
 	{
 		ft_perror("exit",  NULL, "too many arguments");
