@@ -96,7 +96,7 @@ fclean : clean
 	@$(RM)  $(NAME)
 	@$(PRINTF) "$(PINK)$(NAME) removed successfully :D$(DEFAULT)\n"
 
-re : fclean all
+re : fclean all bonus
 
 bonus : $(OBJS_BONUS)
 

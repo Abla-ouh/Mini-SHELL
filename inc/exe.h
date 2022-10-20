@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/13 17:58:12 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/20 16:55:02 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <errno.h>
 # include <unistd.h>
 # include <minishell.h>
+# include <sys/wait.h>
+
+# define RD_END 0
+# define WR_END 1
 
 typedef struct s_env
 {
@@ -31,14 +35,24 @@ typedef struct s_gexe
 	char	**env;
 	int     exit_status;
 	t_list  *envx;
+	int		perv_fd;
 }	t_gexe;
 
 t_gexe glob;
 
-void	ft_exec(t_cmds *cmds);
+void	ft_run_cmds(t_cmds *cmds);
 void	ft_wait_cmd(pid_t pid);
-int	ft_isbuiltin(t_cmds *shel_l);
-int	run_builtin(t_cmds *shel_l, int flag);
+int		ft_isbuiltin(t_cmds *shel_l);
+int		run_builtin(t_cmds *shel_l, int flag);
+int		ft_perror(char *cmd, char *flag, char *msg);
+int     ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd);
+int		sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd);
+void	redi_sub(t_cmds *node_cmd ,int p_fd[2]);
+void	builtin_sub(t_cmds *node_cmd);
+char	**env_lst_to_matrix(t_list *env_list);
+void	ft_reset_glob(void);
+int		check_execut(t_cmds *shel_l);
+
 /*init the gdexe struct*/
 void	glob_init(char **env);
 
@@ -49,6 +63,7 @@ int		ft_env(char **av ,t_list *env);
 t_env	*init_lst_env(void);
 t_env	*env_str(char *str);
 t_list	*env_list(char **env);
+void 	var_export(char **var, t_list *new);
 
 /*find title in env lst and return the value addres */
 char **find_title(char *title);
@@ -62,12 +77,12 @@ int		cd_option(char *dir);
 
 /*the chdir func but change the oldpwd and update the pwd */
 int		chdir_update(char *dir);
-
+void	pwd_update(void);
 /*********************** the builtin exit **************************/
 int		ft_exit(char **ar);
 
-/*atoi but convert to unsigned int */
-unsigned int	ft_atoui(char *nb, unsigned int *ptr);
+// /*atoi but convert to unsigned int */
+// unsigned int	ft_atoui(char *nb, unsigned int *ptr);
 
 /*********************** the builtin echo **************************/
 int		ft_echo(char **ar);
@@ -86,5 +101,11 @@ int		ft_export(char **var);
 int		vars_check(char *var);
 int		var_update(char **var);
 void	export_var(char *input);
+
+
+/********************************************************************/
+
+void	ft_arrfreey(void);
+void	ft_delenv(void *env);
 
 #endif 

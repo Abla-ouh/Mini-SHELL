@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:42:28 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/05 09:42:47 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/16 14:57:53 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_putstr(char *str)
 		return (i);
 	}
 	while (*str)
-		i += write(2, str++, 1);
+		i += write(1, str++, 1);
 	return (i);
 }

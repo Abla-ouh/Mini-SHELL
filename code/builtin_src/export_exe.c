@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 21:26:58 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/10 18:40:09 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/15 11:26:50 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,9 @@ int	ft_export(char **vars)
 		else
 		{
 			err = 1;
-			ft_putstr_fd("minishell: export: `", 2);
-			ft_putstr_fd(vars[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
+			ft_perror("export", vars[i], "not a valid identifier");
 		}
 		i++;
 	}
 	return (err);
 }
-
-// int main(int ac, char **av, char **env)
-// {	
-// 	(void)ac;
-
-// 	glob.envx = env_list(env);
-// 	//ft_env(en);
-// 	ft_export(av);
-// 	ft_env(glob.envx);	
-	
-// 	//put_export();
-// }

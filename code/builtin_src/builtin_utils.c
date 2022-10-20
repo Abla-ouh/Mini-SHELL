@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/10 18:42:51 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/20 09:26:17 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	var_cat(char **var)
 	return (0);
 }
 
-t_env *var_export(char **var, t_list *new)
+void	var_export(char **var, t_list *new)
 {
 	t_env *ret;
 
 	ret = init_lst_env();
 	if (!ret)
-		return (NULL);
+		return ;
 	ret->title = ft_strdup(var[0]);
 	ret->value = ft_strdup(var[1]);
 	if (!var[1])
@@ -45,12 +45,10 @@ t_env *var_export(char **var, t_list *new)
 		ft_leak((void *)new);
 	ft_lstadd_back(&glob.envx, new);
 	free(var);
-	return (ret);
 }
 
 int	var_update(char **var)
 {
-	t_env	*env;
 	t_list	*new;
 	char	**r_write;
 
@@ -64,7 +62,7 @@ int	var_update(char **var)
 			return (1);
 	}
 	else
-		env = var_export(var, new);
+		var_export(var, new);
 	return (0);
 }
 

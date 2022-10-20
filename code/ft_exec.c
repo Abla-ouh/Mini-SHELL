@@ -6,90 +6,94 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/12 21:05:15 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/20 17:45:02 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <exe.h>
 
-int sub_process(t_cmds *node_cmd)
+void	close_all_fds(t_cmds *shel_l)
 {
+	t_cmds *nodes;
 	
-	if (execve(node_cmd->path, node_cmd->args, glob.env))
-		return (-1);
-	return (0);
+	nodes = shel_l;
+	while (nodes)
+	{
+		if (nodes->in > 0)
+			close(nodes->in);
+		if (nodes->out > 1)
+			close(nodes->out);
+		nodes = nodes->next;
+	}
 }
 
-int	ft_cmd_exe(t_cmds *node_cmd)
+int sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
+{
+	int 	f;
+	
+	f = 0;
+	redi_sub(node_cmd ,p_fd);
+	close(p_fd[RD_END]);
+	close_all_fds(shel_l);
+	f = ft_isbuiltin(node_cmd);
+	if (f) 
+		run_builtin(node_cmd, f);
+	else
+	{
+		if (execve(node_cmd->path, node_cmd->args, glob.env) == -1)
+			ft_perror(NULL, NULL, NULL);
+	}
+	exit(1);
+}
+
+int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
 {
 	pid_t	pid;
+	int	p_fd[2];
 	
+	if (pipe(p_fd) == -1) 
+		exit (1);
+	glob.env = env_lst_to_matrix(glob.envx);
 	pid = fork();
 	if (pid == -1)
-		return (-1);
-	else if (!pid)
-		return (sub_process(node_cmd));
-	ft_wait_cmd(pid);	
-	return (0);
+		exit (1);
+	if (!pid)
+		return (sub_process(shel_l, node_cmd, p_fd));
+	close(p_fd[WR_END]);
+	if (glob.perv_fd)
+		close(glob.perv_fd);
+	glob.perv_fd = p_fd[RD_END];
+	return (pid);
 }
 
-void	ft_exec(t_cmds *shel_l)
+void	ft_run_cmds(t_cmds *shel_l)
 {
-	t_cmds *node_cmd;
+	t_cmds	*node_cmd;
+	pid_t	pid;
 	int		flag;
-	
+
 	flag = 0;
 	node_cmd = shel_l;
 	if (node_cmd->next == NULL)
 		flag = ft_isbuiltin(shel_l);
 	if (flag != 0)
-		run_builtin(shel_l, flag);
+		glob.exit_status = run_builtin(shel_l, flag);
 	else
 	{
 		while (node_cmd)
 		{
-			glob.exit_status = ft_cmd_exe(node_cmd);
+			if (check_execut(node_cmd))
+				pid = ft_cmd_exe(shel_l, node_cmd);
+			else
+			{
+				ft_perror("minishell", NULL, NULL);
+				return ;
+			}
 			node_cmd = node_cmd->next;
 		}
+		glob.perv_fd = 0;
+		ft_wait_cmd(pid);
 	}
 	return ;
-}
-
-int	ft_isbuiltin(t_cmds *shel_l)
-{
-	if (!ft_strcmp(shel_l->args[0] ,"cd"))
-		return (1);
-	else if ((!ft_strcmp(shel_l->args[0] ,"exit")))
-		return (2);
-	else if ((!ft_strcmp(shel_l->args[0] ,"export")))
-		return (3);
-	else if ((!ft_strcmp(shel_l->args[0] ,"echo")))
-		return (4);
-	else if ((!ft_strcmp(shel_l->args[0] ,"unset")))
-		return (5);
-	else if ((!ft_strcmp(shel_l->args[0] ,"env")))
-		return (6);
-	else if ((!ft_strcmp(shel_l->args[0] ,"pwd")))
-		return (7);
-	return (0);
-}
-
-int	run_builtin(t_cmds *shel_l, int flag)
-{
-	if (flag == 1)
-		return (ft_cd(shel_l->args));
-	else if (flag == 2)
-		return (ft_exit(shel_l->args));
-	else if (flag == 3)
-		return (ft_export(shel_l->args));
-	else if (flag == 4)
-		return (ft_echo(shel_l->args));
-	else if (flag == 5)
-		return (ft_unset(shel_l->args));
-	else if (flag == 6)
-		return (ft_env(shel_l->args ,glob.envx));
-	else if (flag == 7)
-		return (ft_pwd(shel_l->args));
-	return (0);
 }

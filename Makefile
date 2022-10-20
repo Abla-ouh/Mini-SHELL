@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/13 17:57:14 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/16 14:33:18 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BLUE	= \033[1;34m
 #vars
 
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror  -fsanitize=address -g
+CFLAGS 		= -Wall -Wextra -Werror  #-fsanitize=address -g
 CFLAGS 		= -Wall -Wextra -Werror
 NAME 		= minishell
 LIBFT    	= libft/libft.a
@@ -40,10 +40,10 @@ PRINTF		= printf
 
 #src&&obj
 SRC			= minishell.c lunch_minishell.c strings_utils.c \
-				exe_data.c builtin_src/builtin_utils.c \
+				exe_data.c err_handling.c builtin_src/builtin_utils.c \
 				builtin_src/cd_exe.c builtin_src/echo_exe.c builtin_src/env_exe.c \
 				builtin_src/export_exe.c builtin_src/exit_exe.c builtin_src/pwd_exe.c \
-				builtin_src/unset_exe.c exe_utils.c ft_exec.c 
+				builtin_src/unset_exe.c exe_utils.c ft_exec.c exe_option.c
 				
 
 OBJS    	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
