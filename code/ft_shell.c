@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/20 18:24:42 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/21 17:46:14 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../inc/minishell.h"
 
-int main(int ac, char **av, char **env)
+unsigned short	g_exit_code = EXIT_SUCCESS;
+
+int	main(int ac, char **av, char **env)
 {
 	(void)av;
 	char	*line;
