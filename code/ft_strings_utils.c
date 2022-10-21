@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:08:45 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/09/25 12:01:20 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/18 00:31:18 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*ft_str_trim(char *s, char *set)
 	int		i;
 	int		j;
 	char	*trimmed;
-
+	
+	end = 0;
 	if (s == NULL || set == NULL)
 		return (NULL);
 	end = ft_getend(s, set, ft_strlen(s) - 1);

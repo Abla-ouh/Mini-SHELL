@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include<stdarg.h>
 # include <limits.h>
 
 /***************************** part ONE********************************/
@@ -48,6 +49,9 @@ int		ft_strrncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strjoin3(char *s1, char *s2);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char	*ft_multijoin(int strs_count, ...);
+char	*ft_find_replace(char *str, int start_i, char *find, char *replace);
 char	**ft_matrdupix(char **mat);
 void	ft_matfreex(char ***mat);
 void	ft_leak(void **ptr);

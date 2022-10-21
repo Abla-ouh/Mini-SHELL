@@ -47,8 +47,11 @@ SRCS	= ft_strlen.c \
 		  ft_substr.c \
 		  ft_strtrim.c \
 		  ft_split.c \
+		  ft_find_replace.c \
+		  ft_join_multi.c \
 		  ft_strmapi.c \
 		  ft_itoa.c \
+		  ft_realloc.c \
 		  ft_putchar_fd.c \
 		  ft_putstr_fd.c \
 		  ft_putendl_fd.c \
