@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/20 17:45:16 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/22 08:42:20 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,23 @@ int	run_builtin(t_cmds *shel_l, int flag)
 	else if (flag == 7)
 		return (ft_pwd(shel_l->args));
 	return (0);
+}
+
+char *return_value(char *title)
+{
+	t_list	*tmp;
+
+	tmp = glob.envx;
+	while (tmp)
+	{
+		if (((t_env *)tmp->content)->title)
+		{
+			if (!ft_strcmp(((t_env *)tmp->content)->title, title))
+			{
+				return (ft_strdup(((t_env *)tmp->content)->value));
+			}
+		}
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

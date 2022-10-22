@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/20 16:58:59 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/22 10:48:45 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ void	ft_reset_glob(void)
 
 int	check_execut(t_cmds *shel_l)
 {
-	if (!(shel_l->is_exec && shel_l->in >= 0 && shel_l->out >= 1))
+	if (!(shel_l) || !(shel_l->is_exec && shel_l->in >= 0 && shel_l->out >= 1))
 		return (0);
-	else if (shel_l->path == NULL)
+	else if (!(shel_l->path) && !(shel_l->args[0]) && !(shel_l->path))
+		return (0);
+	else if (!(shel_l->args[0]))
 		return (0);
 	else
 		return (1);

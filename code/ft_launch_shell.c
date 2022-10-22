@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_launch_shell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/20 22:14:56 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:59:48 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ t_cmds	*ft_parser(char *line)
 {
 	t_data	data;
 	t_cmds	*cmds;
+	t_cmds	*tmp;
 	int		i;
 	int		sync_lines;
 
@@ -171,21 +172,22 @@ t_cmds	*ft_parser(char *line)
 	}
 	cmds = ft_fillup_struct(&data);
 	i = 0;
-	while (cmds)
+	tmp = cmds;
+	while (tmp)
 	{
 		i = 0;
-		while (cmds->args[i])
+		while (tmp->args[i])
 		{
-			printf("arg : %s index %d\n", cmds->args[i], i);
+			printf("arg : %s index %d\n", tmp->args[i], i);
 			i++;
 		}
 		printf("\n");
-		printf("cmds->in: %d\n", cmds->in);
-		printf("cmds->out: %d\n", cmds->out);
-		printf("cmds->is_exec: %d\n", cmds->is_exec);
-		printf("cmds->path: %s\n", cmds->path);
+		printf("tmp->in: %d\n", tmp->in);
+		printf("tmp->out: %d\n", tmp->out);
+		printf("tmp->is_exec: %d\n", tmp->is_exec);
+		printf("tmp->path: %s\n", tmp->path);
 		printf("-------------------------------------------------------\n");
-		cmds = cmds->next;
+		tmp = tmp->next;
 	}
     /* free all addresses not useful anymore */
 	return (cmds);

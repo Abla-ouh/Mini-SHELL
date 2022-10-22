@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/21 17:46:14 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/22 09:03:13 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **env)
 	t_cmds	*shel_l;
 	line = NULL;
 
-	if (ac != 1 || !*env)
+	if (ac != 1 || !(*env))
 		return (1);
 	glob_init(env);
 	while(1)
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strlen(line) > 0)
 		{
 			add_history(line);
-		    shel_l = ft_parser(line);
+			shel_l = ft_parser(line);
 			ft_run_cmds(shel_l);
 		}
 	}

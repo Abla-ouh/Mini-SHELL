@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/21 17:47:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/21 17:52:12 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_gexe
 	char	**env;
 	int     exit_status;
 	t_list  *envx;
-	int		perv_fd;
 	int		perv_fd;
 }	t_gexe;
 
