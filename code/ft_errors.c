@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:19:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:21:26 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:26:11 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 		if (tokens[i] != '|' && tokens[i] != 'S' && tokens[i + 1] != 'S')
 		{
 			if (!lines[i + 1])
-				printf("minishell: syntax error near unexpected token `newline'\n");
+				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 			else if (ft_strlen(lines[i + 1]) > 1)
 				printf("minishell: syntax error near unexpected token `%c%c'\n", lines[i + 1][0], lines[i + 1][0]);
 			else
@@ -34,29 +34,24 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 	return (0);
 }
 
-int	is_quoted(char *arg)
+int	is_quoted(char *str)
 {
-	int	i;
+	int		i;
+	char	quote_type;
 
-	i = 0;
-	while (arg[i])
+	i = -1;
+	quote_type = '\0';
+	while (str[++i])
 	{
-		if (arg[i] == '\"')
+		if (str[i] == '\"' || str[i] == '\'')
 		{
-			skip_quote(arg, &i, '\"');
-			if (arg[i - 1] != '\"')
-				return (0);
+			if (!quote_type)
+				quote_type = str[i];
+			else if (str[i] == quote_type)
+				quote_type = '\0';
 		}
-		else if (arg[i] == '\'')
-		{
-			skip_quote(arg, &i, '\'');
-			if (arg[i - 1] != '\'')
-				return (0);
-		}
-		else
-			i++;
 	}
-	return (1);
+	return (quote_type == '\0');
 }
 
 int	ft_syntax_error(char **lines, char *token)
@@ -64,9 +59,11 @@ int	ft_syntax_error(char **lines, char *token)
 	int	i;
 
 	i = 0;
+	if (!(*lines))
+		return (0);
 	if (!ft_strcmp(lines[0], "|"))
 	{
-		printf("minishell: syntax error near unexpected token `|'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
 	while (token[i])
@@ -83,14 +80,14 @@ int	ft_syntax_error(char **lines, char *token)
 		}
 		if (!is_quoted(lines[i]))
 		{
-			printf("minishell: unclosed quotes\n");
+			ft_putstr_fd("minishell: unclosed quotes\n", 2);
 			return (1);
 		}
 		i++;
 	}
 	if (!ft_strcmp(lines[i - 1], "|"))
 	{
-		printf("minishell: syntax error near unexpected token `|'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
 	return (0);

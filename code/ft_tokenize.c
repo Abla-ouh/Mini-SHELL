@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:16:45 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:18:32 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 14:24:05 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ char	*ft_tokenize(char **lines)
 	int		len;
 	char	*tokenized_arr;
 
-	i = 0;
-	len = 0;
+	i = -1;
 	k = 0;
+	len = 0;
 	while (lines[len])
 		len++;
 	tokenized_arr = ft_calloc(len + 1, sizeof(char *));
-	while (lines[i])
+	while (lines[++i])
 	{
 		if (*lines[i] == '|')
 			tokenized_arr[k] = check_pipe(lines[i]);
@@ -83,15 +83,7 @@ char	*ft_tokenize(char **lines)
 		else
 			tokenized_arr[k] = 'S';
 		k++;
-		i++;
 	}
 	tokenized_arr[k] = '\0';
-	i = 0;
-	while (tokenized_arr[i])
-	{
-		printf("%c", tokenized_arr[i]);
-		i++;
-	}
-	printf("\n");
 	return (tokenized_arr);
 }

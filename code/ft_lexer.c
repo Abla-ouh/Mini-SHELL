@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:10:10 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/20 21:34:29 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 12:22:05 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,17 @@ int	valid_word(char *str_trim, int *i)
 
 int	get_len(char *line, char *set)
 {
-	char	*str_trim;
-	int		len;
 	int		i;
+	int		len;
+	char	*str_trim;
 
-	len = 0;
 	i = 0;
-	str_trim = ft_str_trim(line, set);
-	if (str_trim == NULL)
+	len = 0;
+	str_trim = ft_strtrim(line, set);
+	if (!str_trim)
 		return (-1);
 	while (str_trim[i])
 	{
-		// if(ft_strchr(set, str_trim[i]) != NULL)
-		//     len++;
 		if (valid_word(str_trim, &i))
 			len++;
 		else
@@ -83,18 +81,18 @@ char *fill_arg(char *trim_line, int *i)
 
 char	**ft_lexer(char *line, char *set)
 {
-	char	**strs;
-	char	*trim_line;
-	int		arr_len;
 	int		i;
 	int		j;
+	int		arr_len;
+	char	**strs;
+	char	*trim_line;
 
 	i = 0;
-	if (line == NULL || set == NULL)
+	if (!line || !set)
 		return (NULL);
 	arr_len = get_len(line, set);
 	strs = ft_calloc(arr_len + 1, sizeof(char **));
-	if (strs == NULL)
+	if (!strs)
 		return (NULL);
 	trim_line = ft_strtrim(line, set);
 	j = 0;
@@ -104,14 +102,6 @@ char	**ft_lexer(char *line, char *set)
 			strs[j++] = fill_arg(trim_line, &i);
 		else
 			i++;
-	}
-	i = -1;
-	while (strs[++i])
-	{
-		// if (strs[i][0] == '\'' && is_single_quoted(strs[i]))
-		// 	break ;
-		if (ft_strchr(strs[i], '$'))
-			strs[i] = expand(strs[i]);
 	}
 	return (strs);
 }

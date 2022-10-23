@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/20 22:14:56 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:56:44 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,6 @@ int	ft_strptr(char **ptr)
 	return (i);
 }
 
-int	unquoted_str_len(char *str)
-{
-	int	i;
-	int	len;
-
-	i = -1;
-	len = 0;
-	while (str[++i])
-		if (str[i] != '\'' && str[i] != '\"')
-			len++;
-	return (len);
-}
-
 char	*unquote_arg(char *str)
 {
 	int		i;
@@ -107,7 +94,7 @@ char	*unquote_arg(char *str)
 
 	i = -1;
 	j = 0;
-	unquoted = malloc(sizeof(char) * (unquoted_str_len(str) + 1));
+	unquoted = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	while (str[++i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
@@ -127,10 +114,10 @@ char	*unquote_arg(char *str)
 
 t_cmds	*ft_parser(char *line)
 {
-	t_data	data;
-	t_cmds	*cmds;
 	int		i;
 	int		sync_lines;
+	t_data	data;
+	t_cmds	*cmds;
 
 	data.lines = ft_lexer(line, " \t\r\v\f\n");
 	data.tokens = ft_tokenize(data.lines);
@@ -138,6 +125,10 @@ t_cmds	*ft_parser(char *line)
 		return (NULL);
 	if (ft_check_redir_filename(data.lines, data.tokens))
 		return (NULL);
+	i = -1;
+	while (data.lines[++i])
+		if (ft_strchr(data.lines[i], '$') && data.tokens[i - 1] != 'H')
+			data.lines[i] = expand(data.lines[i]);
 	data.splitted_tokens = ft_split(data.tokens, '|');
 	data.here_fds = (int **)malloc(sizeof(int *) * (ft_strptr(data.splitted_tokens)));
 	i = -1;
@@ -163,12 +154,9 @@ t_cmds	*ft_parser(char *line)
 		data.outfiles[i] = ft_open_outfiles(data.lines, data.splitted_tokens[i], &sync_lines);
 		sync_lines++;
 	}
-	i = 0;
-	while (data.lines[i])
-	{
+	i = -1;
+	while (data.lines[++i])
 		data.lines[i] = unquote_arg(data.lines[i]);
-		i++;
-	}
 	cmds = ft_fillup_struct(&data);
 	i = 0;
 	while (cmds)

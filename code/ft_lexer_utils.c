@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:35:25 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/20 01:26:32 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 13:57:39 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void	find_string(char *str_trim, int *i)
 {
 	while (is_seperator_char(str_trim[*i]))
 	{
-		if (str_trim[*i] == '"')
-			skip_quote(str_trim, i, '"');
-		else if (str_trim[*i] == '\'')
-			skip_quote(str_trim, i, '\'');
+		if (str_trim[*i] == '\"' || str_trim[*i] == '\'')
+			skip_quote(str_trim, i, str_trim[*i]);
 		else
 			(*i)++;
 	}
@@ -37,7 +35,7 @@ void	find_string(char *str_trim, int *i)
 
 void	skip_quote(char *str_trim, int *i, char q)
 {
-	(*i)++;
+	(*i)++;	
 	while (str_trim[*i] && str_trim[*i] != q)
 		(*i)++;
 	if (str_trim[*i] == q)

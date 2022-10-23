@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:25:13 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:26:02 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:55:50 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync_lines)
 
 	out = find_op(tokens, '>');
 	out += find_op(tokens, 'A');
-	i = 0;
 	if (!out)
 	{
-		while (tokens[i++])
-			(*sync_lines)++;
+		*sync_lines += ft_strlen(tokens);
 		return (NULL);
 	}
+	i = 0;
 	j = 0;
 	outfiles = malloc(sizeof(int) * (out));
 	while (i < out)
@@ -62,8 +61,10 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync_lines)
 			outfiles[i] = open(lines[*sync_lines + 1],
 					O_TRUNC | O_WRONLY, 0644);
 		else
-			outfiles[i] = open(lines[*sync_lines + 1], O_APPEND, 0644);
+			outfiles[i] = open(lines[*sync_lines + 1], O_CREAT | O_APPEND | O_WRONLY, 0644);
 		i++;
+		j++;
+		*sync_lines += 1;
 	}
 	while (tokens[j++])
 		(*sync_lines)++;

@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/20 00:00:11 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:59:00 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,12 @@ int		*ft_open_infiles(char **lines, char *tokens, int *sync_lines);
 int		*ft_open_outfiles(char **lines, char *tokens, int *sync_lines);
 char	**ft_fill_args(char **lines, char *tokens, int *sync_lines);
 void	count_until_not(char *trim_line, int i, int *len, char o);
+void	skip_quote1(char *str_trim, int *i, char q);
 void	count_string(char *trim_line, int i, int *len);
 int		find_until_not(char *str_trim, int *i, char o);
 void	find_string(char *str_trim, int *i);
 void	skip_quote(char *str_trim, int *i, char q);
+char	*unquote_arg(char *str);
 int		is_single_quoted(char *arg);
 char	*get_cmd_path(t_cmds *cmds);
 int		find_op(char *tokens, char c);

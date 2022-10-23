@@ -6,25 +6,25 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/14 22:15:06 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/21 19:49:22 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-int	ft_env(t_list *env)
- {
-	while (env)
-	{
-		if (((t_env *)env->content)->value)
-		{
-			printf("%s=", ((t_env *)env->content)->title);
-			printf("%s\n", ((t_env *)env->content)->value);
-		}
-		env = env->next;
-	}
-	return (1);
- }
+// int	ft_env(t_list *env)
+//  {
+// 	while (env)
+// 	{
+// 		if (((t_env *)env->content)->value)
+// 		{
+// 			printf("%s=", ((t_env *)env->content)->title);
+// 			printf("%s\n", ((t_env *)env->content)->value);
+// 		}
+// 		env = env->next;
+// 	}
+// 	return (1);
+//  }
 
 t_env	*init_lst_env(void)
 {
