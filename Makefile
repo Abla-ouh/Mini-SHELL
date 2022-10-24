@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/22 10:47:36 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/24 18:58:42 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ BTIN_DIR	= builtin_src
 NAME		= $(BIN_DIR)/$(BIN)
 BIN			= minishell
 SRC_DIR		= code
-RDLINE		= -lreadline
+RDLINE		= -lreadline -lncurses
+RDLINE_FLAG =  -L /Users/midfath/homebrew/opt/readline/lib
+RDLINE_PATH =  -I /Users/midfath/homebrew/opt/readline/include
 
 #cmd
 
@@ -55,11 +57,11 @@ OBJS    	= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 all : $(NAME)
 
 $(NAME) : $(BIN_DIR) $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(RDLINE) -I inc -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(RDLINE) $(RDLINE_FLAG) $(RDLINE_PATH) -I inc -o $(NAME)
 	@$(PRINTF) "\r%100s\r$(BLUE)$(NAME) is up to date!$(DEFAULT)\n"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	@$(CC) $(CFLAGS) -I inc -c $< -o $@
+	@$(CC) $(CFLAGS) $(RDLINE_PATH) -I inc -c $< -o $@ 
 	@$(PRINTF) "\rCompiling $(BLUE)$<$(DEFAULT)..."
 
 $(LIBFT):

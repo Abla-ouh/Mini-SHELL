@@ -6,12 +6,18 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/23 14:56:28 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 17:04:13 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <exe.h>
+
+void	signal_stream(void)
+{
+	signal(SIGINT, &handler);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 void	close_all_fds(t_cmds *shel_l)
 {
@@ -38,15 +44,15 @@ int sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 	close_all_fds(shel_l);
 	f = ft_isbuiltin(node_cmd);
 	if (f) 
-		run_builtin(node_cmd, f);
+		exit(run_builtin(node_cmd, f));
 	else if (ft_strchr(node_cmd->args[0], '/'))
 		exe_file(node_cmd);
 	else
 	{
-		if (execve(node_cmd->path, node_cmd->args, glob.env) == -1)
-			ft_perror("minishell", NULL, NULL);
+		glob.env = env_lst_to_matrix(glob.envx);
+		exe_cmd(shel_l);
 	}
-	exit(1);
+	exit(127);
 }
 
 int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
@@ -74,7 +80,7 @@ void	ft_run_cmds(t_cmds *shel_l)
 	t_cmds	*node_cmd;
 	pid_t	pid;
 	int		flag;
-
+	
 	flag = 0;
 	node_cmd = shel_l;
 	if (node_cmd && node_cmd->next == NULL && check_execut(node_cmd))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/22 13:31:09 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:06:56 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,6 @@ char	*ft_find_name(char *arg)
 	return (ft_substr(arg, 0, name_len));
 }
 
-char *return_value(char *title)
-{
-	t_list	*tmp;
-
-	tmp = glob.envx;
-	while (tmp)
-	{
-		if (((t_env *)tmp->content)->title)
-		{
-			if (!ft_strcmp(((t_env *)tmp->content)->title, title))
-			{
-				return (ft_strdup(((t_env *)tmp->content)->value));
-			}
-		}
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
 
 int	replace_arg(char **arg, int i, char *name)
 {

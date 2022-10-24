@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 05:45:09 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 13:01:20 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,24 @@ void	exe_file(t_cmds *node_cmd)
 	else
 		ft_perror("minishell", node_cmd->args[0], "command not found");
 	
+}
+
+
+void	exe_cmd(t_cmds *node_cmd)
+{
+	char	**p;
+
+	p = find_title("PATH");
+	if (!p)
+	{
+		if (execve(node_cmd->path, node_cmd->args, glob.env) == -1)
+			ft_perror("minishell", node_cmd->args[0], "No such file or directory");
+	}
+	else if (ft_strchr(node_cmd->path, '/'))
+	{
+		if (execve(node_cmd->path, node_cmd->args, glob.env) == -1)
+			ft_perror("minishell", node_cmd->args[0], "command not found");
+	}
+	else
+		ft_perror("minishell", node_cmd->args[0], "command not found");
 }

@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/22 08:42:20 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 12:38:37 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	glob_init(char **env)
 {
-	glob.envx = NULL;
+	glob.env = NULL;
 	glob.exit_status = 0;
 	glob.envx = env_list(env);
 	glob.perv_fd = 0;

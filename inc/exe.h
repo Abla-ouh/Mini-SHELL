@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/23 14:55:57 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 18:59:33 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <dirent.h>
+# include <readline/readline.h>
+
 
 # define RD_END 0
 # define WR_END 1
@@ -55,6 +57,9 @@ char	**env_lst_to_matrix(t_list *env_list);
 void	ft_reset_glob(void);
 int		check_execut(t_cmds *shel_l);
 void	exe_file(t_cmds *node_cmd);
+void	exe_cmd(t_cmds *node_cmd);
+void	signal_stream(void);
+void	handler(int sig);
 
 /*init the gdexe struct*/
 void	glob_init(char **env);

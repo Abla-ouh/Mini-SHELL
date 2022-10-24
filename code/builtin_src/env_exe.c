@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 05:49:50 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 12:50:01 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_env(char **av, t_list *env)
  {
 	if (av[1])
-		return (errno);
+		return (1);
 	while (env)
 	{
 		if (((t_env *)env->content)->value)
@@ -25,7 +25,7 @@ int	ft_env(char **av, t_list *env)
 		}
 		env = env->next;
 	}
-	return (1);
+	return (0);
  }
 
 t_env	*init_lst_env(void)
