@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/22 09:03:13 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 05:50:51 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(int ac, char **av, char **env)
 {
 	(void)av;
 	char	*line;
+	t_cmds	*cmds;
 	t_cmds	*shel_l;
-	line = NULL;
 
 	if (ac != 1 || !(*env))
 		return (1);

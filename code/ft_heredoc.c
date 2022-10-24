@@ -6,46 +6,53 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:22:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:28:12 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:00:16 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+
 int	ft_read_stdin(char **lines, int del_idx)
 {
 	char	*temp;
 	int		here_fds[2];
+	int		expand_in_hdoc;
 
 	pipe(here_fds);
-	while (1)
+	expand_in_hdoc = (!ft_strchr(lines[del_idx], '\"') && !ft_strchr(lines[del_idx], '\''));
+	lines[del_idx] = unquote_arg(lines[del_idx]); // getting the limiter unquoted
+	while(1)
 	{
 		temp = readline("> ");
 		if (!temp || !ft_strcmp(temp, lines[del_idx]))
 			break ;
-		write(here_fds[1], temp, ft_strlen(temp));
+		if (expand_in_hdoc)
+			temp = expand(temp);
+		write(here_fds[STDOUT_FILENO], temp, ft_strlen(temp));
+		write(here_fds[STDOUT_FILENO], "\n", 1);
 		free(temp);
 	}
-	if (temp) //khrj b delimeter
+	if (temp)
 		free(temp);
-	close(here_fds[1]);
-	return (here_fds[0]);
+	close(here_fds[STDOUT_FILENO]);
+	return (here_fds[STDIN_FILENO]);
 }
 
 int	find_op(char *tokens, char c)
 {
 	int	i;
-	int	her;
+	int	count;
 
 	i = 0;
-	her = 0;
+	count = 0;
 	while (tokens[i])
 	{
 		if (tokens[i] == c)
-			her++;
+			count++;
 		i++;
 	}
-	return (her);
+	return (count);
 }
 
 int	*ft_open_hdocs(char **lines, char *tokens, int *sync_lines)
@@ -56,14 +63,13 @@ int	*ft_open_hdocs(char **lines, char *tokens, int *sync_lines)
 	int	j;
 
 	here_num = find_op(tokens, 'H');
-	i = 0;
 	if (!here_num)
 	{
-		while (tokens[i++])
-			(*sync_lines)++;
+		*sync_lines += ft_strlen(tokens);
 		return (NULL);
 	}
-	here_fds = malloc(sizeof(int) * (here_num + 1));
+	here_fds = malloc(sizeof(int) * (here_num));
+	i = 0;
 	j = 0;
 	while (i < here_num)
 	{
@@ -74,21 +80,9 @@ int	*ft_open_hdocs(char **lines, char *tokens, int *sync_lines)
 		}
 		here_fds[i] = ft_read_stdin(lines, ++(*sync_lines));
 		i++;
+		j++;
 	}
 	while (tokens[j++])
 		(*sync_lines)++;
-	// i = 0;
-	// while(i < here_num)
-	// {
-	// 	j = 0;
-	// 	while(j < 2)
-	// 	{
-	// 		printf("%d  ", here_fds[i][j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
-	// 	i++;
-	// }
-	// exit(1);
 	return (here_fds);
 }

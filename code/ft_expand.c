@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/21 13:00:22 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/22 13:31:09 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,55 @@
 
 char	*ft_find_name(char *arg)
 {
-	int	i;
+	int name_len;
 
-	i = 0;
-	if (ft_isdigit(arg[0])) // to recheck 
-		return (ft_substr(arg, 0, 1));
-	while (ft_isalnum(arg[i]) || arg[i] == '_')
-		i++;
-	return (ft_substr(arg, 0, i));
+	name_len = 1;
+	if (ft_isdigit(arg[1]))
+		return (ft_substr(arg, 0, 2));
+	while (ft_isalnum(arg[name_len]) || arg[name_len] == '_')
+		name_len++;
+	if (name_len == 1 && arg[name_len] == '?')
+		name_len++;
+	if (name_len == 1)
+		return (NULL);
+	return (ft_substr(arg, 0, name_len));
+}
+
+char *return_value(char *title)
+{
+	t_list	*tmp;
+
+	tmp = glob.envx;
+	while (tmp)
+	{
+		if (((t_env *)tmp->content)->title)
+		{
+			if (!ft_strcmp(((t_env *)tmp->content)->title, title))
+			{
+				return (ft_strdup(((t_env *)tmp->content)->value));
+			}
+		}
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 int	replace_arg(char **arg, int i, char *name)
 {
 	char	*temp;
-	char	**store_title;
 	char	*var_value;
-
-	store_title = find_title(name + 1);
+	char	*store;
+	
+	store = return_value(name);
+	// printf("%s", name);
+	// printf("%s", store);
+	// exit (0);
 	if (!name)
 		return (1);
 	if (!ft_strncmp(name, "$?", 2))
 		var_value = ft_itoa(glob.exit_status);
 	else
-		var_value = ft_strdup(*store_title);
+		var_value = return_value(name + 1);
 	temp = *arg;
 	*arg = ft_find_replace(*arg, i, name, var_value);
 	free(temp);

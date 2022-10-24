@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:24:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:24:50 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:47:28 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ int	*ft_open_infiles(char **lines, char *tokens, int *sync_lines)
 	int	*infiles;
 
 	in = find_op(tokens, '<');
-	i = 0;
 	if (!in)
 	{
-		while (tokens[i++])
-			(*sync_lines)++;
+		*sync_lines += ft_strlen(tokens);
 		return (NULL);
 	}
 	infiles = malloc(sizeof(int) * (in));
+	i = 0;
 	j = 0;
 	while (i < in)
 	{
