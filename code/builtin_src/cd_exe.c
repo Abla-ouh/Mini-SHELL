@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/20 17:59:58 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/23 12:36:27 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	ft_cd(char **av)
 	else
 		r = chdir_update(av[1]);
 	if (r == -1)
-		ft_perror("cd", NULL, NULL);	
+		ft_perror("cd", NULL, NULL);
+	else if (r == -2)	
+		ft_perror("minishell", "cd", "error retrieving current directory: getcwd: \
+	cannot access parent directories: No such file or directory");
 	return (r);
 }
 
@@ -36,7 +39,7 @@ int	cd_option(char *path)
 	if (!(dir))
 	{
 		ft_perror("cd", path, "environment variable not set");
-		return (-1);
+		return (1);
 	}
 	return (chdir_update(*dir));
 }
@@ -47,20 +50,30 @@ int	chdir_update(char *dir)
 	char	*cwd;
 	
 	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		cwd = *find_title("PWD");
 	o_pwd = find_title("OLDPWD");
-	if (chdir(dir) == -1)
+	if (chdir(dir) == -1 || (!(cwd) && !ft_strcmp(dir, ".")))
 	{
-		free(cwd);
-		return (-1);
+		if (!cwd)
+			return (-2);
+		else
+		{
+			free(cwd);
+			return (-1);
+		}
 	}
+	return(path_changer(o_pwd, cwd));	
+}
+
+int	path_changer(char **o_pwd, char *cwd)
+{
+	if (!cwd)
+		cwd = return_value("PWD");
 	if (o_pwd)
 	{
 		free(*o_pwd);
 		*o_pwd = ft_strdup(cwd);
 		if (!(*o_pwd))
-			return (0);
+			return (-1);
 	}
 	else if (!o_pwd)
 	{
@@ -70,7 +83,7 @@ int	chdir_update(char *dir)
 		var_update(o_pwd);
 	}
 	pwd_update();
-	return (1);
+	return (0);
 }
 
 void	pwd_update(void)

@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/22 10:59:20 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/23 14:56:28 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 	f = ft_isbuiltin(node_cmd);
 	if (f) 
 		run_builtin(node_cmd, f);
+	else if (ft_strchr(node_cmd->args[0], '/'))
+		exe_file(node_cmd);
 	else
 	{
 		if (execve(node_cmd->path, node_cmd->args, glob.env) == -1)
-			ft_perror(NULL, NULL, NULL);
+			ft_perror("minishell", NULL, NULL);
 	}
 	exit(1);
 }

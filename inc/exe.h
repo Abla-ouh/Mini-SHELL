@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/21 17:52:12 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/23 14:55:57 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <minishell.h>
 # include <sys/wait.h>
+# include <signal.h>
+# include <dirent.h>
 
 # define RD_END 0
 # define WR_END 1
@@ -52,6 +54,7 @@ void	builtin_sub(t_cmds *node_cmd);
 char	**env_lst_to_matrix(t_list *env_list);
 void	ft_reset_glob(void);
 int		check_execut(t_cmds *shel_l);
+void	exe_file(t_cmds *node_cmd);
 
 /*init the gdexe struct*/
 void	glob_init(char **env);
@@ -107,5 +110,7 @@ void	export_var(char *input);
 
 void	ft_arrfreey(void);
 void	ft_delenv(void *env);
+char	*return_value(char *title);
+int		path_changer(char **o_pwd, char *cwd);
 
 #endif

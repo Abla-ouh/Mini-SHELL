@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/18 16:33:51 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/24 05:45:09 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,20 @@ void	redi_sub(t_cmds *node_cmd ,int *p_fd)
 		dup2(p_fd[WR_END], STDOUT_FILENO);
 	close(p_fd[WR_END]);
 	return ;
+}
+
+void	exe_file(t_cmds *node_cmd)
+{
+	DIR	*dir;
+
+	execve(node_cmd->path, node_cmd->args, glob.env);
+	dir = opendir(node_cmd->args[0]);
+	if (dir)
+	{
+		ft_perror("minishell", node_cmd->args[0], "No such file or directory");
+		closedir(dir);
+	}
+	else
+		ft_perror("minishell", node_cmd->args[0], "command not found");
+	
 }

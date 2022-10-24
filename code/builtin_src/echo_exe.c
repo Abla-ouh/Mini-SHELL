@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_exe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:57:32 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/14 22:15:21 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/23 12:40:55 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_echo(char **ar)
 		if (ar[(i++) + 1])
 			write(1, " ", 1);
 	}
-	if (j)
-		write(1, "\n", 1);
+	write(1, "\n", j);
 	return (0);
 }

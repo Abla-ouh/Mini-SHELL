@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/20 21:48:26 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/23 13:31:45 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	ft_exit(char **ar)
 			exit(255);
 		}
 		sig = ft_atoi(ar[1]);
-		//printf("%lu\n", sig);
 		if (sig && !ar[2])
 			exit(sig % 256);
 	}
