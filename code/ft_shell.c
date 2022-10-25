@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/24 16:58:11 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 06:10:27 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int	main(int ac, char **av, char **env)
 			ft_run_cmds(shel_l);
 		}
 	}
-	ft_reset_glob();
+	//ft_reset_glob();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/22 10:48:45 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 07:08:09 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ char	**env_lst_to_matrix(t_list *lst)
 	tmp = NULL;
 	env_list = lst;
 	size = ft_lstsize(env_list);
-	env = (char **)malloc((sizeof(char *) * size) + 1);
+	env = malloc((sizeof(char *) * (size + 1)));
 	size = 0;
 	while (env_list)
 	{
 		tmp = ft_strjoin("=", ((t_env *)env_list->content)->value);
 		env[size] = ft_strjoin(((t_env *)env_list->content)->title, tmp);
 		free(tmp);
+		if (!(env[size]))
+			ft_arrfreey();
 		size++;
 		env_list = env_list->next;
 	}
