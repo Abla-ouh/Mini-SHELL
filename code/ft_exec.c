@@ -6,11 +6,10 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 17:04:13 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 14:03:09 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
 #include <exe.h>
 
 void	signal_stream(void)
@@ -79,14 +78,10 @@ void	ft_run_cmds(t_cmds *shel_l)
 {
 	t_cmds	*node_cmd;
 	pid_t	pid;
-	int		flag;
-	
-	flag = 0;
+
 	node_cmd = shel_l;
-	if (node_cmd && node_cmd->next == NULL && check_execut(node_cmd))
-		flag = ft_isbuiltin(shel_l);
-	if (flag != 0)
-		glob.exit_status = run_builtin(shel_l, flag);
+	if (node_cmd && node_cmd->next == NULL && ft_isbuiltin(node_cmd))
+		exe_builtin(node_cmd);
 	else
 	{
 		while (node_cmd)

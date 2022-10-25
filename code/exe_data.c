@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 12:38:37 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:34:10 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	glob_init(char **env)
 {
+	glob.sig_c = 0;
 	glob.env = NULL;
 	glob.exit_status = 0;
 	glob.envx = env_list(env);
@@ -35,6 +36,8 @@ void	ft_arrfreey()
 
 int	ft_isbuiltin(t_cmds *shel_l)
 {
+	if (!check_execut(shel_l))
+		return(0);
 	if (!ft_strcmp(shel_l->args[0] ,"cd"))
 		return (1);
 	else if ((!ft_strcmp(shel_l->args[0] ,"exit")))
