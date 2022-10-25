@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_launch_shell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/24 05:48:32 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 01:04:09 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_cmds	*ft_parser(char *line)
 	int		sync_lines;
 	t_data	data;
 	t_cmds	*cmds;
-	t_cmds	*tmp;
+	//t_cmds	*tmp;
 
 	data.lines = ft_lexer(line, " \t\r\v\f\n");
 	data.tokens = ft_tokenize(data.lines);
@@ -159,24 +159,7 @@ t_cmds	*ft_parser(char *line)
 	while (data.lines[++i])
 		data.lines[i] = unquote_arg(data.lines[i]);
 	cmds = ft_fillup_struct(&data);
-	i = 0;
-	tmp = cmds;
-	while (tmp)
-	{
-		i = 0;
-		while (tmp->args[i])
-		{
-			printf("arg : %s index %d\n", tmp->args[i], i);
-			i++;
-		}
-		printf("\n");
-		printf("tmp->in: %d\n", tmp->in);
-		printf("tmp->out: %d\n", tmp->out);
-		printf("tmp->is_exec: %d\n", tmp->is_exec);
-		printf("tmp->path: %s\n", tmp->path);
-		printf("-------------------------------------------------------\n");
-		tmp = tmp->next;
-	}
+	// i = 0; // tmp = cmds; // while (tmp) // { // 	i = 0; // 	while (tmp->args[i]) // 	{ // 		printf("arg : %s index %d\n", tmp->args[i], i); // 		i++; // 	} // 	printf("\n"); // 	printf("tmp->in: %d\n", tmp->in); // 	printf("tmp->out: %d\n", tmp->out); // 	printf("tmp->is_exec: %d\n", tmp->is_exec); // 	printf("tmp->path: %s\n", tmp->path); // 	printf("-------------------------------------------------------\n"); // 	tmp = tmp->next; // }
     /* free all addresses not useful anymore */
 	return (cmds);
 }

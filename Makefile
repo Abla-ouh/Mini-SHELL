@@ -6,7 +6,7 @@
 #    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/25 08:49:55 by midfath          ###   ########.fr        #
+#    Updated: 2022/10/25 08:53:01 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BLUE	= \033[1;34m
 #vars
 
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS 		= -Wall -Wextra -Werror  -fsanitize=address -g
 # CFLAGS 		= -Wall -Wextra -Werror
 NAME 		= minishell
 LIBFT    	= libft/libft.a
@@ -33,8 +33,8 @@ NAME		= $(BIN_DIR)/$(BIN)
 BIN			= minishell
 SRC_DIR		= code
 RDLINE		= -lreadline -lncurses
-RDLINE_FLAG =  -L /Users/midfath/homebrew/opt/readline/lib
-RDLINE_PATH =  -I /Users/midfath/homebrew/opt/readline/include
+RDLINE_FLAG =  -L /Users/abouhaga/.brew/opt/readline/lib
+RDLINE_PATH =  -I /Users/abouhaga/.brew/opt/readline/include
 
 #cmd
 

@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:31:21 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/22 09:57:53 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/25 01:25:24 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ char	*get_cmd_path(t_cmds *cmds)
 	int		i;
 
 	i = 0;
-	path = getenv("PATH");
+	if (cmds->args[0] && ft_strchr(cmds->args[0], '/'))
+		return (ft_strdup(cmds->args[0]));
+	path = return_value("PATH");
 	if (!path)
 		return (NULL);
 	while (path[i])
