@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 18:59:33 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:34:43 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ typedef struct s_cmds t_cmds;
 typedef struct s_gexe
 {
 	char	**env;
+	int		sig_c;
 	int     exit_status;
 	t_list  *envx;
+	int		infd;
+	int		outfd;
 	int		perv_fd;
 }	t_gexe;
 
@@ -58,6 +61,7 @@ void	ft_reset_glob(void);
 int		check_execut(t_cmds *shel_l);
 void	exe_file(t_cmds *node_cmd);
 void	exe_cmd(t_cmds *node_cmd);
+void	exe_builtin(t_cmds *node_cmd);
 void	signal_stream(void);
 void	handler(int sig);
 

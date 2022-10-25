@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:03:28 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 18:50:23 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 17:30:20 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	handler(int sig)
 {
 	if (sig == SIGINT)
 	{
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_redisplay();
+		glob.exit_status = 1;
 	}
 }

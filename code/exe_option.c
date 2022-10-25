@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_option.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/25 01:00:21 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:06:16 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,29 @@ void	exe_file(t_cmds *node_cmd)
 	
 }
 
+void	exe_builtin(t_cmds *node_cmd)
+{
+	int	flag;
+	
+	flag = ft_isbuiltin(node_cmd);
+	if (flag != 0 && (node_cmd->in != STDIN_FILENO || node_cmd->out != STDOUT_FILENO))
+	{
+		if (node_cmd->in != STDIN_FILENO)
+		{
+			dup2(node_cmd->in , STDIN_FILENO);
+			close(node_cmd->in);
+		}
+		if (node_cmd->out != STDOUT_FILENO)
+		{
+			dup2(node_cmd->out, STDOUT_FILENO);
+			close(node_cmd->out);
+		}
+	}
+	if (flag != 0)
+		glob.exit_status = run_builtin(node_cmd, flag);
+	dup2(glob.infd, STDIN_FILENO);
+	dup2(glob.outfd, STDOUT_FILENO);
+}
 
 void	exe_cmd(t_cmds *node_cmd)
 {
