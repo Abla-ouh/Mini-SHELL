@@ -6,30 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/25 01:04:09 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/25 02:18:04 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-// int	is_double_quoted(char *arg, int *len)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (arg[i])
-// 	{
-// 		if (arg[i] == '\"')
-// 		{
-// 			skip_quote_len(arg, i, len ,'\"');
-// 			if (arg[i - 1] != '\"')
-// 				return (0);
-// 		}
-// 		else
-// 			i++;
-// 	}
-// 	return (1);
-// }
 
 void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
 {
@@ -118,7 +99,7 @@ t_cmds	*ft_parser(char *line)
 	int		sync_lines;
 	t_data	data;
 	t_cmds	*cmds;
-	//t_cmds	*tmp;
+	t_cmds	*tmp;
 
 	data.lines = ft_lexer(line, " \t\r\v\f\n");
 	data.tokens = ft_tokenize(data.lines);
@@ -159,7 +140,24 @@ t_cmds	*ft_parser(char *line)
 	while (data.lines[++i])
 		data.lines[i] = unquote_arg(data.lines[i]);
 	cmds = ft_fillup_struct(&data);
-	// i = 0; // tmp = cmds; // while (tmp) // { // 	i = 0; // 	while (tmp->args[i]) // 	{ // 		printf("arg : %s index %d\n", tmp->args[i], i); // 		i++; // 	} // 	printf("\n"); // 	printf("tmp->in: %d\n", tmp->in); // 	printf("tmp->out: %d\n", tmp->out); // 	printf("tmp->is_exec: %d\n", tmp->is_exec); // 	printf("tmp->path: %s\n", tmp->path); // 	printf("-------------------------------------------------------\n"); // 	tmp = tmp->next; // }
+	i = 0;
+	tmp = cmds;
+	while (tmp)
+	{
+		i = 0;
+		while (tmp->args[i])
+		{
+			printf("arg : %s index %d\n", tmp->args[i], i);
+			i++;
+		}
+		printf("\n");
+		printf("tmp->in: %d\n", tmp->in);
+		printf("tmp->out: %d\n", tmp->out);
+		printf("tmp->is_exec: %d\n", tmp->is_exec);
+		printf("tmp->path: %s\n", tmp->path);
+		printf("-------------------------------------------------------\n");
+		tmp = tmp->next;
+	}
     /* free all addresses not useful anymore */
 	return (cmds);
 }
