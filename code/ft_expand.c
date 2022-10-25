@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/24 13:06:56 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/25 00:38:52 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,49 +79,3 @@ char	*expand(char *arg)
 	}
 	return (arg);
 }
-
-// char	*expand(char *arg, t_list *env)
-// {
-// 	int		i;
-// 	char	*tmp;
-// 	char	*tmp2;
-// 	char	*tmp3;
-// 	char	*name;
-// 	char	**value;
-
-// 	i = 0;
-// 	tmp = NULL;
-// 	tmp2 = NULL;
-// 	tmp3 = NULL;
-// 	name = NULL;
-// 	while (arg[i])
-// 	{
-// 		if (arg[i] == '$')
-// 		{
-// 			while (arg[i] == '$')
-// 				i++;
-// 			i--;
-// 			tmp = ft_substr(arg, 0, i);
-// 			name = ft_find_name(arg + i + 1);
-// 			tmp2 = ft_substr(arg, i + 1 + ft_strlen(name), ft_strlen(arg));
-// 			value = find_title(glob.envx, name);
-// 			free(arg);
-// 			if (value == NULL)
-// 				arg = ft_strjoin(tmp, tmp2);
-// 			else
-// 			{
-// 				tmp3 = ft_strjoin(tmp, *value);
-// 				arg = ft_strjoin(tmp3, tmp2);
-// 				i += ft_strlen(*value);
-// 				// free(*value);
-// 			}
-// 			free(tmp);
-// 			free(name);
-// 			free(tmp2);
-// 			free(tmp3);
-// 		}
-// 		else
-// 			i++;
-// 	}
-// 	return (arg);
-// }
