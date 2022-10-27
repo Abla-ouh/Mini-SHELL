@@ -6,14 +6,14 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/24 12:50:01 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 11:46:36 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
 int	ft_env(char **av, t_list *env)
- {
+{
 	if (av[1])
 		return (1);
 	while (env)
@@ -26,11 +26,11 @@ int	ft_env(char **av, t_list *env)
 		env = env->next;
 	}
 	return (0);
- }
+}
 
 t_env	*init_lst_env(void)
 {
-	t_env *new;
+	t_env	*new;
 
 	new = (t_env *)ft_calloc(1, sizeof(t_env));
 	return (new);
@@ -63,7 +63,7 @@ t_list	*env_list(char **env)
 	t_list	*head;
 	t_list	*node;
 	t_env	*st_env;
-	
+
 	i = 0;
 	head = NULL;
 	while (env[i])

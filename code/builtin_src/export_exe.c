@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 21:26:58 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/15 11:26:50 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:22:08 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	export_var(char *input)
 {
 	char	**new_var;
 	int		len;
-	
+
 	new_var = get_var(input);
 	len = ft_strlen(new_var[0]);
 	if (new_var[0][len - 1] == '+')
@@ -31,7 +31,7 @@ void	export_var(char *input)
 int	vars_check(char *var)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!ft_isalpha(var[0]) && !(var[0] == '_'))
 		return (0);
@@ -42,12 +42,12 @@ int	vars_check(char *var)
 		|| !var[i] || var[i] == '=');
 }
 
-void	put_export()
+void	put_export(void)
 {
-	t_env *env;
-	t_list *tmp;
-	
-	tmp =glob.envx;
+	t_env	*env;
+	t_list	*tmp;
+
+	tmp = g_glob.envx;
 	while (tmp)
 	{
 		env = tmp->content;

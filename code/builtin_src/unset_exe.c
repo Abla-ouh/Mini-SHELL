@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:06:47 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/25 07:22:00 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:27:47 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	env_del(char *ar)
 {
 	t_list	**tmp;
 	t_list	*node;
-	
-	tmp = &glob.envx;
+
+	tmp = &g_glob.envx;
 	while (*tmp)
 	{
-		if (!(ft_strcmp(ar, ((t_env*)(*tmp)->content)->title)))
+		if (!(ft_strcmp(ar, ((t_env *)(*tmp)->content)->title)))
 		{
 			node = *tmp;
 			*tmp = (*tmp)->next;
@@ -32,7 +32,6 @@ void	env_del(char *ar)
 		}
 		tmp = &(*tmp)->next;
 	}
-	
 }
 
 int	check_ar(char *ar)
@@ -62,7 +61,7 @@ int	ft_unset(char **ar)
 		else
 		{
 			err = 1;
-			ft_perror("minishell", ar[i], "not a valid identifier");
+			ft_perror(NULL, ar[i], "not a valid identifier");
 		}
 		i++;
 	}

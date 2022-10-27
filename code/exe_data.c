@@ -6,54 +6,57 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/25 17:34:10 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 14:19:24 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-void	glob_init(char **env)
+void	g_glob_init(char **env)
 {
-	glob.sig_c = 0;
-	glob.env = NULL;
-	glob.exit_status = 0;
-	glob.envx = env_list(env);
-	glob.perv_fd = 0;
+	g_glob.infd = dup(0);
+	g_glob.outfd = dup(1);
+	g_glob.sig_c = 0;
+	g_glob.env = NULL;
+	g_glob.exit_status = 0;
+	g_glob.envx = env_list(env);
+	g_glob.perv_fd = 0;
 }
 
-void	ft_arrfreey()
+void	ft_arrfreey(void)
 {
 	int	i;
 
 	i = 0;
-	while (glob.env && glob.env[i])
+	while (g_glob.env && g_glob.env[i])
 	{
-		free(glob.env[i]);
+		free(g_glob.env[i]);
 		i++;
 	}
-	glob.env = NULL;
+	g_glob.env = NULL;
 }
 
 int	ft_isbuiltin(t_cmds *shel_l)
 {
-	if (!check_execut(shel_l))
-		return(0);
-	if (!ft_strcmp(shel_l->args[0] ,"cd"))
+	if (!shel_l || !shel_l->is_exec || shel_l->in < 0 || \
+	shel_l->out < 0 || !shel_l->args[0])
+		return (0);
+	if (!ft_strcmp(shel_l->args[0], "cd"))
 		return (1);
-	else if ((!ft_strcmp(shel_l->args[0] ,"exit")))
+	else if ((!ft_strcmp(shel_l->args[0], "exit")))
 		return (2);
-	else if ((!ft_strcmp(shel_l->args[0] ,"export")))
+	else if ((!ft_strcmp(shel_l->args[0], "export")))
 		return (3);
-	else if ((!ft_strcmp(shel_l->args[0] ,"echo")))
+	else if ((!ft_strcmp(shel_l->args[0], "echo")))
 		return (4);
-	else if ((!ft_strcmp(shel_l->args[0] ,"unset")))
+	else if ((!ft_strcmp(shel_l->args[0], "unset")))
 		return (5);
-	else if ((!ft_strcmp(shel_l->args[0] ,"env")) && \
+	else if ((!ft_strcmp(shel_l->args[0], "env")) && \
 	shel_l->args[1] == NULL)
 		return (6);
-	else if ((!ft_strcmp(shel_l->args[0] ,"pwd")))
+	else if ((!ft_strcmp(shel_l->args[0], "pwd")))
 		return (7);
-	else if ((!ft_strcmp(shel_l->args[0] ,"env")) && shel_l->args)
+	else if ((!ft_strcmp(shel_l->args[0], "env")) && shel_l->args)
 		return (8);
 	return (0);
 }
@@ -73,17 +76,17 @@ int	run_builtin(t_cmds *shel_l, int flag)
 	else if (flag == 8)
 		return (ft_perror("env", NULL, "too many arguments"));
 	else if (flag == 6)
-		return (ft_env(shel_l->args ,glob.envx));
+		return (ft_env(shel_l->args, g_glob.envx));
 	else if (flag == 7)
 		return (ft_pwd(shel_l->args));
 	return (0);
 }
 
-char *return_value(char *title)
+char	*return_value(char *title)
 {
 	t_list	*tmp;
 
-	tmp = glob.envx;
+	tmp = g_glob.envx;
 	while (tmp)
 	{
 		if (((t_env *)tmp->content)->title)

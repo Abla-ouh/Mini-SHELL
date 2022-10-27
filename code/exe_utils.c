@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/25 07:08:09 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:44:41 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 void	ft_wait_cmd(pid_t pid)
 {
-	//
-	// waitpid(pid, &glob.exit_status, 0);
-	// if (glob.exit_status != 2 && glob.exit_status != 3)
-	// else
+	waitpid(pid, &g_glob.exit_status, 0);
 	(void)pid;
-	while (wait(&glob.exit_status) != -1)
+	while (wait(&g_glob.exit_status) != -1)
 		;
-	glob.exit_status = WEXITSTATUS(glob.exit_status);
-	glob.exit_status += 128;
+	g_glob.exit_status = WEXITSTATUS(g_glob.exit_status);
+	g_glob.exit_status += 128;
 }
 
 char	**env_lst_to_matrix(t_list *lst)
@@ -51,24 +48,20 @@ char	**env_lst_to_matrix(t_list *lst)
 	return (env);
 }
 
-void	ft_reset_glob(void)
+void	ft_reset_g_glob(void)
 {
-	ft_lstclear(&glob.envx, ft_delenv);
-	glob.envx = NULL;
+	ft_lstclear(&g_glob.envx, ft_delenv);
+	g_glob.envx = NULL;
 	ft_arrfreey();
-	glob.env = NULL;
+	g_glob.env = NULL;
 }
 
-int	check_execut(t_cmds *shel_l)
+int	check_exe(t_cmds *shel_l)
 {
-	if (!(shel_l) || !(shel_l->is_exec && shel_l->in >= 0 && shel_l->out >= 1))
+	if (!shel_l || !shel_l->is_exec || shel_l->in < 0 || shel_l->out < 0 \
+	|| !shel_l->path || !shel_l->args[0])
 		return (0);
-	else if (!(shel_l->path) && !(shel_l->args[0]) && !(shel_l->path))
-		return (0);
-	else if (!(shel_l->args[0]))
-		return (0);
-	else
-		return (1);
+	return (1);
 }
 
 void	ft_delenv(void *env)

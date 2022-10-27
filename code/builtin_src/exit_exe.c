@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/23 13:31:45 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 13:22:08 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_digits(char *str)
 			return (1);
 		i++;
 	}
-		return (0);
+	return (0);
 }
 
 int	ft_exit(char **ar)
@@ -31,23 +31,19 @@ int	ft_exit(char **ar)
 	long int	sig;
 
 	sig = 0;
-	if (!ar[2])
+	if (!ar[1])
+		exit (g_glob.exit_status);
+	if (ft_check_digits(ar[1]))
 	{
-		if (!ar[1])
-			exit(glob.exit_status);	
-		if (ft_check_digits(ar[1]))
-		{
-			ft_perror("exit", ar[1], "numeric arguement required");
-			exit(255);
-		}
-		sig = ft_atoi(ar[1]);
-		if (sig && !ar[2])
-			exit(sig % 256);
-	}
-	else
-	{
-		ft_perror("exit",  NULL, "too many arguments");
+		ft_perror("exit", ar[1], "numeric arguement required");
 		exit(255);
 	}
-	return(0);
+	sig = ft_atoi(ar[1]);
+	if (sig && !ar[2])
+		exit(sig % 256);
+	else
+	{
+		ft_perror("exit", "NULL", "too many arguments");
+		exit(255);
+	}
 }

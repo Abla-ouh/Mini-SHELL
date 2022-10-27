@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:19:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/23 22:26:11 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/27 00:11:32 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 		if (tokens[i] != '|' && tokens[i] != 'S' && tokens[i + 1] != 'S')
 		{
 			if (!lines[i + 1])
-				ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+				ft_putstr_fd("minishell: syntax error near \
+				unexpected token `newline'\n", 2);
 			else if (ft_strlen(lines[i + 1]) > 1)
-				printf("minishell: syntax error near unexpected token `%c%c'\n", lines[i + 1][0], lines[i + 1][0]);
+				printf("minishell: syntax error near \
+				unexpected token `%c%c'\n", lines[i + 1][0], lines[i + 1][0]);
 			else
-				printf("minishell: syntax error near unexpected token `%c'\n", lines[i + 1][0]);
+				printf("minishell: syntax error near \
+				unexpected token `%c'\n", lines[i + 1][0]);
 			return (1);
 		}
 		i++;

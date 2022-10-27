@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/25 00:38:52 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/27 13:22:08 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	replace_arg(char **arg, int i, char *name)
 	if (!name)
 		return (1);
 	if (!ft_strncmp(name, "$?", 2))
-		var_value = ft_itoa(glob.exit_status);
+		var_value = ft_itoa(g_glob.exit_status);
 	else
 		var_value = return_value(name + 1);
 	temp = *arg;
