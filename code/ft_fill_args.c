@@ -6,11 +6,31 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:29:36 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/25 00:54:28 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:28:19 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	is_seperator_char(char c)
+{
+	return (c != ' '
+		&& c != '<'
+		&& c != '>'
+		&& c != '|'
+		&& c != '\t'
+		&& c != '\0');
+}
+
+void	skip_quote_len(char *trim_line, int i, int *len, char q)
+{
+	(*len)++;
+	while (trim_line[i + (*len)]
+		&& trim_line[i + (*len)] != q)
+		(*len)++;
+	if (trim_line[i + (*len)] == q)
+		(*len)++;
+}
 
 int	args_to_alloc(char *tokens)
 {
@@ -28,7 +48,7 @@ int	args_to_alloc(char *tokens)
 	return (s);
 }
 
-char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
+char	**ft_fill_args(char **lines, char *tokens, int *sync)
 {
 	int		i;
 	int		j;
@@ -43,45 +63,13 @@ char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
 	{
 		if (tokens[i] == 'S' && (i == 0 || tokens[i - 1] == 'S'))
 		{
-			args[j] = ft_strdup(lines[*sync_lines]);
+			args[j] = ft_strdup(lines[*sync]);
 			j++;
 		}
-		(*sync_lines)++;
+		(*sync)++;
 	}
 	args[j] = NULL;
 	while (tokens[i++])
-		(*sync_lines)++;
+		(*sync)++;
 	return (args);
 }
-// char	**ft_fill_args(char **lines, char *tokens, int *sync_lines)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	**args;
-
-// 	i = 0;
-// 	j = 0;
-// 	args = (char **)malloc(sizeof(char **) * (args_to_alloc(tokens) + 1));
-// 	if (!args)
-// 		return (NULL);
-// 	while (tokens[i])
-// 	{
-// 		if (tokens[i] == 'S' && (i == 0 || tokens[i - 1] == 'S'))
-// 		{
-// 			while (tokens[i] == 'S')
-// 			{
-// 				args[j] = ft_strdup(lines[*sync_lines]);
-// 				j++;
-// 				i++;
-// 				(*sync_lines)++;
-// 			}
-// 			break ;
-// 		}
-// 		i++;
-// 		(*sync_lines)++;
-// 	}
-// 	args[j] = NULL;
-// 	while (tokens[i++])
-// 		(*sync_lines)++;
-// 	return (args);
-// }

@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:19:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 00:11:32 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 22:48:29 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 		if (tokens[i] != '|' && tokens[i] != 'S' && tokens[i + 1] != 'S')
 		{
 			if (!lines[i + 1])
-				ft_putstr_fd("minishell: syntax error near \
-				unexpected token `newline'\n", 2);
+				ft_fprintf(2, "minishell: syntax error \
+					near unexpected token `newline'\n", NULL);
 			else if (ft_strlen(lines[i + 1]) > 1)
-				printf("minishell: syntax error near \
+				ft_fprintf(2, "minishell: syntax error near \
 				unexpected token `%c%c'\n", lines[i + 1][0], lines[i + 1][0]);
 			else
-				printf("minishell: syntax error near \
-				unexpected token `%c'\n", lines[i + 1][0]);
+				ft_fprintf(2, "minishell: syntax error \
+					near unexpected token `%c'\n", lines[i + 1][0]);
 			return (1);
 		}
 		i++;
@@ -65,33 +65,22 @@ int	ft_syntax_error(char **lines, char *token)
 	if (!(*lines))
 		return (0);
 	if (!ft_strcmp(lines[0], "|"))
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
-		return (1);
-	}
+		return (ft_fprintf(2, "minishell: syntax \
+		error near unexpected token `|'\n", NULL));
 	while (token[i])
 	{
 		if (token[i] == '|' && token[i + 1] == '|')
-		{
-			printf("minishell: syntax error near unexpected token `%c'\n", lines[i][0]);
-			return (1);
-		}
+			return (ft_fprintf(2, "minishell: syntax \
+			error near unexpected token `%c'\n", lines[i][0]));
 		if (token[i] == 'E')
-		{
-			printf("minishell: syntax error near unexpected token `%c%c'\n", lines[i][0], lines[i][0]);
-			return (1);
-		}
+			return (ft_fprintf(2, "minishell: syntax \
+			error near unexpected token `%c%c'\n", lines[i][0], lines[i][0]));
 		if (!is_quoted(lines[i]))
-		{
-			ft_putstr_fd("minishell: unclosed quotes\n", 2);
-			return (1);
-		}
+			return (ft_fprintf(2, "minishell: unclosed quotes\n", NULL));
 		i++;
 	}
 	if (!ft_strcmp(lines[i - 1], "|"))
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
-		return (1);
-	}
+		return (ft_fprintf(2, "minishell: syntax error \
+		near unexpected token `|'\n", NULL));
 	return (0);
 }

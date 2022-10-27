@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:27:07 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:27:50 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/27 00:43:17 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,22 @@ int	check_exec(t_data *data, int cmd_idx, int last_in, int last_out)
 
 int	setup_last_io(int *last_io, char *token, t_data *data, int cmd_idx)
 {
-	int	last_in;
-	int	last_her;
 	int	last_out;
 	int	_exec;
 
-	last_in = find_op(token, '<');
-	last_her = find_op(token, 'H');
 	last_out = find_op(token, '>');
 	last_out += find_op(token, 'A');
-	if (!check_exec(data, cmd_idx, last_in, last_out))
+	if (!check_exec(data, cmd_idx, find_op(token, '<'), last_out))
 	{
 		_exec = 0;
 		return (_exec);
 	}
-	if (last_in || last_her)
+	if (find_op(token, '<') || find_op(token, 'H'))
 	{
 		if (ft_strrchr(token, 'H') > ft_strrchr(token, '<'))
-			last_io[0] = data->here_fds[cmd_idx][last_her - 1];
+			last_io[0] = data->here_fds[cmd_idx][find_op(token, 'H') - 1];
 		else
-			last_io[0] = data->infiles[cmd_idx][last_in - 1];
+			last_io[0] = data->infiles[cmd_idx][find_op(token, '<') - 1];
 	}
 	else
 		last_io[0] = 0;

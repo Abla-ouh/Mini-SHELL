@@ -6,21 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:35:25 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/23 13:57:39 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:02:30 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	is_seperator_char(char c)
-{
-	return (c != ' '
-		&& c != '<'
-		&& c != '>'
-		&& c != '|'
-		&& c != '\t'
-		&& c != '\0');
-}
 
 void	find_string(char *str_trim, int *i)
 {
@@ -35,7 +25,7 @@ void	find_string(char *str_trim, int *i)
 
 void	skip_quote(char *str_trim, int *i, char q)
 {
-	(*i)++;	
+	(*i)++;
 	while (str_trim[*i] && str_trim[*i] != q)
 		(*i)++;
 	if (str_trim[*i] == q)
@@ -47,16 +37,6 @@ int	find_until_not(char *str_trim, int *i, char o)
 	while (str_trim[*i] == o)
 		(*i)++;
 	return (1);
-}
-
-void	skip_quote_len(char *trim_line, int i, int *len, char q)
-{
-	(*len)++;
-	while (trim_line[i + (*len)]
-		&& trim_line[i + (*len)] != q)
-		(*len)++;
-	if (trim_line[i + (*len)] == q)
-		(*len)++;
 }
 
 void	count_until_not(char *trim_line, int i, int *len, char o)

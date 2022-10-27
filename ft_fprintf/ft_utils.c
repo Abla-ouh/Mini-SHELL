@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_expand_utils.c                                  :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 23:37:39 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/19 23:38:17 by abouhaga         ###   ########.fr       */
+/*   Created: 2022/10/27 00:25:52 by abouhaga          #+#    #+#             */
+/*   Updated: 2022/10/27 00:25:54 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "ft_fprintf.h"
 
-int	is_single_quoted(char *arg)
+int	ft_fputchar(int fd, char c)
 {
-	int	i;
+	return (write(fd, &c, 1));
+}
 
-	i = 0;
-	while (arg[i])
-	{
-		if (arg[i] == '\'')
-		{
-			skip_quote(arg, &i, '\'');
-			if (arg[i - 1] != '\'')
-				return (0);
-		}
-		else
-			i++;
-	}
-	return (1);
+int	ft_fputstr(int fd, char *str)
+{
+	size_t	i;
+
+	if (!str)
+		return (write(fd, "(null)", 6));
+	i = ft_strlen(str);
+	return (write(fd, str, i));
 }
