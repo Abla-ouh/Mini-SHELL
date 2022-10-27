@@ -6,12 +6,11 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:22:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/25 02:05:59 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/26 11:28:19 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
 
 int	ft_read_stdin(char **lines, int del_idx)
 {
@@ -20,9 +19,10 @@ int	ft_read_stdin(char **lines, int del_idx)
 	int		expand_in_hdoc;
 
 	pipe(here_fds);
-	expand_in_hdoc = (!ft_strchr(lines[del_idx], '\"') && !ft_strchr(lines[del_idx], '\''));
-	lines[del_idx] = unquote_arg(lines[del_idx]); // getting the limiter unquoted
-	while(1)
+	expand_in_hdoc = (!ft_strchr(lines[del_idx], '\"')
+			&& !ft_strchr(lines[del_idx], '\''));
+	lines[del_idx] = unquote_arg(lines[del_idx]);
+	while (1)
 	{
 		temp = readline("> ");
 		if (!temp || !ft_strcmp(temp, lines[del_idx]))
@@ -55,32 +55,30 @@ int	find_op(char *tokens, char c)
 	return (count);
 }
 
-int	*ft_open_hdocs(char **lines, char *tokens, int *sync_lines)
+int	*ft_open_hdocs(char **lines, char *tokens, int *sync)
 {
 	int	*here_fds;
-	int	here_num;
 	int	i;
 	int	j;
 
-	here_num = find_op(tokens, 'H');
-	if (!here_num)
+	if (!find_op(tokens, 'H'))
 	{
-		*sync_lines += ft_strlen(tokens);
+		*sync += ft_strlen(tokens);
 		return (NULL);
 	}
-	here_fds = malloc(sizeof(int) * (here_num));
+	here_fds = malloc(sizeof(int) * (find_op(tokens, 'H')));
 	i = -1;
 	j = 0;
-	while (++i < here_num)
+	while (++i < find_op(tokens, 'H'))
 	{
 		while (tokens[j] && tokens[j] != 'H')
 		{
-			(*sync_lines)++;
+			(*sync)++;
 			j++;
 		}
-		here_fds[i] = ft_read_stdin(lines, ++(*sync_lines));
+		here_fds[i] = ft_read_stdin(lines, ++(*sync));
 		j++;
 	}
-	*sync_lines += ft_strlen(&tokens[j]);
+	*sync += ft_strlen(&tokens[j]);
 	return (here_fds);
 }

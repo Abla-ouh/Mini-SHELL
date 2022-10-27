@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/25 00:38:52 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/26 09:46:33 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_find_name(char *arg)
 {
-	int name_len;
+	int	name_len;
 
 	name_len = 1;
 	if (ft_isdigit(arg[1]))
@@ -28,17 +28,11 @@ char	*ft_find_name(char *arg)
 	return (ft_substr(arg, 0, name_len));
 }
 
-
 int	replace_arg(char **arg, int i, char *name)
 {
 	char	*temp;
 	char	*var_value;
-	char	*store;
-	
-	store = return_value(name);
-	// printf("%s", name);
-	// printf("%s", store);
-	// exit (0);
+
 	if (!name)
 		return (1);
 	if (!ft_strncmp(name, "$?", 2))

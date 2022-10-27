@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/21 17:45:25 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/26 11:06:07 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	var_update(char **var)
 
 	new = NULL;
 	r_write = find_title(var[0]);
-	if(r_write)
+	if (r_write)
 	{
 		free(*r_write);
 		*r_write = ft_strdup(var[1]);

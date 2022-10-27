@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:10:10 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/23 12:22:05 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/26 10:48:55 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	get_len(char *line, char *set)
 	return (len);
 }
 
-char *fill_arg(char *trim_line, int *i)
+char	*fill_arg(char *trim_line, int *i)
 {
 	int		len;
 	int		j;

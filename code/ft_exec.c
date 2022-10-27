@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/25 14:03:09 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/26 10:54:35 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	signal_stream(void)
 
 void	close_all_fds(t_cmds *shel_l)
 {
-	t_cmds *nodes;
-	
+	t_cmds	*nodes;
+
 	nodes = shel_l;
 	while (nodes)
 	{
