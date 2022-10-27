@@ -6,13 +6,14 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/23 21:59:00 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/27 00:48:10 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "../libft/libft.h"
+# include "../ft_fprintf/ft_fprintf.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -47,34 +48,52 @@ typedef struct s_data
 {
 	char	**lines;
 	char	*tokens;
-	char	**splitted_tokens;
+	char	**s_tokens;
 	int		**here_fds;
 	int		**infiles;
 	int		**outfiles;
 }	t_data;
 
+typedef struct s_cord
+{
+	int	i;
+	int	j;
+	int	*sync;
+}	t_cord;
+
+/*************************** PARSER *************************/
+void	check_expand(t_data	*data);
 t_cmds	*ft_parser(char *line);
+int		ft_strptr(char **ptr);
+void	fill_here_fds(t_data *data);
+void	fill_infiles(t_data *data);
+void	fill_outfiles(t_data *data);
+/************************** LEXER ***************************/
 char	*ft_tokenize(char **lines);
+char	**ft_lexer(char *line, char *set);
+int		is_seperator_char(char c);
+int		find_until_not(char *str_trim, int *i, char o);
+void	count_until_not(char *trim_line, int i, int *len, char o);
+void	find_string(char *str_trim, int *i);
+void	count_string(char *trim_line, int i, int *len);
+/************************** EXPAND ***************************/
 char	*expand(char *arg);
+/************************** ERROR ****************************/
 int		ft_syntax_error(char **lines, char *token);
 int		ft_check_redir_filename(char **lines, char *tokens);
-int		*ft_open_hdocs(char **lines, char *tokens, int *sync_lines);
-int		setup_last_io(int *last_io, char *token, t_data *data, int cmd_idx);
-int		*ft_open_infiles(char **lines, char *tokens, int *sync_lines);
-int		*ft_open_outfiles(char **lines, char *tokens, int *sync_lines);
-char	**ft_fill_args(char **lines, char *tokens, int *sync_lines);
-void	count_until_not(char *trim_line, int i, int *len, char o);
-void	skip_quote1(char *str_trim, int *i, char q);
-void	count_string(char *trim_line, int i, int *len);
-int		find_until_not(char *str_trim, int *i, char o);
-void	find_string(char *str_trim, int *i);
-void	skip_quote(char *str_trim, int *i, char q);
-char	*unquote_arg(char *str);
-int		is_single_quoted(char *arg);
-char	*get_cmd_path(t_cmds *cmds);
-int		find_op(char *tokens, char c);
-char	**ft_lexer(char *line, char *set);
 int		count_dup(char *str_trim, char o);
-char	*ft_str_trim(char *s, char *set);
-char	*ft_tokenize(char **lines);
+/************************** REDIRECTIONS *********************/
+int		find_op(char *tokens, char c);
+int		*ft_open_hdocs(char **lines, char *tokens, int *sync);
+int		*ft_open_infiles(char **lines, char *tokens, int *sync);
+int		*ft_open_outfiles(char **lines, char *tokens, int *sync);
+int		setup_last_io(int *last_io, char *token, t_data *data, int cmd_idx);
+/************************* FILLUP ***************************/
+char	**ft_fill_args(char **lines, char *tokens, int *sync);
+void	skip_quote1(char *str_trim, int *i, char q);
+void	skip_quote(char *str_trim, int *i, char q);
+void	skip_quote_len(char *trim_line, int i, int *len, char q);
+char	*unquote_arg(char *str);
+/************************ PATH *****************************/
+char	*get_cmd_path(t_cmds *cmds);
 #endif

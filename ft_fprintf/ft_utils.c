@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_istrchr.c                                       :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/25 18:35:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/26 12:31:28 by abouhaga         ###   ########.fr       */
+/*   Created: 2022/10/27 00:25:52 by abouhaga          #+#    #+#             */
+/*   Updated: 2022/10/27 00:25:54 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_istrchr(const char *str, char c)
-{
-	int	index;
+#include "ft_fprintf.h"
 
-	index = 0;
+int	ft_fputchar(int fd, char c)
+{
+	return (write(fd, &c, 1));
+}
+
+int	ft_fputstr(int fd, char *str)
+{
+	size_t	i;
+
 	if (!str)
-		return (-1);
-	while (str[index])
-	{
-		if (str[index] == c)
-			return (index);
-		index++;
-	}
-	return (-1);
+		return (write(fd, "(null)", 6));
+	i = ft_strlen(str);
+	return (write(fd, str, i));
 }
