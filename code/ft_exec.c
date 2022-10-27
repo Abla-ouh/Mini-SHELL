@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 14:18:34 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 22:41:24 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ void	ft_run_cmds(t_cmds *shel_l)
 			if (check_exe(node_cmd))
 				pid = ft_cmd_exe(shel_l, node_cmd);
 			else if (shel_l->args[0])
-			{
-				//ft_perror(NULL, NULL, NULL);
 				return ;
-			}
 			node_cmd = node_cmd->next;
 		}
 		g_glob.perv_fd = 0;

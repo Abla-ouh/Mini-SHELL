@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 16:27:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 20:21:18 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	main(int ac, char **av, char **env)
 	t_cmds	*tmp;
 
 	(void) av;
-	(void) ac;
-	// if (ac != 1 || !(*env))
-	// 	return (1);
+	if (ac != 1 || !(*env))
+		return (1);
 	g_glob_init(env);
 	while (1)
 	{

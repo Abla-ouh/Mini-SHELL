@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 14:03:15 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/27 22:40:31 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ void	exe_file(t_cmds *node_cmd)
 			closedir(dir);
 		}
 		else
-		{
 			ft_perror(NULL, node_cmd->args[0], "command not found");
-		}
 	}
 }
 
@@ -83,7 +81,7 @@ void	exe_cmd(t_cmds *node_cmd)
 	char	**p;
 
 	p = find_title("PATH");
-	if (p && (execve(node_cmd->path, node_cmd->args, g_glob.env) == -1))
+	if (*p && (execve(node_cmd->path, node_cmd->args, g_glob.env) == -1))
 	{
 		ft_perror(NULL, node_cmd->args[0], "command not found");
 		exit(127);
