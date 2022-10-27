@@ -6,7 +6,7 @@
 #    By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/27 21:01:37 by abouhaga         ###   ########.fr        #
+#    Updated: 2022/10/27 22:03:23 by abouhaga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ $(BIN_DIR) :
 
 clean :
 	@make clean -C libft
+	@make clean -C ft_fprintf
 
 fclean : clean
 	@rm -rf libft/libft.a
