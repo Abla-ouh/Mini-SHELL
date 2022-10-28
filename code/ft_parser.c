@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 21:48:29 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:55:39 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,22 @@ t_cmds	*ft_parser(char *line)
 	t_data	data;
 	t_cmds	*cmds;
 
-	i = -1;
 	data.lines = ft_lexer(line, " \t\r\v\f\n");
 	data.tokens = ft_tokenize(data.lines);
 	if (ft_syntax_error(data.lines, data.tokens))
 		return (NULL);
 	if (ft_check_redir_filename(data.lines, data.tokens))
 		return (NULL);
-	data.s_tokens = ft_split(data.tokens, '|');
+	i = -1;
+	while (data.lines[++i])
+		if (ft_indexof(data.lines[i], '$') == -1)
+			data.lines[i] = unquote_arg(data.lines[i]);
 	check_expand(&data);
+	data.s_tokens = ft_split(data.tokens, '|');
 	fill_here_fds(&data);
 	fill_infiles(&data);
 	fill_outfiles(&data);
+	i = -1;
 	while (data.lines[++i])
 		data.lines[i] = unquote_arg(data.lines[i]);
 	cmds = ft_fillup_struct(&data);

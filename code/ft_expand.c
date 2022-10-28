@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/26 09:46:33 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/28 13:19:26 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	replace_arg(char **arg, int i, char *name)
 {
 	char	*temp;
 	char	*var_value;
+	int		name_len;
 
+	//glob.exit_status = 1;
 	if (!name)
 		return (1);
 	if (!ft_strncmp(name, "$?", 2))
@@ -41,9 +43,13 @@ int	replace_arg(char **arg, int i, char *name)
 		var_value = return_value(name + 1);
 	temp = *arg;
 	*arg = ft_find_replace(*arg, i, name, var_value);
+	if (!var_value)
+		name_len = 0;
+	else
+		name_len = ft_strlen(var_value);
 	free(temp);
 	free(var_value);
-	return (ft_strlen(name));
+	return (name_len);
 }
 
 char	*expand(char *arg)

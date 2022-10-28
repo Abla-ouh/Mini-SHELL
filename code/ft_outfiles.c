@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:25:13 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 21:53:23 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/28 12:20:24 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,24 @@ void	to_open(t_cord *cords, char *tokens, char **lines, int *outfiles)
 				O_CREAT | O_APPEND | O_WRONLY, 0644);
 }
 
-void	init_cords(int *sync, t_cord *cords)
+int	*count_check_out(char *tokens, t_cord *cords, int *out, int *sync)
 {
-	cords->i = -1;
-	cords->j = -1;
-	cords->sync = sync;
-}
+	int	*outfiles;
 
-int	count_check_out(int out, char *tokens, t_cord *cords)
-{
-	out = find_op(tokens, '>');
-	out += find_op(tokens, 'A');
-	if (!out)
+	cords->i = 0;
+	cords->j = 0;
+	cords->sync = sync;
+	*out = find_op(tokens, '>');
+	*out += find_op(tokens, 'A');
+	outfiles = (int *)malloc(sizeof(int) * (*out));
+	if (!outfiles)
+		return (NULL);
+	if (!(*out))
 	{
 		cords->sync += ft_strlen(tokens);
-		return (-1);
+		return (NULL);
 	}
-	return (out);
+	return (outfiles);
 }
 
 int	*ft_open_outfiles(char **lines, char *tokens, int *sync)
@@ -72,21 +73,21 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync)
 	int		out;
 
 	out = 0;
-	init_cords(sync, &cords);
-	out = count_check_out(out, tokens, &cords);
-	if (out == -1)
-		return (NULL);
-	outfiles = malloc(sizeof(int) * (out));
-	while (++cords.i < out)
+	outfiles = count_check_out(tokens, &cords, &out, sync);
+	while (cords.i < out)
 	{
-		while (tokens[++cords.j] && (tokens[cords.j] != '>'
+		while (tokens[cords.j] && (tokens[cords.j] != '>'
 				&& tokens[cords.j] != 'A'))
+		{
 			(*sync)++;
+			cords.j++;
+		}
 		if (!tokens[cords.j])
 			break ;
 		if (outfiles_fail(lines, tokens, &cords, outfiles) == 1)
 			continue ;
 		to_open(&cords, tokens, lines, outfiles);
+		cords.i++;
 		cords.j++;
 		*sync += 1;
 	}
