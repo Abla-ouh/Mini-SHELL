@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 11:46:36 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/28 10:45:06 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_list	*env_list(char **env)
 	t_list	*node;
 	t_env	*st_env;
 
+	if (!env || !env[0])
+		env = ft_empty_env(env);
 	i = 0;
 	head = NULL;
 	while (env[i])

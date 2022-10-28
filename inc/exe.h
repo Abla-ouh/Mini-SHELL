@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 13:22:45 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/28 10:23:43 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	g_glob_init(char **env);
 int		ft_env(char **av, t_list *env);
 
 /*convert the char **env to lst*/
+char	**ft_empty_env(char **env);
 t_env	*init_lst_env(void);
 t_env	*env_str(char *str);
 t_list	*env_list(char **env);

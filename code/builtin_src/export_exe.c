@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 21:26:58 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 13:22:08 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/28 11:36:30 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,11 @@ void	put_export(void)
 		env = tmp->content;
 		if (ft_strcmp(env->title, "_"))
 		{
-			ft_putstr("declare -x ");
-			ft_putstr(env->title);
+			printf("declare -x ");
+			printf("%s", env->title);
 			if (env->value)
-			{
-				write(1, "=", 1);
-				write(1, "\"", 1);
-				ft_putstr(env->value);
-				write(1, "\"", 1);
-			}
-			ft_putstr("\n");
+				printf("=\"%s\"", env->value);
+			printf("\n");
 		}
 		tmp = tmp->next;
 	}
