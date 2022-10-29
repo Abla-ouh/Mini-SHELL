@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 17:16:43 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 21:39:55 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ typedef struct s_cmds
 	int				is_exec;
 	struct s_cmds	*next;
 }	t_cmds;
-
-typedef struct s_expand
-{
-	int				type;
-	char			*arg;
-	struct s_expand	*next;
-}	t_expand;
 
 typedef struct s_data
 {
