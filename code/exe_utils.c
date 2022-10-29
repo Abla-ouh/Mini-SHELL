@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 03:59:05 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 04:27:08 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	ft_wait_cmd(pid_t pid)
 {
 	waitpid(pid, &g_glob.exit_status, 0);
-	if (WIFSIGNALED(g_glob.exit_status))
-	{
-		g_glob.exit_status = WIFSIGNALED(g_glob.exit_status) +  128;
-		return ;
-	}
-	else
+	// if (WIFSIGNALED(g_glob.exit_status))
+	// {
+	// 	g_glob.exit_status = WIFSIGNALED(g_glob.exit_status) +  128;
+	// 	return ;
+	// }
+	//else
 		g_glob.exit_status = WEXITSTATUS(g_glob.exit_status);
 	while (wait(&g_glob.exit_status) != -1)
 		;
