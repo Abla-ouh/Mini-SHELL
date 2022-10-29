@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 18:03:28 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 04:35:20 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 19:30:58 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	sig_handler_heredoc(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		g_glob.sig_c = 1;
 		close(STDIN_FILENO);
 	}
 }

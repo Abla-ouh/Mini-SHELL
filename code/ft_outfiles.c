@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_outfiles.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:25:13 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/28 12:20:24 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:46:17 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,24 @@
 int	outfiles_fail(char **lines, char *tokens, t_cord *cords, int *outfiles)
 {
 	if ((tokens[cords->j] == '>' || tokens[cords->j] == 'A')
-		&& access(lines[(*cords->sync) + 1], F_OK) == -1)
-	{
-		outfiles[cords->i] = open(lines[(*cords->sync) + 1],
-				O_CREAT | O_WRONLY, 0644);
-		cords->i++;
-		cords->j++;
-		(*cords->sync)++;
-		return (1);
-	}
-	else if (access(lines[(*cords->sync) + 1], W_OK) == -1)
+		&& access(lines[(*cords->sync) + 1], W_OK) == -1
+		&& access(lines[(*cords->sync) + 1], F_OK) != -1)
 	{
 		outfiles[cords->i] = F_PERMISSION_DENIED;
-		printf("minishell: %s: Permission denied\n", lines[cords->j + 1]);
+		ft_fprintf(2, "minishell: %s: Permission denied\n", lines[cords->j + 1]);
 		cords->i++;
 		cords->j++;
 		(*cords->sync)++;
-		return (1);
+		return (F_PERMISSION_DENIED);
 	}
-	return (0);
+	return (1);
 }
 
 void	to_open(t_cord *cords, char *tokens, char **lines, int *outfiles)
 {
 	if (tokens[cords->j] == '>')
 		outfiles[cords->i] = open(lines[(*cords->sync) + 1],
-				O_TRUNC | O_WRONLY, 0644);
+				O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	else
 		outfiles[cords->i] = open(lines[(*cords->sync) + 1],
 				O_CREAT | O_APPEND | O_WRONLY, 0644);
@@ -82,10 +74,11 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync)
 			(*sync)++;
 			cords.j++;
 		}
-		if (!tokens[cords.j])
+		if (!tokens[cords.j]
+			|| outfiles_fail(lines, tokens, &cords, outfiles) < 0
+			|| g_glob.flag == -1)
 			break ;
-		if (outfiles_fail(lines, tokens, &cords, outfiles) == 1)
-			continue ;
+			
 		to_open(&cords, tokens, lines, outfiles);
 		cords.i++;
 		cords.j++;

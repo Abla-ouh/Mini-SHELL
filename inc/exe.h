@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 03:09:59 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 19:29:22 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ typedef struct s_cmds	t_cmds;
 typedef struct s_gexe
 {
 	char	**env;
-	int		sig_c;
 	int		exit_status;
 	t_list	*envx;
 	int		infd;
 	int		outfd;
+	int		sig_c;
+	int		flag;
 	int		perv_fd;
 }	t_gexe;
 
