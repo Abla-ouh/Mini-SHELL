@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/28 15:18:08 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 04:35:48 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	replace_arg(char **arg, int i, char *name)
 	char	*var_value;
 	int		name_len;
 
-	//glob.exit_status = 1;
 	if (!name)
 		return (1);
 	if (!ft_strncmp(name, "$?", 2))

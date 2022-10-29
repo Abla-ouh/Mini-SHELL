@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/28 10:23:43 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 03:34:29 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_gexe
 	t_list	*envx;
 	int		infd;
 	int		outfd;
+	int		flag;
 	int		perv_fd;
 }	t_gexe;
 

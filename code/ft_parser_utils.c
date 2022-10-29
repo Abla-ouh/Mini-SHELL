@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:48:47 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 21:52:56 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 04:47:58 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	check_expand(t_data	*data)
 
 	i = -1;
 	while (data->lines[++i])
-		if (ft_strchr(data->lines[i], '$') && data->tokens[i - 1] != 'H')
+	{
+		if (data->lines[i][0] == '$' && data->lines[i][1] == '?')
 			data->lines[i] = expand(data->lines[i]);
+		else if (ft_strchr(data->lines[i], '$') && data->tokens[i - 1] != 'H')
+			data->lines[i] = expand(data->lines[i]);
+	}
 }
 
 int	ft_strptr(char **ptr)
