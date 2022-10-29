@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_exe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 13:22:08 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 17:25:16 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_digits(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i])  && str[i] != '-' && str[i] != '+')
+		if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
 			return (1);
 		i++;
 	}
@@ -32,7 +32,11 @@ int	ft_exit(char **ar)
 
 	sig = 0;
 	if (!ar[1])
+	{
+		system("leaks minishell");
+		ft_reset_g_glob();
 		exit (g_glob.exit_status);
+	}
 	if (ft_check_digits(ar[1]))
 	{
 		ft_perror("exit", ar[1], "numeric arguement required");
@@ -44,6 +48,6 @@ int	ft_exit(char **ar)
 	else
 	{
 		ft_perror("exit", "NULL", "too many arguments");
-		exit(255);
+		return (1);
 	}
 }

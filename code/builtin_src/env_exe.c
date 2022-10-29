@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/28 10:45:06 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 00:15:55 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_env(char **av, t_list *env)
 {
-	if (av[1])
-		return (1);
+	(void) av;
 	while (env)
 	{
 		if (((t_env *)env->content)->value)
@@ -47,8 +46,8 @@ t_env	*env_str(char *str)
 	node = init_lst_env();
 	if (!node)
 		return (NULL);
-	node->title = ft_substr(str, 0, i++);
-	node->value = ft_substr(str + i, 0, ft_strlen(str + i));
+	node->title = ft_substr(str, 0, i);
+	node->value = ft_strnstr(str + i + 1, "\0", ft_strlen(str));
 	if (!node->title || !node->value)
 	{
 		free (node);

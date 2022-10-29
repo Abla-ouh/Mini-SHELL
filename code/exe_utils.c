@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/28 15:11:13 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 04:40:57 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 void	ft_wait_cmd(pid_t pid)
 {
 	waitpid(pid, &g_glob.exit_status, 0);
-	(void)pid;
+	if (WIFSIGNALED(g_glob.exit_status))
+	{
+		g_glob.exit_status = WIFSIGNALED(g_glob.exit_status) + 129;
+		return ;
+	}
+	else
+		g_glob.exit_status = WEXITSTATUS(g_glob.exit_status);
 	while (wait(&g_glob.exit_status) != -1)
 		;
-	g_glob.exit_status = WEXITSTATUS(g_glob.exit_status);
-	g_glob.exit_status += 128;
 }
 
 char	**env_lst_to_matrix(t_list *lst)
@@ -65,7 +69,5 @@ int	check_exe(t_cmds *shel_l)
 
 void	ft_delenv(void *env)
 {
-	free(((t_env *)env)->title);
-	free(((t_env *)env)->value);
 	free((t_env *)env);
 }

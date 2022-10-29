@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:25:13 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 04:12:49 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:51:15 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync)
 			|| outfiles_fail(lines, tokens, &cords, outfiles) < 0
 			|| g_glob.flag == -1)
 			break ;
-		to_open(&cords, tokens, lines, outfiles);
+		if (g_glob.flag != -1)
+			to_open(&cords, tokens, lines, outfiles);
 		cords.i++;
 		cords.j++;
 		*sync += 1;

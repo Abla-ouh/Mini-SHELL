@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:22:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/26 11:28:19 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:55:47 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_read_stdin(char **lines, int del_idx)
 	expand_in_hdoc = (!ft_strchr(lines[del_idx], '\"')
 			&& !ft_strchr(lines[del_idx], '\''));
 	lines[del_idx] = unquote_arg(lines[del_idx]);
+	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, &sig_handler_heredoc);
 	while (1)
 	{
 		temp = readline("> ");
@@ -36,6 +38,8 @@ int	ft_read_stdin(char **lines, int del_idx)
 	if (temp)
 		free(temp);
 	close(here_fds[STDOUT_FILENO]);
+	signal(SIGINT, &handler);
+	dup2(g_glob.infd, STDIN_FILENO);
 	return (here_fds[STDIN_FILENO]);
 }
 

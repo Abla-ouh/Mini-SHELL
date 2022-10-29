@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:19:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 02:34:47 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:16:19 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,13 @@ int	ft_syntax_error(char **lines, char *token)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (!(*lines))
 		return (0);
 	if (!ft_strcmp(lines[0], "|"))
 		return (ft_fprintf(2,
-				"minishell: syntax error near unexpected token `|'\n",
-				NULL));
-	while (token[i])
+				"minishell: syntax error near unexpected token `|'\n", NULL));
+	while (token[++i])
 	{
 		if (token[i] == '|' && token[i + 1] == '|')
 			return (ft_fprintf(2,
@@ -83,11 +82,9 @@ int	ft_syntax_error(char **lines, char *token)
 					lines[i][0], lines[i][0]));
 		if (!is_quoted(lines[i]))
 			return (ft_fprintf(2, "minishell: unclosed quotes\n", NULL));
-		i++;
 	}
 	if (!ft_strcmp(lines[i - 1], "|"))
 		return (ft_fprintf(2,
-				"minishell: syntax error near unexpected token `|'\n",
-				NULL));
+				"minishell: syntax error near unexpected token `|'\n", NULL));
 	return (0);
 }

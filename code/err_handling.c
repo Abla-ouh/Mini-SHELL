@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:44:30 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 22:50:25 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 03:20:58 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	ft_perror(char *cmd, char *flag, char *msg)
 		ft_putstr_fd("Error: ", 2);
 		ft_putendl_fd(msg, 2);
 	}
-	return (127);
+	return (0);
 }

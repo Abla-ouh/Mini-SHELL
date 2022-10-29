@@ -11,6 +11,8 @@
             "program": "${workspaceFolder}/bin/minishell",
             "args": [],
             "cwd": "${workspaceFolder}"
+            "doki.background.enabled" : true,
+            
         }
     ]
 }

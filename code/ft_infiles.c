@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:24:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 04:20:02 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:43:54 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,20 @@ int	infiles_fail(char **lines, char *tokens, t_cord	*cords, int *infiles)
 	}
 	return (0);
 }
+void init_cords(t_cord *cords, int *sync)
+{
+	cords->i = 0;
+	cords->j = 0;
+	cords->sync = sync;
+}
 
 int	*ft_open_infiles(char **lines, char *tokens, int *sync)
 {
 	t_cord	cords;
 	int		*infiles;
 
-	cords.i = 0;
-	cords.j = 0;
-	cords.sync = sync;
+	g_glob.flag = 0;
+	init_cords(&cords, sync);
 	if (!find_op(tokens, '<'))
 	{
 		*sync += ft_strlen(tokens);

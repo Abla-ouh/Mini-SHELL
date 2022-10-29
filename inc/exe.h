@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 03:34:29 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:13:13 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ char	**env_lst_to_matrix(t_list *env_list);
 void	ft_reset_g_glob(void);
 int		check_exe(t_cmds *shel_l);
 void	exe_file(t_cmds *node_cmd);
-void	exe_cmd(t_cmds *node_cmd);
+int		exe_cmd(t_cmds *node_cmd);
 void	exe_builtin(t_cmds *node_cmd);
 void	signal_stream(void);
 void	handler(int sig);
+void	sig_handler_heredoc(int sig);
 
 /*init the gdexe struct*/
 void	g_glob_init(char **env);
