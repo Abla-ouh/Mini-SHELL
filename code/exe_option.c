@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 03:37:45 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 04:51:01 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ void	exe_file(t_cmds *node_cmd)
 		dir = opendir(node_cmd->args[0]);
 		if (dir)
 		{
-			ft_perror(NULL, node_cmd->args[0], NULL);
+			ft_perror(NULL, node_cmd->args[0], "is a directory");
 			closedir(dir);
+			exit (126);
 		}
 		else
-			ft_perror(NULL, node_cmd->args[0], "command not found");
+		{
+			ft_perror(NULL, node_cmd->args[0], "No such file or directory");
+			exit (127);
+		}
 	}
 }
 
@@ -84,12 +88,12 @@ int	exe_cmd(t_cmds *node_cmd)
 	if (p && (execve(node_cmd->path, node_cmd->args, g_glob.env) == -1))
 	{	
 		ft_perror(NULL, node_cmd->args[0], "command not found");
-		exit(127);
+		exit(1);
 	}
 	else if (!p)
 	{
 		ft_perror(NULL, node_cmd->args[0], "No such file or directory");
-		exit(1);
+		exit(127);
 	}
 	exit (0);
 }

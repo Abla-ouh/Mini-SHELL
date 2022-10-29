@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 04:25:42 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 04:36:54 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	replace_arg(char **arg, int i, char *name)
 	if (!name)
 		return (1);
 	if (!ft_strncmp(name, "$?", 2))
-		var_value = ft_itoa(127);
+		var_value = ft_itoa(g_glob.exit_status);
 	else
 		var_value = return_value(name + 1);
 	temp = *arg;
