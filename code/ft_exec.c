@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/28 15:10:44 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 03:57:39 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,24 @@ int	sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 	redi_sub(node_cmd, p_fd);
 	close(p_fd[RD_END]);
 	close_all_fds(shel_l);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	f = ft_isbuiltin(node_cmd);
 	if (f)
+	{
+		ft_arrfreey();
 		exit(run_builtin(node_cmd, f));
-	if (!shel_l->args[0])
-		exit (1);
+	}
+	if (!node_cmd->args[0])
+	{
+		ft_arrfreey();
+		exit (0);
+	}
 	else if (ft_strchr(node_cmd->args[0], '/'))
 		exe_file(node_cmd);
 	else
-		exe_cmd(node_cmd);
-	exit(127);
+		exit(exe_cmd(node_cmd));
+	exit(0);
 }
 
 int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
@@ -63,7 +71,10 @@ int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
 	g_glob.env = env_lst_to_matrix(g_glob.envx);
 	pid = fork();
 	if (pid == -1)
+	{
+		ft_reset_g_glob();
 		exit (1);
+	}
 	if (!pid)
 		return (sub_process(shel_l, node_cmd, p_fd));
 	close(p_fd[WR_END]);
@@ -89,7 +100,7 @@ void	ft_run_cmds(t_cmds *shel_l)
 				pid = ft_cmd_exe(shel_l, node_cmd);
 			else if (!check_exe(node_cmd))
 			{
-				ft_perror(NULL, NULL, NULL);
+				ft_arrfreey();
 				return ;
 			}
 			node_cmd = node_cmd->next;

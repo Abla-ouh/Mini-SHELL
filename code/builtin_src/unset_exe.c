@@ -6,13 +6,13 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:06:47 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 13:27:47 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 02:26:52 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-void	env_del(char *ar)
+static int	env_del(char *ar)
 {
 	t_list	**tmp;
 	t_list	*node;
@@ -23,15 +23,13 @@ void	env_del(char *ar)
 		if (!(ft_strcmp(ar, ((t_env *)(*tmp)->content)->title)))
 		{
 			node = *tmp;
-			*tmp = (*tmp)->next;
-			free(((t_env *)node->content)->value);
-			free(((t_env *)node->content)->title);
 			free(node->content);
-			free(node);
-			return ;
+			*tmp = (*tmp)->next;
+			return (0);
 		}
 		tmp = &(*tmp)->next;
 	}
+	return (1);
 }
 
 int	check_ar(char *ar)

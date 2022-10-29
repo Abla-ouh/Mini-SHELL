@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:19:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 22:48:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 03:15:47 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_syntax_error(char **lines, char *token)
 	{
 		if (token[i] == '|' && token[i + 1] == '|')
 			return (ft_fprintf(2, "minishell: syntax \
-			error near unexpected token `%c'\n", lines[i][0]));
+	 error near unexpected token `%c'\n", lines[i][0]));
 		if (token[i] == 'E')
 			return (ft_fprintf(2, "minishell: syntax \
 			error near unexpected token `%c%c'\n", lines[i][0], lines[i][0]));

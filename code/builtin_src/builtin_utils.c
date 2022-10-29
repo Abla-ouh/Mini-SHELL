@@ -6,10 +6,9 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 22:52:54 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 02:31:17 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <exe.h>
 
@@ -58,10 +57,13 @@ int	var_update(char **var)
 	r_write = find_title(var[0]);
 	if (r_write)
 	{
-		free(*r_write);
-		*r_write = ft_strdup(var[1]);
+		if (var[1])
+			*r_write = ft_strdup(var[1]);
 		if (!(*r_write))
+		{
+			free(var);
 			return (1);
+		}
 	}
 	else
 		var_export(var, new);
@@ -74,13 +76,14 @@ char	**get_var(char *str)
 	char	**new_var;
 
 	i = 0;
-	new_var = (char **)malloc(sizeof(char *) * 2);
+	new_var = (char **)malloc(sizeof(char *) * 3);
 	new_var[0] = NULL;
 	new_var[1] = NULL;
+	new_var[2] = NULL;
 	while (str[i] && str[i] != '=')
 		i++;
 	new_var[0] = ft_substr(str, 0, i);
-	if (!str[i] || str[i + 1] == 0)
+	if (!str[i])
 	{
 		free(new_var[1]);
 		new_var[1] = NULL;

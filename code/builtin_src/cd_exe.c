@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/27 13:27:21 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 02:35:04 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_cd(char **av)
 		r = chdir_update(av[1]);
 	if (r == -1)
 		ft_perror("cd", NULL, NULL);
-	else if (r == -2)	
+	else if (r == -2)
 		ft_perror(NULL, "cd", "error retrieving current directory: getcwd: \
-	cannot access parent directories: No such file or directory");
+	 cannot access parent directories: No such file or directory");
 	return (r = ((r == -2) || (r = -1)));
 }
 
@@ -70,16 +70,18 @@ int	path_changer(char **o_pwd, char *cwd)
 		cwd = return_value("PWD");
 	if (o_pwd)
 	{
-		free(*o_pwd);
 		*o_pwd = ft_strdup(cwd);
 		if (!(*o_pwd))
 			return (-1);
 	}
 	else if (!o_pwd)
 	{
-		o_pwd = (char **)malloc(sizeof(char) * 2);
+		o_pwd = malloc(sizeof(char *) * 3);
+		if (!o_pwd)
+			return (1);
 		o_pwd[0] = "OLDPWD";
 		o_pwd[1] = ft_strdup(cwd);
+		o_pwd[2] = NULL;
 		var_update(o_pwd);
 	}
 	pwd_update();
@@ -94,7 +96,6 @@ void	pwd_update(void)
 	new_pwd = find_title("PWD");
 	if (new_pwd)
 	{
-		free(*new_pwd);
 		*new_pwd = NULL;
 		pwd = getcwd(NULL, 0);
 		if (pwd)
