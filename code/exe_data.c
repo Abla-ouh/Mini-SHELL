@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 11:46:30 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 15:03:56 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_arrfreey(void)
 		free(g_glob.env[i]);
 		i++;
 	}
+	free(g_glob.env);
 	g_glob.env = NULL;
 }
 

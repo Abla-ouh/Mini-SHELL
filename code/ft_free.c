@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 22:08:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 14:16:06 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:43:00 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,32 @@ void	cleanup(t_data *data)
 	free(data->outfiles);
 }
 
-void	ft_free_cmds(t_cmds *cmds)
-{
-	int	i;
+// void	ft_free_cmds(t_cmds *cmds)
+// {
+// 	int	i;
 
-	if (cmds == 0x0)
-		return ;
-	i = 0;
-	while (cmds->args[i])
-	{
-		free(cmds->args[i]);
-		i++;
-	}
-	free(cmds->args);
-	free(cmds);
-}
+// 	if (cmds == 0x0)
+// 		return ;
+// 	i = 0;
+// 	while (cmds->args[i])
+// 	{
+// 		free(cmds->args[i]);
+// 		i++;
+// 	}
+// 	free(cmds->args);
+// 	free(cmds);
+// }
 
-void	ft_free_all(t_cmds *cmds)
-{
-	t_cmds	*tmp;
+// void	ft_free_all(t_cmds *cmds)
+// {
+// 	t_cmds	*tmp;
 
-	if (cmds == 0x0)
-		return ;
-	while (cmds)
-	{
-		tmp = cmds->next;
-		ft_free_cmds(cmds);
-		cmds = tmp;
-	}
-}
+// 	if (cmds == 0x0)
+// 		return ;
+// 	while (cmds)
+// 	{
+// 		tmp = cmds->next;
+// 		ft_free_cmds(cmds);
+// 		cmds = tmp;
+// 	}
+// }

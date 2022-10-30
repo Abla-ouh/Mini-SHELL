@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 14:17:43 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:56:08 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ char	*get_cmd_path(t_cmds *cmds);
 void	cleanup(t_data *data);
 void	ft_free_all(t_cmds *cmds);
 void	free_2d_char(char **str);
+void	ft_free_all_stuff_and_start_again(t_cmds *shel_l);
 #endif

@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:31:21 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 14:06:10 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:26:27 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*get_cmd_path(t_cmds *cmds)
 	path = tmp_path;
 	if ((cmds->args[0] && ft_strchr(cmds->args[0], '/')) || !path)
 	{
-		(free(path), free(tmp_path));
+		free(tmp_path);
 		return (ft_null_path(cmds->args[0]));
 	}
 	return (get_cmd_path2(path, tmp_path, cmds));
