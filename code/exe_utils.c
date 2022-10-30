@@ -6,24 +6,36 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:24:06 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 12:36:50 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <exe.h>
 
-void	ft_wait_cmd(pid_t pid)
+void	ft_wait_cmd(void)
 {
-	waitpid(pid, &g_glob.exit_status, 0);
-	if (WIFSIGNALED(g_glob.exit_status))
+	int	flag;
+	int	exit_flag;
+
+	flag = 1;
+	exit_flag = 0;
+	while (flag != -1)
 	{
-		g_glob.exit_status = WIFSIGNALED(g_glob.exit_status) + 129;
-		return ;
+		flag = waitpid(-1, &exit_flag, 0);
+		if (flag == g_glob.last_pid)
+		{
+			if (WIFSIGNALED(exit_flag))
+			{
+				g_glob.exit_status = WTERMSIG(exit_flag) + 128;
+				if (WTERMSIG(exit_flag) == SIGINT)
+					write(1, "\n", 1);
+				else if (WTERMSIG(exit_flag) == SIGQUIT)
+					write(1, "Quit :3\n", 8);
+			}
+			else
+				g_glob.exit_status = WEXITSTATUS(exit_flag);
+		}
 	}
-	else
-		g_glob.exit_status = WEXITSTATUS(g_glob.exit_status);
-	while (wait(&g_glob.exit_status) != -1)
-		;
 }
 
 char	**env_lst_to_matrix(t_list *lst)
@@ -54,10 +66,11 @@ char	**env_lst_to_matrix(t_list *lst)
 
 void	ft_reset_g_glob(void)
 {
-	ft_lstclear(&g_glob.envx, ft_delenv);
+	ft_lstclear(&g_glob.envx, free);
 	g_glob.envx = NULL;
 	ft_arrfreey();
 	g_glob.env = NULL;
+	exit (g_glob.exit_status);
 }
 
 int	check_exe(t_cmds *shel_l)
@@ -65,9 +78,4 @@ int	check_exe(t_cmds *shel_l)
 	if (!shel_l || !shel_l->is_exec)
 		return (0);
 	return (1);
-}
-
-void	ft_delenv(void *env)
-{
-	free((t_env *)env);
 }

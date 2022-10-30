@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 10:35:07 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:17:43 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_cord
 }	t_cord;
 
 /*************************** PARSER *************************/
-void	check_expand(t_data	*data);
 t_cmds	*ft_parser(char *line);
 int		ft_strptr(char **ptr);
 void	fill_here_fds(t_data *data);
@@ -70,6 +69,7 @@ void	count_until_not(char *trim_line, int i, int *len, char o);
 void	find_string(char *str_trim, int *i);
 void	count_string(char *trim_line, int i, int *len);
 /************************** EXPAND ***************************/
+void	check_expand(t_data	*data);
 char	*expand(char *arg);
 /************************** ERROR ****************************/
 int		ft_syntax_error(char **lines, char *token);
@@ -83,7 +83,6 @@ int		*ft_open_outfiles(char **lines, char *tokens, int *sync);
 int		setup_last_io(int *last_io, char *token, t_data *data, int cmd_idx);
 /************************* FILLUP ***************************/
 char	**ft_fill_args(char **lines, char *tokens, int *sync);
-void	skip_quote1(char *str_trim, int *i, char q);
 void	skip_quote(char *str_trim, int *i, char q);
 void	skip_quote_len(char *trim_line, int i, int *len, char q);
 char	*unquote_arg(char *str);
@@ -92,6 +91,5 @@ char	*get_cmd_path(t_cmds *cmds);
 /************************ FREE *******************************/
 void	cleanup(t_data *data);
 void	ft_free_all(t_cmds *cmds);
-void	free_2d_int(int **str);
 void	free_2d_char(char **str);
 #endif

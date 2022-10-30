@@ -6,11 +6,24 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 22:08:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 13:49:59 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:16:06 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	free_2d_char(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 void	cleanup(t_data *data)
 {

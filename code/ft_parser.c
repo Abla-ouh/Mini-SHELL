@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 14:00:16 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:15:59 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,6 @@ void	ft_add_back_cmd(t_cmds **cmds, t_cmds *new)
 			ptr = ptr->next;
 		ptr->next = new;
 	}
-}
-
-void	free_2d_char(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
 }
 
 t_cmds	*ft_fillup_struct(t_data *data)

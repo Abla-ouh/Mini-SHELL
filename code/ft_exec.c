@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:17:52 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 11:21:20 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 		exe_file(node_cmd);
 	else
 		exe_cmd(node_cmd);
-	exit (127);
+	exit (1);
 }
 
 int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
@@ -72,25 +72,26 @@ int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
-	{
 		ft_reset_g_glob();
-		exit (1);
-	}
 	if (!pid)
 		return (sub_process(shel_l, node_cmd, p_fd));
 	close(p_fd[WR_END]);
 	if (g_glob.perv_fd)
 		close(g_glob.perv_fd);
 	g_glob.perv_fd = p_fd[RD_END];
+	if (node_cmd->in > 0)
+		close(node_cmd->in);
+	if (node_cmd->out > 1)
+		close(node_cmd->out);
+	if (node_cmd->in != STDIN_FILENO)
+		close(p_fd[RD_END]);
 	return (pid);
 }
 
 void	ft_run_cmds(t_cmds *shel_l)
 {
 	t_cmds	*node_cmd;
-	pid_t	pid;
 
-	pid = -1;
 	node_cmd = shel_l;
 	if (node_cmd && node_cmd->next == NULL && ft_isbuiltin(node_cmd))
 		return (exe_builtin(node_cmd));
@@ -99,7 +100,10 @@ void	ft_run_cmds(t_cmds *shel_l)
 		while (node_cmd)
 		{
 			if (check_exe(node_cmd))
-				pid = ft_cmd_exe(shel_l, node_cmd);
+			{
+				ft_arrfreey();
+				g_glob.last_pid = ft_cmd_exe(shel_l, node_cmd);
+			}
 			else if (!check_exe(node_cmd))
 			{
 				ft_arrfreey();
@@ -108,7 +112,6 @@ void	ft_run_cmds(t_cmds *shel_l)
 			node_cmd = node_cmd->next;
 		}
 		g_glob.perv_fd = 0;
-		ft_wait_cmd(pid);
+		ft_wait_cmd();
 	}
-	return ;
 }

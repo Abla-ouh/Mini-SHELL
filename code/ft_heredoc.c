@@ -6,11 +6,23 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:22:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 09:50:27 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:11:47 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+static void	sig_heredoc(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGINT, &sig_handler_heredoc);
+}
+
+static void	sig(void)
+{
+	signal(SIGINT, &handler);
+	dup2(g_glob.infd, STDIN_FILENO);
+}
 
 int	ft_read_stdin(char **lines, int del_idx)
 {
@@ -22,8 +34,7 @@ int	ft_read_stdin(char **lines, int del_idx)
 	expand_in_hdoc = (!ft_strchr(lines[del_idx], '\"')
 			&& !ft_strchr(lines[del_idx], '\''));
 	lines[del_idx] = unquote_arg(lines[del_idx]);
-	signal(SIGINT, SIG_IGN);
-	signal(SIGINT, &sig_handler_heredoc);
+	sig_heredoc();
 	while (1)
 	{
 		temp = readline("> ");
@@ -38,8 +49,7 @@ int	ft_read_stdin(char **lines, int del_idx)
 	if (temp)
 		free(temp);
 	close(here_fds[STDOUT_FILENO]);
-	signal(SIGINT, &handler);
-	dup2(g_glob.infd, STDIN_FILENO);
+	sig();
 	return (here_fds[STDIN_FILENO]);
 }
 

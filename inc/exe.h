@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 22:01:50 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:12:33 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ typedef struct s_gexe
 	int		sig_c;
 	int		flag;
 	int		perv_fd;
+	pid_t	last_pid;
 }	t_gexe;
 
 t_gexe					g_glob;
 
 void	ft_run_cmds(t_cmds *cmds);
-void	ft_wait_cmd(pid_t pid);
+void	ft_wait_cmd(void);
 int		ft_isbuiltin(t_cmds *shel_l);
 int		run_builtin(t_cmds *shel_l, int flag);
 int		ft_perror(char *cmd, char *flag, char *msg);
@@ -118,8 +119,8 @@ void	export_var(char *input);
 /********************************************************************/
 
 void	ft_arrfreey(void);
-void	ft_delenv(void *env);
 char	*return_value(char *title);
 int		path_changer(char **o_pwd, char *cwd);
+void	ft_closethemall(t_cmds *node_cmd, int *p_fd);
 
 #endif

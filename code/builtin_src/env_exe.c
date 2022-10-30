@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 00:15:55 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 11:43:51 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	ft_env(char **av, t_list *env)
 {
-	(void) av;
+	if (av[1] && ft_strcmp("env", av[1]))
+	{
+		ft_perror("env", NULL, "too many arguments");
+		return (1);
+	}
 	while (env)
 	{
 		if (((t_env *)env->content)->value)
