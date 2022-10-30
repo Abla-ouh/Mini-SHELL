@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 14:11:40 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 20:21:44 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	redi_sub(t_cmds *node_cmd, int *p_fd)
 {
+	// printf("here\n");
+	// if (node_cmd->in < 0 || node_cmd->out < 0 )
+	// 	return ;
 	if (node_cmd->in != STDIN_FILENO)
 	{
 		dup2(node_cmd->in, STDIN_FILENO);

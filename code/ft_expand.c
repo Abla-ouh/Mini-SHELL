@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 11:46:44 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 21:24:16 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,17 @@ int	replace_arg(char **arg, int i, char *name)
 	return (name_len);
 }
 
+void	get_quote(char curr_chr, char *quote)
+{
+	if (curr_chr == '\'' || curr_chr == '\"')
+	{
+		if (*quote == '\0')
+			*quote = curr_chr;
+		else if (*quote == curr_chr)
+			*quote = '\0';
+	}
+}
+
 char	*expand(char *arg)
 {
 	int		i;
@@ -61,21 +72,15 @@ char	*expand(char *arg)
 	quote = '\0';
 	while (arg[i])
 	{
-		if (arg[i] == '\'' || arg[i] == '\"')
-		{
-			if (quote == '\0')
-				quote = arg[i];
-			else if (quote == arg[i])
-				quote = '\0';
-		}
+		get_quote(arg[i], &quote);
 		if (arg[i] != '$' || quote == '\'')
 			i++;
 		else
 		{
 			name = ft_find_name(&arg[i]);
+			system("leaks minishell");
 			i += replace_arg(&arg, i, name);
 		}
 	}
-	free(name);
 	return (arg);
 }

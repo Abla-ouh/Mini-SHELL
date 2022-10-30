@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 15:05:05 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 20:30:41 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,11 @@ int	sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 		ft_arrfreey();
 		exit(run_builtin(node_cmd, f));
 	}
-	if (!node_cmd->args[0])
+	if (!node_cmd->args[0] || !node_cmd->is_exec || node_cmd->in < 0
+		|| node_cmd->out < 0)
 	{
 		ft_arrfreey();
-		exit (127);
+		exit (1);
 	}
 	else if (ft_strchr(node_cmd->args[0], '/'))
 		exe_file(node_cmd);
@@ -87,29 +88,6 @@ int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
 	return (pid);
 }
 
-void ft_free_all_stuff_and_start_again(t_cmds *shel_l)
-{
-	t_cmds	*cmds;
-	t_cmds	*current_cmds;
-
-	cmds = shel_l;
-
-	while (cmds)
-	{
-		if (cmds->path)
-			free(cmds->path);
-		free_2d_char(cmds->args);
-		if (cmds->in)
-			close(cmds->in);
-		if (cmds->out > 1)
-			close(cmds->out);
-		current_cmds = cmds;
-		cmds = cmds->next;
-		free(current_cmds);
-	}
-	ft_arrfreey();
-}
-
 void	ft_run_cmds(t_cmds *shel_l)
 {
 	t_cmds	*node_cmd;
@@ -122,13 +100,7 @@ void	ft_run_cmds(t_cmds *shel_l)
 		g_glob.env = env_lst_to_matrix(g_glob.envx);
 		while (node_cmd)
 		{
-			if (check_exe(node_cmd))
-				g_glob.last_pid = ft_cmd_exe(shel_l, node_cmd);
-			else if (!check_exe(node_cmd))
-			{
-				ft_arrfreey();
-				return ;
-			}
+			g_glob.last_pid = ft_cmd_exe(shel_l, node_cmd);
 			node_cmd = node_cmd->next;
 		}
 		g_glob.perv_fd = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 12:36:50 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 17:51:24 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	**env_lst_to_matrix(t_list *lst)
 	int		size;
 	char	**env;
 	char	*tmp;
+	char	*buff;
 	t_list	*env_list;
 
 	tmp = NULL;
@@ -52,9 +53,11 @@ char	**env_lst_to_matrix(t_list *lst)
 	size = 0;
 	while (env_list)
 	{
-		tmp = ft_strjoin("=", ((t_env *)env_list->content)->value);
+		buff = ft_strdup(((t_env *)env_list->content)->value);
+		tmp = ft_strjoin("=", buff);
 		env[size] = ft_strjoin(((t_env *)env_list->content)->title, tmp);
 		free(tmp);
+		free(buff);
 		if (!(env[size]))
 			ft_arrfreey();
 		size++;
@@ -71,11 +74,4 @@ void	ft_reset_g_glob(void)
 	ft_arrfreey();
 	g_glob.env = NULL;
 	exit (g_glob.exit_status);
-}
-
-int	check_exe(t_cmds *shel_l)
-{
-	if (!shel_l || !shel_l->is_exec)
-		return (0);
-	return (1);
 }

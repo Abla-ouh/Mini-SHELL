@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 15:03:56 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 17:00:04 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	ft_arrfreey(void)
 
 int	ft_isbuiltin(t_cmds *shel_l)
 {
-	if (!shel_l || !shel_l->is_exec || shel_l->in < 0 || \
-	shel_l->out < 0 || !shel_l->args[0])
+	if (!shel_l || !shel_l->args[0] || shel_l->in < 0 || shel_l->out < 0)
 		return (0);
 	if (!ft_strcmp(shel_l->args[0], "cd"))
 		return (1);
