@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 21:50:18 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:06:43 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,24 @@ int	main(int ac, char **av, char **env)
 	g_glob_init(env);
 	while (1)
 	{
+		g_glob.sig_c = 0;
 		signal_stream();
 		line = readline("\e[1;95mminishell$> \e[0m");
 		if (!line)
-			exit(g_glob.exit_status);
+			exit (g_glob.exit_status);
 		if (ft_strlen(line) > 0)
 		{
 			add_history(line);
 			shel_l = ft_parser(line);
-			ft_run_cmds(shel_l);
+			if (!shel_l)
+			{
+				g_glob.exit_status = 258;
+				free (line);
+				continue ;
+			}
+			else if (g_glob.sig_c != 1)
+				ft_run_cmds(shel_l);
+			ft_free_all(shel_l);
 		}
 		free(line);
 	}

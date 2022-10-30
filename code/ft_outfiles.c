@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:25:13 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 17:51:15 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:02:44 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ void	to_open(t_cord *cords, char *tokens, char **lines, int *outfiles)
 				O_CREAT | O_APPEND | O_WRONLY, 0644);
 }
 
+void	ft_skipout(char *tokens, t_cord *cords, int *sync)
+{
+	while (tokens[cords->j] && (tokens[cords->j] != '>'
+			&& tokens[cords->j] != 'A'))
+	{
+		(*sync)++;
+		cords->j++;
+	}
+}
+
 int	*count_check_out(char *tokens, t_cord *cords, int *out, int *sync)
 {
 	int	*outfiles;
@@ -53,6 +63,7 @@ int	*count_check_out(char *tokens, t_cord *cords, int *out, int *sync)
 	if (!(*out))
 	{
 		cords->sync += ft_strlen(tokens);
+		free(outfiles);
 		return (NULL);
 	}
 	return (outfiles);
@@ -74,9 +85,8 @@ int	*ft_open_outfiles(char **lines, char *tokens, int *sync)
 			(*sync)++;
 			cords.j++;
 		}
-		if (!tokens[cords.j]
-			|| outfiles_fail(lines, tokens, &cords, outfiles) < 0
-			|| g_glob.flag == -1)
+		if (!tokens[cords.j] || outfiles_fail(lines, \
+			tokens, &cords, outfiles) < 0 || g_glob.flag == -1)
 			break ;
 		if (g_glob.flag != -1)
 			to_open(&cords, tokens, lines, outfiles);

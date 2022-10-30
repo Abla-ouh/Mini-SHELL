@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:18:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 21:39:55 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 10:35:07 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,9 @@ void	skip_quote_len(char *trim_line, int i, int *len, char q);
 char	*unquote_arg(char *str);
 /************************ PATH *****************************/
 char	*get_cmd_path(t_cmds *cmds);
+/************************ FREE *******************************/
+void	cleanup(t_data *data);
+void	ft_free_all(t_cmds *cmds);
+void	free_2d_int(int **str);
+void	free_2d_char(char **str);
 #endif

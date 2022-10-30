@@ -6,11 +6,24 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:27:07 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/27 00:43:17 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 04:43:40 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	free_2d_int(int **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 int	check_exec(t_data *data, int cmd_idx, int last_in, int last_out)
 {

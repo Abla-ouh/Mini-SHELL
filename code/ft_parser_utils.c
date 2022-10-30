@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 11:48:47 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 17:09:31 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:13:33 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	fill_infiles(t_data *data)
 	while (data->s_tokens[++i])
 	{
 		data->infiles[i] = ft_open_infiles(data->lines, \
-		data->s_tokens[i], &sync);
+			data->s_tokens[i], &sync);
 		sync++;
 	}
 }
@@ -77,7 +77,7 @@ void	fill_outfiles(t_data *data)
 	i = -1;
 	sync = 0;
 	data->outfiles = (int **)malloc(sizeof(int *) * \
-	(ft_strptr(data->s_tokens)));
+		(ft_strptr(data->s_tokens)));
 	while (data->s_tokens[++i])
 	{
 		data->outfiles[i] = ft_open_outfiles(data->lines, data->s_tokens[i],

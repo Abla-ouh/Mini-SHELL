@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 04:47:24 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/29 19:17:52 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int	sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 	if (!node_cmd->args[0])
 	{
 		ft_arrfreey();
-		g_glob.exit_status = 1;
+		exit (127);
 	}
 	else if (ft_strchr(node_cmd->args[0], '/'))
 		exe_file(node_cmd);
 	else
 		exe_cmd(node_cmd);
-	exit (0);
+	exit (127);
 }
 
 int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
@@ -69,6 +69,7 @@ int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
 	if (pipe(p_fd) == -1)
 		exit (1);
 	g_glob.env = env_lst_to_matrix(g_glob.envx);
+	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -89,9 +90,10 @@ void	ft_run_cmds(t_cmds *shel_l)
 	t_cmds	*node_cmd;
 	pid_t	pid;
 
+	pid = -1;
 	node_cmd = shel_l;
 	if (node_cmd && node_cmd->next == NULL && ft_isbuiltin(node_cmd))
-		exe_builtin(node_cmd);
+		return (exe_builtin(node_cmd));
 	else
 	{
 		while (node_cmd)

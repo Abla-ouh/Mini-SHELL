@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:24:26 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 17:43:54 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 13:50:29 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,21 @@ int	infiles_fail(char **lines, char *tokens, t_cord	*cords, int *infiles)
 	}
 	return (0);
 }
-void init_cords(t_cord *cords, int *sync)
+
+void	init_cords(t_cord *cords, int *sync)
 {
 	cords->i = 0;
 	cords->j = 0;
 	cords->sync = sync;
+}
+
+void	ft_skipin(char *tokens, t_cord *cords, int *sync)
+{
+	while (tokens[cords->j] && tokens[cords->j] != '<')
+	{
+		(*sync)++;
+		cords->j++;
+	}
 }
 
 int	*ft_open_infiles(char **lines, char *tokens, int *sync)
@@ -62,11 +72,7 @@ int	*ft_open_infiles(char **lines, char *tokens, int *sync)
 	infiles = malloc(sizeof(int) * (find_op(tokens, '<')));
 	while (cords.i < find_op(tokens, '<'))
 	{
-		while (tokens[cords.j] && tokens[cords.j] != '<')
-		{
-			cords.j++;
-			(*sync)++;
-		}
+		ft_skipin(tokens, &cords, sync);
 		if (!tokens[cords.j]
 			|| infiles_fail(lines, tokens, &cords, infiles) < 0)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:10:10 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/26 10:48:55 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/30 10:22:16 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ char	**ft_lexer(char *line, char *set)
 		else
 			i++;
 	}
+	free(trim_line);
 	return (strs);
 }

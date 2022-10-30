@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:19:38 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/29 17:16:19 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:00:54 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_redir_filename(char **lines, char *tokens)
 		{
 			if (!lines[i + 1])
 				ft_fprintf(2,
-					"minishell: syntax error near unexpected token `newline'\n",
+					"minishell:  error near unexpected token `newline'\n",
 					NULL);
 			else if (ft_strlen(lines[i + 1]) > 1)
 				ft_fprintf(2,

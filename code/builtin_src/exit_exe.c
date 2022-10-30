@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 17:25:16 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:02:15 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_exit(char **ar)
 	sig = 0;
 	if (!ar[1])
 	{
-		system("leaks minishell");
 		ft_reset_g_glob();
 		exit (g_glob.exit_status);
 	}
