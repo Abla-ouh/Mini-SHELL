@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:29:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:24:06 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 03:22:25 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ char	**env_lst_to_matrix(t_list *lst)
 
 void	ft_reset_g_glob(void)
 {
-	ft_lstclear(&g_glob.envx, ft_delenv);
+	ft_lstclear(&g_glob.envx, free);
 	g_glob.envx = NULL;
 	ft_arrfreey();
 	g_glob.env = NULL;
+	exit (g_glob.exit_status);
 }
 
 int	check_exe(t_cmds *shel_l)
@@ -67,7 +68,18 @@ int	check_exe(t_cmds *shel_l)
 	return (1);
 }
 
-void	ft_delenv(void *env)
+void	ft_closethemall(t_cmds *node_cmd, int *p_fd)
 {
-	free((t_env *)env);
+	close(p_fd[WR_END]);
+	if (g_glob.perv_fd)
+		close(g_glob.perv_fd);
+	if (!ft_isbuiltin(node_cmd))
+	{
+		if (node_cmd->in > 0)
+			close(node_cmd->in);
+		if (node_cmd->out > 1)
+			close(node_cmd->out);
+		g_glob.perv_fd = p_fd[RD_END];
+		close(p_fd[RD_END]);
+	}
 }

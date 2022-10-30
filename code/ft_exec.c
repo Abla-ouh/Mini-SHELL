@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:17:52 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 03:21:55 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 
 	f = 0;
 	redi_sub(node_cmd, p_fd);
+	printf("{{%d}}\n", node_cmd->in);
 	close(p_fd[RD_END]);
 	close_all_fds(shel_l);
 	signal(SIGINT, SIG_DFL);
@@ -72,16 +73,19 @@ int	ft_cmd_exe(t_cmds *shel_l, t_cmds *node_cmd)
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == -1)
-	{
 		ft_reset_g_glob();
-		exit (1);
-	}
 	if (!pid)
 		return (sub_process(shel_l, node_cmd, p_fd));
 	close(p_fd[WR_END]);
 	if (g_glob.perv_fd)
 		close(g_glob.perv_fd);
+	if (node_cmd->in > 0)
+		close(node_cmd->in);
+	if (node_cmd->out > 1)
+		close(node_cmd->out);
 	g_glob.perv_fd = p_fd[RD_END];
+	if (!ft_isbuiltin(node_cmd))
+		close(p_fd[RD_END]);
 	return (pid);
 }
 

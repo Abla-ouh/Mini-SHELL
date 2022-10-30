@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:29:22 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 03:06:45 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		exe_cmd(t_cmds *node_cmd);
 void	exe_builtin(t_cmds *node_cmd);
 void	signal_stream(void);
 void	handler(int sig);
-void	sig_handler_heredoc(int	sig);
+void	sig_handler_heredoc(int sig);
 
 /*init the gdexe struct*/
 void	g_glob_init(char **env);
@@ -118,8 +118,8 @@ void	export_var(char *input);
 /********************************************************************/
 
 void	ft_arrfreey(void);
-void	ft_delenv(void *env);
 char	*return_value(char *title);
 int		path_changer(char **o_pwd, char *cwd);
+void	ft_closethemall(t_cmds *node_cmd, int *p_fd);
 
 #endif
