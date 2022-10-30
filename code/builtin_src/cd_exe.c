@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 02:35:04 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 12:33:04 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	ft_cd(char **av)
 	else if (r == -2)
 		ft_perror(NULL, "cd", "error retrieving current directory: getcwd: \
 	 cannot access parent directories: No such file or directory");
-	return (r = ((r == -2) || (r = -1)));
+	if ((r == -2) || (r == -1))
+		return (1);
+	else
+		return (0);
 }
 
 int	cd_option(char *path)

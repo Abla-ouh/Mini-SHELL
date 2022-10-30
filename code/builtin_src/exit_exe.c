@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:46:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:32:00 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 12:32:46 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_digits(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i])  && str[i] != '-' && str[i] != '+')
+		if (!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
 			return (1);
 		i++;
 	}

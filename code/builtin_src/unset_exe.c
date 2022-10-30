@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:06:47 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 02:26:52 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 12:32:32 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_unset(char **ar)
 	while (ar[i])
 	{
 		if (check_ar(ar[i]))
-			env_del(ar[i]); 
+			env_del(ar[i]);
 		else
 		{
 			err = 1;

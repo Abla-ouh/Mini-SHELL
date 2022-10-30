@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 02:31:17 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 05:03:25 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	var_cat(char **var)
 	if (r_write)
 	{
 		len = ft_strlen(*r_write) + ft_strlen(var[1]);
-		ft_strlcat(*r_write, var[1], len + 1);
+		*r_write = ft_strjoin(*r_write, var[1]);
 		if (!(*r_write))
 			return (1);
 	}

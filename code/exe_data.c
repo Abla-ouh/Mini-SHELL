@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:45:26 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/29 19:29:29 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 11:46:30 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,10 @@ int	ft_isbuiltin(t_cmds *shel_l)
 		return (4);
 	else if ((!ft_strcmp(shel_l->args[0], "unset")))
 		return (5);
-	else if ((!ft_strcmp(shel_l->args[0], "env")) && \
-	shel_l->args[1] == NULL)
+	else if ((!ft_strcmp(shel_l->args[0], "env")))
 		return (6);
 	else if ((!ft_strcmp(shel_l->args[0], "pwd")))
 		return (7);
-	else if ((!ft_strcmp(shel_l->args[0], "env")) && shel_l->args)
-		return (8);
 	return (0);
 }
 
@@ -73,8 +70,6 @@ int	run_builtin(t_cmds *shel_l, int flag)
 		return (ft_echo(shel_l->args));
 	else if (flag == 5)
 		return (ft_unset(shel_l->args));
-	else if (flag == 8)
-		return (ft_perror("env", NULL, "too many arguments"));
 	else if (flag == 6)
 		return (ft_env(shel_l->args, g_glob.envx));
 	else if (flag == 7)

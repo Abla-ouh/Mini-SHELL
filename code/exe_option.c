@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 04:34:25 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 11:55:37 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ void	exe_file(t_cmds *node_cmd)
 		dir = opendir(node_cmd->args[0]);
 		if (dir)
 		{
+			ft_arrfreey();
 			ft_perror(NULL, node_cmd->args[0], "is a directory");
 			closedir(dir);
 			exit (126);
 		}
 		else
 		{
+			ft_arrfreey();
 			ft_perror(NULL, node_cmd->args[0], "No such file or directory");
 			exit (127);
 		}

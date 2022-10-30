@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 03:06:45 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 09:20:20 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ typedef struct s_gexe
 	int		sig_c;
 	int		flag;
 	int		perv_fd;
+	pid_t	last_pid;
 }	t_gexe;
 
 t_gexe					g_glob;
 
 void	ft_run_cmds(t_cmds *cmds);
-void	ft_wait_cmd(pid_t pid);
+void	ft_wait_cmd(void);
 int		ft_isbuiltin(t_cmds *shel_l);
 int		run_builtin(t_cmds *shel_l, int flag);
 int		ft_perror(char *cmd, char *flag, char *msg);
