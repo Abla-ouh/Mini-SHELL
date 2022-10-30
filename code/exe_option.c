@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 09:22:17 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 03:28:15 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 04:34:25 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	exe_builtin(t_cmds *node_cmd)
 
 int	exe_cmd(t_cmds *node_cmd)
 {
-	char	*p;
+	char	**p;
 
-	p = return_value("PATH");
+	p = find_title("PATH");
 	if (p && (execve(node_cmd->path, node_cmd->args, g_glob.env) == -1))
 	{	
 		ft_arrfreey();

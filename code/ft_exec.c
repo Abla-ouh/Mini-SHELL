@@ -6,7 +6,7 @@
 /*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:51:19 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 03:21:55 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/30 04:46:32 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	sub_process(t_cmds *shel_l, t_cmds *node_cmd, int *p_fd)
 
 	f = 0;
 	redi_sub(node_cmd, p_fd);
-	printf("{{%d}}\n", node_cmd->in);
 	close(p_fd[RD_END]);
 	close_all_fds(shel_l);
 	signal(SIGINT, SIG_DFL);
@@ -103,7 +102,10 @@ void	ft_run_cmds(t_cmds *shel_l)
 		while (node_cmd)
 		{
 			if (check_exe(node_cmd))
+			{
+				ft_arrfreey();
 				pid = ft_cmd_exe(shel_l, node_cmd);
+			}
 			else if (!check_exe(node_cmd))
 			{
 				ft_arrfreey();
