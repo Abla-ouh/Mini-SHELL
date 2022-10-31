@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 20:26:06 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:03:05 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,9 @@ int	path_changer(char **o_pwd, char *cwd)
 {
 	if (!cwd)
 		cwd = return_value("PWD");
-	if (o_pwd)
-	{
-		*o_pwd = ft_strdup(cwd);
-		free(cwd);
-		if (!(*o_pwd))
-			return (-1);
-	}
-	else if (!o_pwd)
-	{
-		o_pwd = malloc(sizeof(char *) * 3);
-		if (!o_pwd)
-			return (1);
-		o_pwd[0] = "OLDPWD";
-		o_pwd[1] = ft_strdup(cwd);
-		free(cwd);
-		o_pwd[2] = NULL;
-		var_update(o_pwd);
-	}
+	free(*o_pwd);
+	*o_pwd = ft_strdup(cwd);
+	free(cwd);
 	pwd_update();
 	return (0);
 }
@@ -101,12 +86,13 @@ void	pwd_update(void)
 	new_pwd = find_title("PWD");
 	if (new_pwd)
 	{
-		*new_pwd = NULL;
 		pwd = getcwd(NULL, 0);
 		if (pwd)
 		{
+			free(*new_pwd);
+			*new_pwd = NULL;
+			*new_pwd = getcwd(NULL, 0);
 			free(pwd);
-			*new_pwd = ft_strdup(pwd);
 		}
 	}
 	else

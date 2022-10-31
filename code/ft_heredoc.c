@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:22:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 14:11:47 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:50:54 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_read_stdin(char **lines, int del_idx)
 			&& !ft_strchr(lines[del_idx], '\''));
 	lines[del_idx] = unquote_arg(lines[del_idx]);
 	sig_heredoc();
-	while (1)
+	while (1 && !g_glob.sig_c)
 	{
 		temp = readline("> ");
 		if (!temp || !ft_strcmp(temp, lines[del_idx]))

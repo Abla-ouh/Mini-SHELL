@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:06:47 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 14:15:18 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 20:30:44 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ static int	env_del(char *ar)
 	t_list	*node;
 
 	tmp = &g_glob.envx;
+	node = NULL;
 	while (*tmp)
 	{
 		if (!(ft_strcmp(ar, ((t_env *)(*tmp)->content)->title)))
 		{
 			node = *tmp;
+			free(((t_env *)(*tmp)->content)->title);
+			free(((t_env *)(*tmp)->content)->value);
 			free(node->content);
+			free(node);
 			*tmp = (*tmp)->next;
 			return (0);
 		}

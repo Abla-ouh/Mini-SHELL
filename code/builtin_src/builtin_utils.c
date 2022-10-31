@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:05:12 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 14:13:52 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 19:35:21 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ int	var_cat(char **var)
 {
 	char	**r_write;
 	int		len;
+	char	*tmp;
 
 	r_write = find_title(var[0]);
 	if (r_write)
 	{
 		len = ft_strlen(*r_write) + ft_strlen(var[1]);
-		*r_write = ft_strjoin(*r_write, var[1]);
+		tmp = ft_strdup(*r_write);
+		free(*r_write);
+		*r_write = ft_strjoin(tmp, var[1]);
+		free(tmp);
 		if (!(*r_write))
 			return (1);
+		free_2d_char(var);
 	}
 	else
 		return (var_update(var));
@@ -40,12 +45,16 @@ void	var_export(char **var, t_list *new)
 	ret->title = ft_strdup(var[0]);
 	ret->value = ft_strdup(var[1]);
 	if (!var[1])
+	{
+		free(ret->value);
 		ret->value = NULL;
-	new = ft_lstnew((void *)ret);
+	}
+	new = ft_lstnew((t_env *)ret);
 	if (!new)
 		ft_leak((void *)new);
 	ft_lstadd_back(&g_glob.envx, new);
-	free(var);
+	new->next = NULL;
+	free_2d_char(var);
 }
 
 int	var_update(char **var)
@@ -58,10 +67,14 @@ int	var_update(char **var)
 	if (r_write)
 	{
 		if (var[1])
+		{	
 			*r_write = ft_strdup(var[1]);
-		if (!(*r_write))
+			free_2d_char(var);
+			return (0);
+		}
+		if (!(r_write))
 		{
-			free(var);
+			free_2d_char(var);
 			return (1);
 		}
 	}

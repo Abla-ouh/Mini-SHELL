@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:37:10 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 11:43:51 by midfath          ###   ########.fr       */
+/*   Updated: 2022/10/31 21:02:35 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_env	*env_str(char *str)
 	if (!node)
 		return (NULL);
 	node->title = ft_substr(str, 0, i);
-	node->value = ft_strnstr(str + i + 1, "\0", ft_strlen(str));
+	node->value = ft_substr(str, i + 1, ft_strlen(str + i) + 1);
 	if (!node->title || !node->value)
 	{
 		free (node);

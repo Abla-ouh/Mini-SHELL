@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:39:49 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/30 14:12:33 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 17:46:38 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,6 @@ int		chdir_update(char *dir);
 void	pwd_update(void);
 /*********************** the builtin exit **************************/
 int		ft_exit(char **ar);
-
-// /*atoi but convert to unsigned int */
-// unsigned int	ft_atoui(char *nb, unsigned int *ptr);
 
 /*********************** the builtin echo **************************/
 int		ft_echo(char **ar);
