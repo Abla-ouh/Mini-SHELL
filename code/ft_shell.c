@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 20:22:33 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:01:06 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 			shel_l = ft_parser(line);
 			if (!shel_l)
-			{
 				g_glob.exit_status = 258;
-			}
 			else if (g_glob.sig_c != 1)
 				ft_run_cmds(shel_l);
 			ft_free_all_stuff_and_start_again(shel_l);

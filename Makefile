@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+         #
+#    By: midfath <midfath@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/30 21:25:23 by abouhaga         ###   ########.fr        #
+#    Updated: 2022/10/31 15:02:42 by midfath          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ NAME		= $(BIN_DIR)/$(BIN)
 BIN			= minishell
 SRC_DIR		= code
 RDLINE		= -lreadline -lncurses
-RDLINE_FLAG =  -L ~/.brew/opt/readline/lib
-RDLINE_PATH =  -I ~/.brew/opt/readline/include
+RDLINE_FLAG =  -L ~/homebrew/opt/readline/lib
+RDLINE_PATH =  -I ~/homebrew/opt/readline/include
 
 #cmd
 PRINTF		= printf
