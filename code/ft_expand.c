@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:14:20 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 21:24:16 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/10/31 17:26:02 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ char	*expand(char *arg)
 		else
 		{
 			name = ft_find_name(&arg[i]);
-			system("leaks minishell");
 			i += replace_arg(&arg, i, name);
 		}
+		free(name);
 	}
 	return (arg);
 }
