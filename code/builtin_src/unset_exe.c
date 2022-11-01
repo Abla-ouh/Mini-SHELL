@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_exe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:06:47 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/31 20:30:44 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/11/01 19:07:37 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static int	env_del(char *ar)
 		if (!(ft_strcmp(ar, ((t_env *)(*tmp)->content)->title)))
 		{
 			node = *tmp;
-			free(((t_env *)(*tmp)->content)->title);
-			free(((t_env *)(*tmp)->content)->value);
+			*tmp = (*tmp)->next;
+			free(((t_env *)(node)->content)->title);
+			free(((t_env *)(node)->content)->value);
 			free(node->content);
 			free(node);
-			*tmp = (*tmp)->next;
 			return (0);
 		}
 		tmp = &(*tmp)->next;

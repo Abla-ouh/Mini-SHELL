@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:54:04 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/31 21:00:12 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/11/01 21:03:44 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **env)
 	while (ac || av)
 	{
 		init_mini();
-		line = readline("\e[1;95mminishell$> \e[0m");
+		line = readline("minishell$> ");
 		if (!line)
 			exit (g_glob.exit_status);
 		if (ft_strlen(line) > 0)

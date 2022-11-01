@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_exe.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 16:53:46 by midfath           #+#    #+#             */
-/*   Updated: 2022/10/31 21:03:05 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:36:09 by midfath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,21 @@ int	path_changer(char **o_pwd, char *cwd)
 {
 	if (!cwd)
 		cwd = return_value("PWD");
-	free(*o_pwd);
-	*o_pwd = ft_strdup(cwd);
-	free(cwd);
+	if (o_pwd)
+	{
+		free(*o_pwd);
+		*o_pwd = NULL;
+		*o_pwd = ft_strdup(cwd);
+		free(cwd);
+	}
+	else
+	{
+		o_pwd = malloc(sizeof(char *) * 3);
+		o_pwd[0] = ft_strdup("OLDPWD");
+		o_pwd[1] = ft_strdup(cwd);
+		o_pwd[2] = NULL;
+		var_update(o_pwd);
+	}
 	pwd_update();
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: midfath <midfath@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 23:22:08 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/31 16:50:54 by midfath          ###   ########.fr       */
+/*   Updated: 2022/11/01 20:57:33 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	ft_read_stdin(char **lines, int del_idx)
 		write(here_fds[STDOUT_FILENO], "\n", 1);
 		free(temp);
 	}
-	if (temp)
-		free(temp);
 	close(here_fds[STDOUT_FILENO]);
 	sig();
 	return (here_fds[STDIN_FILENO]);

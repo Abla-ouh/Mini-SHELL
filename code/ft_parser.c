@@ -6,7 +6,7 @@
 /*   By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:21:05 by abouhaga          #+#    #+#             */
-/*   Updated: 2022/10/30 16:33:26 by abouhaga         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:02:47 by abouhaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,6 @@ t_cmds	*ft_parser(char *line)
 		(free(data.tokens), free_2d_char(data.lines));
 		return (NULL);
 	}
-	i = -1;
-	while (data.lines[++i])
-		if (ft_indexof(data.lines[i], '$') == -1)
-			data.lines[i] = unquote_arg(data.lines[i]);
 	check_expand(&data);
 	data.s_tokens = ft_split(data.tokens, '|');
 	(free(data.tokens), fill_red(&data));

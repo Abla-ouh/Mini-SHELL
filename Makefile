@@ -6,7 +6,7 @@
 #    By: abouhaga <abouhaga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/19 12:13:55 by abouhaga          #+#    #+#              #
-#    Updated: 2022/10/31 17:35:56 by abouhaga         ###   ########.fr        #
+#    Updated: 2022/11/01 22:05:47 by abouhaga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ BLUE	= \033[1;34m
 #vars
 
 CC 			= gcc
-CFLAGS 		= -Wall -Wextra -Werror -g #-fsanitize=address -g
-# CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror
 NAME 		= minishell
 LIBFT    	= libft/libft.a
 OBJ_DIR		= obj
