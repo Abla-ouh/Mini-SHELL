@@ -24,7 +24,10 @@ It was only logical that they came up with the idea of creating a software to **
 
 Thanks to **Minishell**, you’ll be able to travel through time and come back to problems people faced when ~~Windows~~ didn’t exist.
 
-![shell](https://miro.medium.com/max/688/1*GuB5q_bWOSZa-8sDg1lEDA.png)
+<p align="center">
+<img alt="GitHub code size in bytes" src="https://miro.medium.com/max/688/1*GuB5q_bWOSZa-8sDg1lEDA.png" />
+</p>
+
 ---
 ## Built-in functions to implement :
 
