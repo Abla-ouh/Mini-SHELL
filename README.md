@@ -86,4 +86,4 @@ Only the following functions are allowed to be used in this project:
 - https://youtu.be/EqndHT606Tw (fd, dup, dup2)
 ---
 ###  the most highlighted learned skill from this project is "How to fix memory leaks, and memory management".
-                                                            We struggled but we learned :) 
+                                                   We struggled but we learned :) 
