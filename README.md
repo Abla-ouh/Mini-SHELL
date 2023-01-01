@@ -1,11 +1,15 @@
 
-##        Want to explore some cute shells [ 🐚 ] ? Then, dive into the Occean.
+      
+<h2 align="center">Want to explore some cute shells [ 🐚 ] ? Then, dive into the Occean.</h2>
+<h1 align="center">WHAT IS IT, MINISHELL !? </h1>
 
-# WHAT IS IT, MINISHELL !?
+<blockquote align="center"> Where There is a SHELL, There is a Way</blockquote>
 
-> **Where There is a SHELL, There is a Way**
+<p align="center">
+<img alt="GitHub code size in bytes" src="https://cameronnokes.com/images/bash.png" />
+</p>
 
-![Bash](https://cameronnokes.com/images/bash.png)
+---
 - It was the first group project in my 42 cursus.
 - 42 project, recoding our own little **bash**. A program capable of parsing (which I have done ) a prompt and launching executables with arguments, along with a few built-in functions.
 -  The objective of this project is to create a simple shell to learn some advanced programming techniques like processes creation and control, file descriptors, signals and pipes, etc.
