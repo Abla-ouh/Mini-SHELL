@@ -10,7 +10,7 @@
 </p>
 
 ---
-- Our first group project during my time at 42, which I collaborated on with @reogin.
+- Our first group project during my time at 42, which I collaborated on with [@reogine](https://github.com/reogine).
 - 42 project, recoding our own little **bash**. A program capable of parsing (which I have done ) a prompt and launching executables with arguments, along with a few built-in functions.
 -  The objective of this project is to create a simple shell to learn some advanced programming techniques like processes creation and control, file descriptors, signals and pipes, etc.
 ---
